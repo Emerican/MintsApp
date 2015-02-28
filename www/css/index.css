@@ -54,7 +54,6 @@ nav{
 }
 
 .left{
-  background-color:#2C4E00;
   padding-left:5px;
   padding-right:5px;
   float:left;
@@ -120,4 +119,9 @@ select{
 
 .fa-shopping-cart{
   color:red;
+}
+
+button{
+  background:transparent;
+  border:solid 2px black;
 }
