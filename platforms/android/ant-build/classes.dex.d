@@ -1,0 +1,21 @@
+/Users/vellameita/Shroom/platforms/android/ant-build/classes.dex : \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/chariotsolutions/nfc/plugin/NfcPlugin$1.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/chariotsolutions/nfc/plugin/NfcPlugin$2.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/chariotsolutions/nfc/plugin/NfcPlugin$3.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/chariotsolutions/nfc/plugin/NfcPlugin$4.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/chariotsolutions/nfc/plugin/NfcPlugin$5.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/chariotsolutions/nfc/plugin/NfcPlugin$6.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/chariotsolutions/nfc/plugin/NfcPlugin$7.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/chariotsolutions/nfc/plugin/NfcPlugin$8.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/chariotsolutions/nfc/plugin/NfcPlugin$9.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/chariotsolutions/nfc/plugin/NfcPlugin.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/chariotsolutions/nfc/plugin/Util.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/mints/shroom/BuildConfig.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/mints/shroom/CordovaApp.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/mints/shroom/R$attr.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/mints/shroom/R$drawable.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/mints/shroom/R$string.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/mints/shroom/R$xml.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/mints/shroom/R.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/org/apache/cordova/api/Dummy.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/dexedLibs/classes-345674641829c8f4b30c7f0ffba6b7a1.jar \

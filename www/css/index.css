@@ -1,0 +1,123 @@
+html,body
+{
+    background-color:rgb(214,112,70);
+}
+body {
+
+      -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+      -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+      -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+
+      font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+        margin: 0;
+}
+#main
+{
+  display:block;
+  width:250px;
+  margin-left:auto;
+  margin-right:auto;
+}
+#main > button{
+  border:solid 2px black;
+  margin:10px 10px 10px 10px;
+  height:100px;
+  width:100px;
+}
+section
+{
+  margin-top: 100px;
+  display: none;
+  width:100%;
+  height:100%;
+}
+
+#products,#settings,#users,#reports{
+  width:250px;
+  margin-left:auto;
+  margin-right:auto;
+}
+#products > button ,#settings > button,#users > button,#reports > button{
+  margin-top:10px;
+  height:70px;
+  width:250px;
+}
+
+/*navigation*/
+
+nav{
+  background-color:rgb(113,41,54);
+  position:fixed;
+  width:100%;
+  top:0;
+  left:0;
+}
+
+.left{
+  background-color:#2C4E00;
+  padding-left:5px;
+  padding-right:5px;
+  float:left;
+}
+.right{
+  float:right;
+  border:none;
+}
+nav button{
+  height:75px;
+  width:75px;
+}
+#mid{
+  overflow:hidden;
+  font-size:50px;
+  text-align:center;
+}
+
+
+/*TextFields*/
+#add_user,#add_group,#browse_users,#browse_groups,#add_product,#browse_products,#add_product_group,#browse_product_group{
+  width:45%;
+  margin-left:auto;
+  margin-right:auto;
+}
+#new_user_form{
+  margin:0;
+  padding:0;
+  padding-top:30px;
+  width:100%;
+}
+
+
+label,input,select{
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+
+}
+
+input{
+  font-size:18px;
+  padding:10px;
+  width:70%;
+  margin-bottom:30px;
+}
+label{
+  width:70%;
+  margin-bottom:8px;
+  font-size:20px;
+}
+select{
+  font-size:20px;
+  padding:10px;
+  width:80%;
+  margin-bottom:30px;
+}
+
+#new_user_btn,#new_product_btn,#new_user_group_btn,#new_product_group_btn,#new_client_group_btn{
+  float:right;
+  margin-right:50px;
+}
+
+.fa-shopping-cart{
+  color:red;
+}
