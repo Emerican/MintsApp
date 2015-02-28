@@ -1,10 +1,5 @@
  * {
-     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    }
-    :focus {
-        outline: 0;
-        border:none;
-        color: rgba(0, 0, 0, 0);
+     -webkit-tap-highlight-color: transparent;
     }
 html,body
 {
@@ -30,6 +25,7 @@ section
 }
 button
 {
+  outline:none;
   cursor:pointer;
   background-color: transparent;
   border: 0;

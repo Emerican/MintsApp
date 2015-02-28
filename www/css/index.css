@@ -1,3 +1,6 @@
+ * {
+     -webkit-tap-highlight-color: transparent;/*just in case*/
+    }
 html,body
 {
     background-color:#ff6c40;
@@ -22,6 +25,7 @@ section
 }
 button
 {
+  outline:none; 
   cursor:pointer;
   background-color: transparent;
   border: 0;
