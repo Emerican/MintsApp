@@ -129,7 +129,7 @@ jQuery(function()
     e.preventDefault();
     var form = jQuery(this);
     var action = form.attr('action') || form.find('button, .button').attr('action');
-    var resource_id = target.attr('resource_uuid') || target.find('[name="uuid"]').val();
+    var resource_id = form.attr('resource_uuid') || form.find('[name="uuid"]').val();
     var resource_name = action.split('/')[1];
 
     switch( action.split('/')[0] )
@@ -146,7 +146,7 @@ jQuery(function()
 
 
     // handle data refresh in .on('change',function(){}) event
-    target.parents('section').trigger('change');
+    form.parents('section').trigger('change');
     //return false;
   });
 
