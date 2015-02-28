@@ -36,7 +36,7 @@ jQuery(function()
   navigation.on('change',function()
   {
     back_button.toggle( section_history.length > 0 );
-    navigation.find('nav .title').html( section_name(current_section) );
+    navigation.find('.title').html( section_names(current_section) );
 
   }).trigger('change');;
 
