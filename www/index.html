@@ -85,30 +85,30 @@
   </section>
 
   <section id="add_user">
-    <form id="new_user_form">
+    <form id="new_user_form" action="new/clients">
       <div class="field">
         <label for="name">Vārds:</label>
-        <input type="text" id="name" required="true">
+        <input type="text" id="name" name="name" required="true">
       </div>
       <div class="field">
         <label for="surname">Uzvārds:</label>
-        <input type="text" id="surname" required="true">
+        <input type="text" id="surname" name="surname"  required="true">
       </div>
       <div class="field">
         <label for="phone">Tālrunis:</label>
-        <input type="number" id="phone">
+        <input type="number" name="phone" id="phone">
       </div>
       <div class="field">
         <label for="email">E-Pasts:</label>
-        <input type="email" id="email">
+        <input type="email" name="email"  id="email">
       </div>
       <div class="field">
-        <label for="user_id">ID:</label>
-        <input type="text" id="user_id" required="true">
+        <label for="cars_id">ID:</label>
+        <input type="text" name="card_id" id="card_id" required="true">
       </div>
       <div class="field">
         <label for="group">Grupa:</label>
-        <select id="user_group_list">
+        <select id="user_group_list" name="client_group_id">
           <option id="options"></option>
         </select>
       </div>

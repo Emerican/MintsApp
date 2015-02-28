@@ -148,47 +148,5 @@ jQuery(function()
     return false;
   });
 
-  $("#new_client_group_btn").click( function()
-         {
-          var client_group_name = jQuery("#group_name").val();
-          Mints.client_groups.new({name:client_group_name});
-        }
-      );
-
-
-  $("#new_user_btn").click(function()
-      {
-        var client_name = jQuery("#name").val();
-        var client_surname = jQuery("#surname").val();
-        var client_phone = jQuery("#phone").val();
-        var client_email = jQuery("#email").val();
-
-        Mints.clients.new({card_id:null,name:client_name,surname:client_surname,client_group_id:null,phone:client_phone,email:client_email,postpay:true});
-      }
-  );
-
-  $("#new_product_btn").click(function()
-  {
-    var product_name = jQuery("#product_name").val();
-    var product_price = jQuery("#product_price").val();
-
-    if(!$.isNumeric(product_price) || product_price.length == 0 || product_name.length == 0 ){
-      alert("Atstāti tukši lauki, vai nav korekti ievadīta cena.");
-    }else{
-      Mints.products.new({product_group_id:null,name:product_name,price:product_price,description:"default"});
-      alert("produkts pievienots");
-          }
-  }
-  );
-
-  $("#new_product_group_btn").click(function()
-  {
-    var product_group_name = jQuery("#product_group_name").val();
-
-    Mints.product_groups.new({name:product_group_name});
-
-  }
-  );
-
 
 });
