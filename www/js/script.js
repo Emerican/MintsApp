@@ -25,8 +25,47 @@ jQuery(function()
   {
     switch(section)
     {
-      case "":
-        return "section_name"
+      case "main":
+        return "Sākums"
+      break;
+      case "products":
+        return "Produkti"
+      break;
+      case "add_product":
+        return "Pievienot produktu"
+      break;
+      case "add_product_group":
+        return "Pievienot produkta grupu"
+      break;
+      case "browse_product":
+        return "Meklēt produktu"
+      break;
+      case "browse_product_group":
+        return "Meklēt produkta grupu"
+      break;
+      case "users":
+        return "Lietotāji"
+      break;
+      case "add_user":
+        return "Pievienot lietotāju"
+      break;
+      case "add_group":
+        return "Pievienot lietotāja grupu"
+      break;
+      case "browse_users":
+        return "Meklēt lietotājus"
+      break;
+      case "browse_groups":
+        return "Meklēt lietotāja grupu"
+      break;
+      case "settings":
+        return "Iestatījumi"
+      break;
+      case "reports":
+        return "Atskaites"
+      break;
+      case "new_order":
+        return "Pasūtījumi"
       break;
       default:
         return section;
