@@ -80,6 +80,7 @@
 /Users/vellameita/Shroom/platforms/android/assets/www/js/ajax.js \
 /Users/vellameita/Shroom/platforms/android/assets/www/js/index.js \
 /Users/vellameita/Shroom/platforms/android/assets/www/js/jquery-2.1.3.min.js \
+/Users/vellameita/Shroom/platforms/android/assets/www/js/jquery.serializeObject.js \
 /Users/vellameita/Shroom/platforms/android/assets/www/js/nfclistener.js \
 /Users/vellameita/Shroom/platforms/android/assets/www/js/phonegap-nfc.js \
 /Users/vellameita/Shroom/platforms/android/assets/www/js/script.js \
