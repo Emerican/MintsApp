@@ -17,7 +17,7 @@ jQuery(function()
     current_section = section_name;
     navigation.trigger('change');
     jQuery('section').hide();
-    jQuery("#"+section_name).trigger('load_data').show();
+    jQuery("#"+section_name).trigger('data_load').show();
 
   };
 
@@ -72,15 +72,22 @@ jQuery(function()
     }
   };
 
-  container.find( 'section' ).on('data_load', function()
+  container.on('data_load', 'section', function()
   {
     var section = jQuery(this);
     var section_id = section.attr('id');
 
     switch (section_id)
     {
-      case "":
-      // handle data here
+      case "add_user":
+
+        var list_opts = "";
+        var list = Mints.client_groups.get();
+        list.forEach(function(item){
+          list_opts += '<option value="' + item.uuid + '">' + item.name + '<option>'
+        });
+
+        section.find('select').html(list_opts);
       break;
     }
 
