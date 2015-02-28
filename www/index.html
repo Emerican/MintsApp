@@ -5,11 +5,10 @@
   <meta charset="utf-8" />
   <meta name="format-detection" content="telephone=no" />
   <meta name="msapplication-tap-highlight" content="no" />
-  <meta content="width=device-width, target-densitydpi=device-dpi, initial-scale=1" name="viewport">
   <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=high-dpi" />
-  <link rel="stylesheet" type="text/css" href="css/index.css" />
   <link rel="stylesheet" href="css/font-awesome-4.3.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
   <title>Shroom</title>
 </head>
 
@@ -38,9 +37,19 @@
 
   <section id="add_product">
     <form>
-      <div class="field>"><label for="group">Grupa:</label><select></select></div>
-      <div class="field"><label for="name">Nosaukums:</label><input type="text" id="product_name"></div>
-      <div class="field"><label for="price">Cena:</label><input type="number" step="any"id="product_price"></div> <!-- step any jānočeko-->
+      <div class="field>">
+        <label for="group">Grupa:</label>
+        <select></select>
+      </div>
+      <div class="field">
+        <label for="name">Nosaukums:</label>
+        <input type="text" id="product_name">
+      </div>
+      <div class="field">
+        <label for="price">Cena:</label>
+        <input type="number" step="any"id="product_price">
+      </div>
+      <!-- step any jānočeko-->
       <div id="new_product_btn"><span class="fa fa-check-circle-o fa-4x"></span></div>
   </form>
   </section>
@@ -66,13 +75,35 @@
 
   <section id="add_user">
     <form id="new_user_form">
-      <div class="field"><label for="name">Vārds:</label><input type="text" id="name"></div>
-      <div class="field"><label for="surname">Uzvārds:</label><input type="text" id="surname"></div>
-      <div class="field"><label for="phone">Tālrunis:</label><input type="number" id="phone"></div>
-      <div class="field"><label for="email">E-Pasts:</label><input type="email" id="email"></div>
-      <div class="field"><label for="user_id">ID:</label><input type="text" id="user_id"></div>
-      <div class="field>"><label for="group">Grupa:</label><select id="user_group_list"><option id="options"></option></select></div>
-      <div id="new_user_btn"><span class="fa fa-check-circle-o fa-4x"></span></div>
+      <div class="field">
+        <label for="name">Vārds:</label>
+        <input type="text" id="name" required="true">
+      </div>
+      <div class="field">
+        <label for="surname">Uzvārds:</label>
+        <input type="text" id="surname" required="true">
+      </div>
+      <div class="field">
+        <label for="phone">Tālrunis:</label>
+        <input type="number" id="phone">
+      </div>
+      <div class="field">
+        <label for="email">E-Pasts:</label>
+        <input type="email" id="email">
+      </div>
+      <div class="field">
+        <label for="user_id">ID:</label>
+        <input type="text" id="user_id" required="true">
+      </div>
+      <div class="field">
+        <label for="group">Grupa:</label>
+        <select id="user_group_list">
+          <option id="options"></option>
+        </select>
+      </div>
+      <div id="new_user_btn">
+        <span class="fa fa-check-circle-o fa-4x"></span>
+      </div>
     </form>
   </section>
 
