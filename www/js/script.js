@@ -17,7 +17,7 @@ jQuery(function()
     current_section = section_name;
     navigation.trigger('change');
     jQuery('section').hide();
-    jQuery("#"+section_name).show();
+    jQuery("#"+section_name).trigger('load_data').show();
 
   };
 
@@ -71,6 +71,21 @@ jQuery(function()
         return section;
     }
   };
+
+  container.find( 'section' ).on('data_load', function()
+  {
+    var section = jQuery(this);
+    var section_id = section.attr('id');
+
+    switch (section_id)
+    {
+      case "":
+      // handle data here
+      break;
+    }
+
+
+  });
 
   navigation.on('change',function()
   {
