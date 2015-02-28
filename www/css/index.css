@@ -63,16 +63,20 @@ nav{
   width:100%;
   top:0;
   left:0;
+  height: 75px;
 }
 
-.left{
-  padding-left:5px;
-  padding-right:5px;
-  float:left;
+nav .left
+{
+  position: absolute;
+  top: 0;
+  left:0;
 }
-.right{
-  float:right;
-  border:none;
+nav .right
+{
+  position: absolute;
+  top: 0;
+  right:0;
 }
 nav button{
   height:75px;
