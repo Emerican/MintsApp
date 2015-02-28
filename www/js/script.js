@@ -21,10 +21,22 @@ jQuery(function()
 
   };
 
+  var section_names = function( section )
+  {
+    switch(section)
+    {
+      case "":
+        return "section_name"
+      break;
+      default:
+        return section;
+    }
+  };
+
   navigation.on('change',function()
   {
     back_button.toggle( section_history.length > 0 );
-    navigation.find('#mid').html( current_section );
+    navigation.find('nav .title').html( section_name(current_section) );
 
   }).trigger('change');;
 
