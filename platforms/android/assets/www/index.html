@@ -17,7 +17,7 @@
   <nav>
     <div class="left">
       <button action="back"><span class="fa fa-arrow-left fa-5x "></span></button>
-      <button action="section/settings"><span class="fa fa-gears fa-5x"></span></button>
+      <button action="section/main"><span class="fa fa-home fa-5x"></span></button>
     </div>
     <div class="right">
       <button action="section/new_order"><span class="fa fa-shopping-cart fa-5x"></span></button>
@@ -47,7 +47,9 @@
     <form>
       <div class="field>">
         <label for="group">Grupa:</label>
-        <select></select>
+        <select id="product_group_list" name="product_group_id">
+          <option></option>
+        </select>
       </div>
       <div class="field">
         <label for="name">Nosaukums:</label>
@@ -109,7 +111,7 @@
       <div class="field">
         <label for="group">Grupa:</label>
         <select id="user_group_list" name="client_group_id">
-          <option id="options"></option>
+          <option></option>
         </select>
       </div>
       <button action="new/clients" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>

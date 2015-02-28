@@ -89,6 +89,16 @@ jQuery(function()
 
         section.find('select').html(list_opts);
       break;
+      case "add_product":
+
+        var product_list_opts ="";
+        var product_list = Mints.product_groups.get();
+        product_list.forEach(function(item){
+          product_list_opts += '<option value="' + item.uuid + '">' + item.name + '<option>'
+        });
+
+        section.find('select').html(product_list_opts);
+      break;
     }
 
 
