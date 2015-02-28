@@ -11,7 +11,7 @@ jQuery(function()
   var current_section = "main";
   var last_section = current_section;
 
-
+  var object
   var section_change = function(section_name)
   {
     current_section = section_name;
@@ -131,15 +131,15 @@ jQuery(function()
     var action = form.attr('action') || form.find('button, .button').attr('action');
     var resource_id = form.attr('resource_uuid') || form.find('[name="uuid"]').val();
     var resource_name = action.split('/')[1];
-
+    console.log( form.serializeObject() );
     switch( action.split('/')[0] )
     {
       case 'new':
-        Mints[resource_name].new( form.serialize() );
+        Mints[resource_name].new( form.serializeObject() );
       break;
 
       case 'set':
-        Mints[resource_name].get(resource_id).set( form.serialize() );
+        Mints[resource_name].get(resource_id).set( form.serializeObject() );
       break;
 
     }
