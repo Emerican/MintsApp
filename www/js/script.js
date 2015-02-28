@@ -124,10 +124,11 @@ jQuery(function()
     return !prevent_default;
   });
 
-  container.on('submit', 'form',function()
+  container.on('submit', 'form',function(e)
   {
+    e.preventDefault();
     var form = jQuery(this);
-    var action = target.attr('action') || target.find('button, .button').attr('action');
+    var action = form.attr('action') || form.find('button, .button').attr('action');
     var resource_id = target.attr('resource_uuid') || target.find('[name="uuid"]').val();
     var resource_name = action.split('/')[1];
 
@@ -143,9 +144,10 @@ jQuery(function()
 
     }
 
+
     // handle data refresh in .on('change',function(){}) event
     target.parents('section').trigger('change');
-    return false;
+    //return false;
   });
 
 
