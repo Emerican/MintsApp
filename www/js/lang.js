@@ -45,6 +45,21 @@ window.Lang = {
       case "new_order":
         return "Jauns pasūtījums"
       break;
+      case "edit_clients":
+        return "Labot klientu"
+      break;
+      case "browse_products":
+        return "Meklēt produktus"
+      break;
+      case "edit_products":
+        return "Labot produktus"
+      break;
+      case "edit_product_groups":
+        return "Labot produktu grupas"
+      break;
+      case "edit_client_groups":
+        return "Labot klientu grupas"
+      break;
       default:
         return section;
     }
