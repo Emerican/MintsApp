@@ -113,6 +113,12 @@ jQuery(function()
       case 'back':
         section_change( section_history.pop() );
       break;
+      case "add":
+        if( action.split('/')[1] == 'product' )
+        {
+          add_products_to_bill( data_target );
+        }
+      break;
 
       default:
         prevent_default = true;
@@ -120,6 +126,45 @@ jQuery(function()
     }
     return prevent_default;
   }
+
+  var add_products_to_bill = function( data_source )
+  {
+    var order_form = jQuery('#new_order form');
+    var product_in_list = order_form.find('[data-source="'+ data_source +'"]');
+    if( product_in_list.length == 0 )
+    {
+      var product_count = order_form.find('.purchase_item').length;
+      var product = Mints.products.get( data_source );
+      order_form.find('.product_list').append('<div class="purchase_item" data-source="'+ product.uuid +'">'+
+        '<input type="hidden" name="bill['+ product_count +'][product_id]" value="'+ product.uuid +'">'+
+        '<input class="count" type="hidden" name="bill['+ product_count +'][count]" value="1">'+
+        '<span class="product_name">'+ product.name +'</span>'+
+        '<span class="count">1</span>'+
+      '</div>');
+    }
+    else
+    {
+      var count = parseInt( product_in_list.find('input.count').val() );
+      product_in_list.find('input.count').val( count + 1 );
+      product_in_list.find('span.count').html( count + 1 );
+    }
+
+  }
+
+  container.on('click', '.product_list .purchase_item', function()
+  {
+    var target = jQuery(this);
+    var count = parseInt( target.find('input.count').val() );
+    if( count > 1 )
+    {
+      target.find('input.count').val( count - 1 );
+      target.find('span.count').html( count - 1 );
+    }
+    else
+    {
+      target.remove();
+    }
+  });
 
   container.on('data_load', 'section', function()
   {
@@ -151,17 +196,19 @@ jQuery(function()
       case "browse_client_groups":
         content.html( resource_list("client_groups") );
       break;
-
-      case "edit_products":
-        section.find('select').html( get_list_options( 'product_groups' ) );
       case "edit_clients":
         section.find('select').html( get_list_options( 'client_groups' ) );
+        populate_form( section, Mints.clients.get( data_source ) );
+      break;
       case "edit_products":
+        section.find('select').html( get_list_options( 'product_groups' ) );
+        populate_form( section, Mints.products.get( data_source ) );
+      break;
       case "edit_product_groups":
-      case "edit_clients":
+        populate_form( section, Mints.product_groups.get( data_source ) );
+      break;
       case "edit_client_groups":
-        var resource_name = section_id.substr(5);
-        populate_form( section, Mints[resource_name].get( data_source ) );
+        populate_form( section, Mints.client_groups.get( data_source ) );
       break;
       case "new_order":
         content.html( product_list() );
@@ -175,7 +222,7 @@ jQuery(function()
     back_button.toggle( section_history.length > 0 );
     navigation.find('.title').html( Lang.section_names(current_section) );
 
-  }).trigger('change');;
+  }).trigger('change');
 
 
   container.on('click', 'button, .button', function()
