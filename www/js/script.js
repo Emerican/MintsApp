@@ -283,16 +283,29 @@ jQuery(function()
           {
             Mints.purchases.new( { product_id:form_obj.product_id[i], count: form_obj.count[i], bill_id: bill.uuid } );
           }
+
+          Mints[resource_name].on('sync', function()
+          {
+            notice( "Izveidots" );
+            Mints[resource_name].unbind('sync');
+            trigger_action( "section/main" );
+            form.find('.client_data, .product_list, .amount').html("");
+          });
         }
         else
         {
           Mints[resource_name].new( form.serializeObject() );
+
+          Mints[resource_name].on('sync', function()
+          {
+            notice( "Izveidots" );
+            Mints[resource_name].unbind('sync');
+            trigger_action( "section/browse_" + resource_name );
+            form.find('input, textarea').val("")
+          });
         }
 
-        Mints[resource_name].on('sync', function()
-        {
-          notice( "Izveidots" );
-        });
+
       break;
 
       case 'update':
@@ -300,6 +313,7 @@ jQuery(function()
         Mints[resource_name].on('sync', function()
         {
           notice( "Saglabāts" );
+          Mints[resource_name].unbind('sync');
           trigger_action( "section/browse_" + resource_name );
         });
       break;
