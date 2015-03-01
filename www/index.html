@@ -6,7 +6,7 @@
   <meta name="format-detection" content="telephone=no" />
   <meta name="msapplication-tap-highlight" content="no" />
   <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=high-dpi" />
+  <meta name="viewport" content="client-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=high-dpi" />
   <link rel="stylesheet" href="css/font-awesome-4.3.0/css/font-awesome.min.css"/>
   <link rel="stylesheet" type="text/css" href="css/index.css" />
   <title>Shroom</title>
@@ -25,12 +25,15 @@
     </div>
     <div class="title">title</div>
   </nav>
+
   <section id="main">
+
     <button action="section/products"><span class="fa fa-list fa-5x"></span></button>
-    <button action="section/users"><span class="fa fa-user fa-5x"></span></button>
+    <button action="section/clients"><span class="fa fa-client fa-5x"></span></button>
     <br>
     <button action="section/reports"><span class="fa fa-bar-chart fa-5x"></span></button>
-    <button action="section/settings"><span class="fa fa-gears fa-5x"></span></button>
+    <button action="section/new_order"><span class="fa fa-shopping-cart fa-5x"></span></button>
+
   </section>
 
 
@@ -68,11 +71,6 @@
   </form>
   </section>
 
-
-  <section id="browse_product">
-      <!-- nav skaidrs vēl -->
-  </section>
-
   <section id="add_product_group">
     <form>
       <div class="field"><label for="product_group">Nosaukums:</label><input type="text" id="product_group_name"></div>
@@ -80,18 +78,18 @@
     </form>
   </section>
 
-  <section id="users">
-    <button class="big" action="section/add_user">Pievienot lietotāju</button>
+  <section id="clients">
+    <button class="big" action="section/add_client">Pievienot lietotāju</button>
     <br>
     <button class="big" action="section/add_group">Pievienot grupu</button>
     <br>
-    <button class="big" action="section/browse_users">Pārskatīt lietotājus</button>
+    <button class="big" action="section/browse_clients">Pārskatīt lietotājus</button>
     <br>
     <button class="big" action="section/browse_groups">Pārskatīt grupas</button>
   </section>
 
-  <section id="add_user">
-    <form id="new_user_form" action="new/clients">
+  <section id="add_client">
+    <form id="new_client_form" action="new/clients">
       <div class="field">
         <label for="name">Vārds:</label>
         <input type="text" id="name" name="name" required="true">
@@ -110,11 +108,11 @@
       </div>
       <div class="field">
         <label for="cars_id">ID:</label>
-        <input type="text" name="card_id" id="card_id" required="true">
+        <input class="nfc" type="text" name="card_id" id="card_id" required="true">
       </div>
       <div class="field">
         <label for="group">Grupa:</label>
-        <select id="user_group_list" name="client_group_id">
+        <select id="client_group_list" name="client_group_id">
           <option></option>
         </select>
       </div>
@@ -130,27 +128,57 @@
   </section>
 
 
-  <section id="browse_users">
+    <section id="browse_products">
+        <div class="content">
+
+        </div>
+    </section>
+
+
+  <section id="browse_clients">
     <form>
-    <div class="field">
-      <label for="search_name">Meklēt lietotāju:</label>
-      <input type="text" id="search_user">
-    </div>
-  </form>
+      <div class="content">
+        <div class="field">
+          <label for="search_name">Meklēt lietotāju:</label>
+          <input type="text" id="search_client">
+        </div>
+      </div>
+    </form>
   </section>
 
-  <section id="browse_groups">
+  <section id="browse_client_groups">
     <form>
-      <div class="field">
-        <label for="search_group">Meklēt grupu:</label>
-        <input type="text" id="search_user_group">
+      <div class="content">
+        <div class="field">
+          <label for="search_group">Meklēt grupu:</label>
+          <input type="text" id="search_client_group">
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <section id="browse_product_groups">
+    <form>
+      <div class="content">
+        <div class="field">
+          <label for="search_product_group"></label>
+          <input type="text" id="search_product_group">
+        </div>
       </div>
     </form>
   </section>
 
   <section id="new_order">
+    <div id="left_order_side">
+      <form>
 
+      </form>
+    </div>
 
+    <div id="right_order_side">
+      <button>Apmaksāt</button>
+      <button>Saglabāt</button>
+    </div>
   </section>
 
 
@@ -163,7 +191,6 @@
   <!-- placeholder -->
 </section>
 
-
   <!-- vendor -->
   <script type="text/javascript" src="cordova.js"></script>
   <script type="text/javascript" src="js/jquery-2.1.3.min.js"> </script>
@@ -175,7 +202,7 @@
   <script type="text/javascript" src="js/Nfc.js"></script>
   <script type="text/javascript" src="js/Mints.js"></script>
 
-  <!-- user script -->
+  <!-- client script -->
   <script type="text/javascript" src="js/lang.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
   <script type="text/javascript" src="js/script2.js"></script>

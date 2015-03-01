@@ -9,7 +9,7 @@ body {
 
       -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
       -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-      -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+      -webkit-client-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
 
       font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
         margin: 0;
@@ -57,7 +57,7 @@ button.big
 
 #products,
 #settings,
-#users,
+#clients,
 #reports
 {
   margin-left:auto;
@@ -128,9 +128,9 @@ nav button span
 
 
 /*TextFields*/
-#add_user,
+#add_client,
 #add_group,
-#browse_users,
+#browse_clients,
 #browse_groups,
 #add_product,
 #browse_products,
@@ -141,7 +141,7 @@ nav button span
   margin-left:auto;
   margin-right:auto;
 }
-#new_user_form{
+#new_client_form{
   margin:0;
   padding:0;
   padding-top:30px;
@@ -177,9 +177,9 @@ select{
   margin-bottom:30px;
 }
 
-#new_user_btn,
+#new_client_btn,
 #new_product_btn,
-#new_user_group_btn,
+#new_client_group_btn,
 #new_product_group_btn,
 #new_client_group_btn
 {
