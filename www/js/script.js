@@ -239,7 +239,7 @@ jQuery(function()
           {
             section.find('.client_data').html('<input type="hidden" name="client_id" value="'+ client.uuid +'"><span>'+ client.name + ' ' + client.surname  +'</span>');
           }
-          
+
           Nfc.unbind('tag_read');
         });
 
