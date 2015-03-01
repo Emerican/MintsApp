@@ -236,24 +236,69 @@ textarea{
 
 
 #new_order{
+  padding-top:70px;
   height:100%;
-  margin-top:-7px;
+  margin-top:-13px;
   width:100%;
-  background-color:red;
 }
 
 #new_order .contents{
+  margin-bottom:-10px;
+  border-left:none;
+  border-top:none;
+  border-bottom:none;
+  border-radius:0px;
   height:100%;
  width:100%;
 }
 
 #new_order .left {
-  background-color:red;
+  border-left:none;
+  border-top:none;
+  border-bottom:none;
   height:100%;
   float:left;
-  width:50%;
+  width:60%;
 }
 #new_order .right{
   float:left;
-  width:50%;
+  width:40%;
+}
+
+#new_order .left .contents ul {
+  padding-top:20px;
+}
+
+#new_order .left .contents ul li >button{
+  width:20%;
+  margin-right:5%;
+  float:left;
+}
+
+#new_order .right .product_list{
+  padding-top:30px;
+}
+#new_order .right .total{
+  background-color:#609732;
+  border:solid 2px black;
+  font-size:50px;
+}
+
+#new_order .right .product_list .purchase_item{
+  border:solid 1px black;
+  margin-bottom:5px;
+  height:50px;
+  line-height:50px;
+  font-weight:bold;
+}
+
+#new_order .right > form > button{
+  margin-top:5px;
+  border:solid 3px black;
+  border-radius:7px;
+  font-weight:bold;
+  font-size:16px;
+  background-color:red;
+  height:80px;
+  width:40%;
 }

@@ -132,10 +132,8 @@ nav button span
 /*TextFields*/
 #add_clients,
 #add_client_groups,
-#browse_clients,
 #browse_groups,
 #add_products,
-#browse_products,
 #add_product_groups,
 #edit_client_groups,
 #edit_product_groups,
@@ -151,6 +149,24 @@ nav button span
   padding:0;
   padding-top:30px;
   width:100%;
+}
+
+#browse_products input{
+  width:45%;
+
+}
+#browse_clients{
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+}
+#search_client{ /*optimizēt šeit un augstāk*/
+  width:45%;
+}
+#search_product{
+  width:45%;
+  font-size:16px;
+  padding:10px;
 }
 
 
@@ -236,13 +252,14 @@ textarea{
 
 
 #new_order{
+  padding-top:70px;
   height:100%;
   margin-top:-13px;
   width:100%;
 }
 
 #new_order .contents{
-  margin-top:-10px;
+  margin-bottom:-10px;
   border-left:none;
   border-top:none;
   border-bottom:none;
@@ -275,9 +292,10 @@ textarea{
 }
 
 #new_order .right .product_list{
-  padding-top:20px;
+  padding-top:30px;
 }
 #new_order .right .total{
+  background-color:#609732;
   border:solid 2px black;
   font-size:50px;
 }
@@ -285,8 +303,8 @@ textarea{
 #new_order .right .product_list .purchase_item{
   border:solid 1px black;
   margin-bottom:5px;
-  height:40px;
-  line-height:40px;
+  height:50px;
+  line-height:50px;
   font-weight:bold;
 }
 

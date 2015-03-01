@@ -139,7 +139,7 @@ jQuery(function()
         '<input type="hidden" name="product_id" value="'+ product.uuid +'">'+
         '<input class="count" type="hidden" name="count" value="1">'+
         '<span class="product_name">'+ product.name + ' x ' +'</span>'+
-        '<span class="count">1</span>'+
+        '<span class="count">1</span>'+ 
       '</div>');
     }
     else
@@ -283,16 +283,29 @@ jQuery(function()
           {
             Mints.purchases.new( { product_id:form_obj.product_id[i], count: form_obj.count[i], bill_id: bill.uuid } );
           }
+
+          Mints[resource_name].on('sync', function()
+          {
+            notice( "Izveidots" );
+            Mints[resource_name].unbind('sync');
+            trigger_action( "section/main" );
+            form.find('.client_data, .product_list, .amount').html("");
+          });
         }
         else
         {
           Mints[resource_name].new( form.serializeObject() );
+
+          Mints[resource_name].on('sync', function()
+          {
+            notice( "Izveidots" );
+            Mints[resource_name].unbind('sync');
+            trigger_action( "section/browse_" + resource_name );
+            form.find('input, textarea').val("")
+          });
         }
 
-        Mints[resource_name].on('sync', function()
-        {
-          notice( "Izveidots" );
-        });
+
       break;
 
       case 'update':
@@ -300,6 +313,7 @@ jQuery(function()
         Mints[resource_name].on('sync', function()
         {
           notice( "Saglabāts" );
+          Mints[resource_name].unbind('sync');
           trigger_action( "section/browse_" + resource_name );
         });
       break;
