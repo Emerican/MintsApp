@@ -30,10 +30,12 @@ jQuery(function()
   };
 
   var resource_params = {};
+  var resource_search = {};
 
   resources.forEach(function(res)
   {
     resource_params[res] = ['uuid','created_at','updated_at','synced'];
+    resource_search[res] = [];
   });
 
   resource_params.bills = resource_params.bills.concat(
@@ -59,6 +61,19 @@ jQuery(function()
   );
   resource_params.purchases = resource_params.purchases.concat(
     ['product_id','bill_id','count']
+  );
+
+  resource_search.client_groups = resource_search.client_groups.concat(
+    ['name']
+  );
+  resource_search.clients = resource_search.clients.concat(
+    ['name','surname','phone','email']
+  );
+  resource_search.product_groups = resource_search.product_groups.concat(
+    ['name']
+  );
+  resource_search.products = resource_search.products.concat(
+    ['name']
   );
 
 
@@ -238,6 +253,19 @@ jQuery(function()
         }
         Mints[resource.class_name].trigger('change');
         return ds[data.uuid];
+      },
+      search_in_object: function(obj, string, class_name)
+      {
+        var found = false;
+        for(var key in obj)
+        {
+          if ( resource_search[class_name].indexOf(key) != -1 && obj[key].search(new RegExp(string, "i")) != -1 )
+          {
+            found = true;
+            break;
+          }
+        }
+        return found;
       }
     }
   };
@@ -385,6 +413,58 @@ jQuery(function()
 
       return result;
     };
+
+    /**
+  	 * search()
+    search for object
+  	 */
+    if( resource_search[ns.class_name].length )
+    {
+      ns.search = function( search_str )
+      {
+        var self = this;
+        var ds = Mints.data_store[self.class_name];
+        var result = [];
+
+        for(var id in ds )
+        {
+          if( Mints.u.search_in_object( ds[id], search_str, self.class_name ) )
+          {
+            result.push( Mints.u.create_relations(self,ds[id]) );
+          }
+
+        };
+
+        return result;
+      };
+    }
+
+    /**
+  	 * search_by_card()
+    search by card for clients
+  	 */
+    if( ns.class_name == 'clients' )
+    {
+      ns.search_by_card = function( search_str )
+      {
+        var self = this;
+        var ds = Mints.data_store[self.class_name];
+        var result;
+
+        for(var id in ds )
+        {
+          if( ds[id].card_id == search_str  )
+          {
+            result = Mints.u.create_relations(self,ds[id]);
+            break;
+          }
+
+        };
+
+        return result;
+      };
+    }
+
   });
 
   resources.forEach(function(res)
