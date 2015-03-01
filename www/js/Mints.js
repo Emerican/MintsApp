@@ -91,7 +91,7 @@ jQuery(function()
         var sub_resource = "";
         var data={};
 
-        if( id )
+        if( id && !Mints.data_store[resource][id].new )
         {
           resource_id = "/" + id;
         }
