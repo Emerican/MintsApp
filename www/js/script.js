@@ -30,6 +30,19 @@ jQuery(function()
     return list_opts;
   }
 
+  var product_list = function( resources )
+  {
+    var items = resources || Mints.products.get();
+
+    var html_output = "";
+    items.forEach(function(item)
+    {
+      html_output +=  '<li><button data-target="' + item.uuid + '" action="add/product">'+ item.name +'</button>' + "</li>";
+    });
+
+    return "<ul>" + html_output + "</ul>";
+  }
+
   var resource_list = function( resource_name, resources )
   {
     var items = resources || Mints[resource_name].get();
@@ -149,6 +162,9 @@ jQuery(function()
       case "edit_client_groups":
         var resource_name = section_id.substr(5);
         populate_form( section, Mints[resource_name].get( data_source ) );
+      break;
+      case "new_order":
+        content.html( product_list() );
       break;
     }
 
