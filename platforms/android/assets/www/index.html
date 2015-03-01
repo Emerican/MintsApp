@@ -46,20 +46,23 @@
   <section id="add_product">
     <form id="new_product_form" action="new/products">
       <div class="field>">
-        <label for="group">Grupa:</label>
-        <select id="product_group_list" name="product_group_id">
+        <label for="product_group_list">Grupa:</label>
+        <select id="product_group_list" name="product_group_id" required="true">
           <option></option>
         </select>
       </div>
       <div class="field">
-        <label for="name">Nosaukums:</label>
-        <input type="text" id="product_name">
+        <label for="product_name">Nosaukums:</label>
+        <input type="text" id="product_name" name="name" required="true">
       </div>
       <div class="field">
-        <label for="price">Cena:</label>
-        <input type="number" step="any"id="product_price">
+        <label for="product_price">Cena:</label>
+        <input type="number" min="0" step="0.01" id="product_price" name="price" required="true">
       </div>
-      <!-- step any jānočeko-->
+      <div class="field">
+        <label for="product_description">Apraksts:</label>
+        <textarea id="product_description" name="description"></textarea>
+      </div>
       <button action="new/products" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
   </form>
   </section>
@@ -127,40 +130,37 @@
 
 
   <section id="browse_users">
-    <div class="field"><label for="search_name">Meklēt lietotāju:</label><input type="text" id="search_user"></div>
+    <form>
+    <div class="field">
+      <label for="search_name">Meklēt lietotāju:</label>
+      <input type="text" id="search_user">
+    </div>
+  </form>
   </section>
+
   <section id="browse_groups">
-    <div class="field"><label for="search_group">Meklēt grupu:</label><input type="text" id="search_user_group"></div>
-  </section>
-
-  <section id="reports">
-    <!-- last thing in this bitch -->
-  </section>
-
-  <section id="settings">
-    <!-- or maybe this is last -->
+    <form>
+      <div class="field">
+        <label for="search_group">Meklēt grupu:</label>
+        <input type="text" id="search_user_group">
+      </div>
+    </form>
   </section>
 
   <section id="new_order">
-    <div id="product_side">
-      <ul>
-        <li><div class="coctails">Burciņas</div></li>
-        <li><div id="food">Ēdiens</div></li>
-        <li><div id="shots">Šoti</div></li>
-        <li><div id="soft_drinks">Mīksto dziras</div></li>
-      </ul>
-    </div>
-    <div id="active_order_side">
 
-    </div>
-    <div id="price_side">
-      <ul>
-        <li><button id="Checkout">Saglabāt</button></li>
-        <li><button id="Save">Apmaksāt</button></li>
-      </ul>
-    </div>
+
   </section>
 
+
+
+<section id="reports">
+  <!-- placehorlder -->
+</section>
+
+<section id="settings">
+  <!-- placeholder -->
+</section>
 
 
 
@@ -172,8 +172,10 @@
   <script type="text/javascript" src="js/phonegap-nfc.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
 
+  <script type="text/javascript" src="js/Mints.js"></script>
+
   <script type="text/javascript" src="js/script.js"></script>
-  <script type="text/javascript" src="js/ajax.js"></script>
+
 </body>
 
 </html>

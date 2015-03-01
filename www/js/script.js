@@ -11,7 +11,6 @@ jQuery(function()
   var current_section = "main";
   var last_section = current_section;
 
-  var object
   var section_change = function(section_name)
   {
     current_section = section_name;
@@ -50,13 +49,13 @@ jQuery(function()
         return "Pievienot lietotāju"
       break;
       case "add_group":
-        return "Pievienot lietotāja grupu"
+        return "Pievienot lietotāju grupu"
       break;
       case "browse_users":
         return "Meklēt lietotājus"
       break;
       case "browse_groups":
-        return "Meklēt lietotāja grupu"
+        return "Meklēt lietotāju grupu"
       break;
       case "settings":
         return "Iestatījumi"
@@ -91,7 +90,7 @@ jQuery(function()
       break;
       case "add_product":
 
-        var product_list_opts ="";
+        var product_list_opts = "";
         var product_list = Mints.product_groups.get();
         product_list.forEach(function(item){
           product_list_opts += '<option value="' + item.uuid + '">' + item.name + '<option>'
@@ -166,6 +165,10 @@ jQuery(function()
     form.parents('section').trigger('change');
     //return false;
   });
+
+
+
+
 
 
 });

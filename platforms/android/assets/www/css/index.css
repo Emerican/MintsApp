@@ -25,7 +25,7 @@ section
 }
 button
 {
-  outline:none; 
+  outline:none;
   cursor:pointer;
   background-color: transparent;
   border: 0;
@@ -163,4 +163,12 @@ select{
 {
   float:right;
   margin-right:50px;
+}
+
+textarea{
+  height:100px;
+  width:70%;
+  resize:vertical;
+  margin-left:auto;
+  margin-right:auto;
 }
