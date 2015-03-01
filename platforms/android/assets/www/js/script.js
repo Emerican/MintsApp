@@ -138,7 +138,7 @@ jQuery(function()
       order_form.find('.product_list').append('<div class="purchase_item" data-source="'+ product.uuid +'" data-price="'+ product.price +'">'+
         '<input type="hidden" name="product_id" value="'+ product.uuid +'">'+
         '<input class="count" type="hidden" name="count" value="1">'+
-        '<span class="product_name">'+ product.name +'</span>'+
+        '<span class="product_name">'+ product.name + ' x ' +'</span>'+
         '<span class="count">1</span>'+
       '</div>');
     }
@@ -157,10 +157,10 @@ jQuery(function()
     order_form.find('.purchase_item').each(function()
     {
       var item = jQuery(this);
-      var price = parseFloat( item.attr('data-price') );
-      var count = parseFloat( item.find('input.count').val() );
+      var price = parseFloat( item.attr('data-price') )*100;
+      var count = parseInt( item.find('input.count').val() );
 
-      total += price * count;
+      total += price * count/100;
     });
 
     order_form.find('.total .amount').html( total );
@@ -271,7 +271,6 @@ jQuery(function()
     var action = form.attr('action') || form.find('button, .button').attr('action');
     var resource_id = form.attr('resource_uuid') || form.find('[name="uuid"]').val();
     var resource_name = action.split('/')[1];
-
     switch( action.split('/')[0] )
     {
       case 'new':
@@ -282,7 +281,7 @@ jQuery(function()
 
           for(var i = 0; i < form_obj.product_id.length; i++)
           {
-            Mints[resource_name].new( { product_id:form_obj.product_id[i], count: form_obj.count[i], bill_id: bill.uuid } );
+            Mints.purchases.new( { product_id:form_obj.product_id[i], count: form_obj.count[i], bill_id: bill.uuid } );
           }
         }
         else

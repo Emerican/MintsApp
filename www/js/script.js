@@ -139,7 +139,7 @@ jQuery(function()
         '<input type="hidden" name="product_id" value="'+ product.uuid +'">'+
         '<input class="count" type="hidden" name="count" value="1">'+
         '<span class="product_name">'+ product.name + ' x ' +'</span>'+
-        '<span class="count">1</span>'+
+        '<span class="count">1</span>'+ 
       '</div>');
     }
     else

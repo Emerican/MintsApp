@@ -4,6 +4,7 @@
 html,body
 {
     background-color:#ff6c40;
+    height:100%;
 }
 body {
 
@@ -67,6 +68,7 @@ button.big
 /*navigation*/
 
 nav{
+  z-index:99;
   background-color:#7e0032;
   position:fixed;
   width:100%;
@@ -233,6 +235,68 @@ textarea{
 /* Order */
 
 
-#new_order .contents{
+#new_order{
+  height:100%;
+  margin-top:-13px;
+  width:100%;
+}
 
+#new_order .contents{
+  margin-top:-10px;
+  border-left:none;
+  border-top:none;
+  border-bottom:none;
+  border-radius:0px;
+  height:100%;
+ width:100%;
+}
+
+#new_order .left {
+  border-left:none;
+  border-top:none;
+  border-bottom:none;
+  height:100%;
+  float:left;
+  width:60%;
+}
+#new_order .right{
+  float:left;
+  width:40%;
+}
+
+#new_order .left .contents ul {
+  padding-top:20px;
+}
+
+#new_order .left .contents ul li >button{
+  width:20%;
+  margin-right:5%;
+  float:left;
+}
+
+#new_order .right .product_list{
+  padding-top:20px;
+}
+#new_order .right .total{
+  border:solid 2px black;
+  font-size:50px;
+}
+
+#new_order .right .product_list .purchase_item{
+  border:solid 1px black;
+  margin-bottom:5px;
+  height:40px;
+  line-height:40px;
+  font-weight:bold;
+}
+
+#new_order .right > form > button{
+  margin-top:5px;
+  border:solid 3px black;
+  border-radius:7px;
+  font-weight:bold;
+  font-size:16px;
+  background-color:red;
+  height:80px;
+  width:40%;
 }

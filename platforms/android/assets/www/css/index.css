@@ -4,6 +4,7 @@
 html,body
 {
     background-color:#ff6c40;
+    height:100%;
 }
 body {
 
@@ -67,6 +68,7 @@ button.big
 /*navigation*/
 
 nav{
+  z-index:99;
   background-color:#7e0032;
   position:fixed;
   width:100%;
@@ -229,4 +231,29 @@ textarea{
   width:70%;
   float:left;
   line-height:75px;
+}
+/* Order */
+
+
+#new_order{
+  height:100%;
+  margin-top:-7px;
+  width:100%;
+  background-color:red;
+}
+
+#new_order .contents{
+  height:100%;
+ width:100%;
+}
+
+#new_order .left {
+  background-color:red;
+  height:100%;
+  float:left;
+  width:50%;
+}
+#new_order .right{
+  float:left;
+  width:50%;
 }
