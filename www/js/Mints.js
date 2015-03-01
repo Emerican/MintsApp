@@ -313,6 +313,15 @@ jQuery(function()
   	};
 
     /**
+  	 * unbind()
+     event handlers
+  	 */
+    ns.unbind = function( type )
+    {
+      this.events[type] == null;
+    };
+
+    /**
   	 * get()
      load from data_store
   	 */
