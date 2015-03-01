@@ -135,7 +135,7 @@ jQuery(function()
     {
       var product_count = order_form.find('.purchase_item').length;
       var product = Mints.products.get( data_source );
-      order_form.find('.product_list').append('<div class="purchase_item" data-source="'+ product.uuid +'">'+
+      order_form.find('.product_list').append('<div class="purchase_item" data-source="'+ product.uuid +'" data-price="'+ product.price +'">'+
         '<input type="hidden" name="bill['+ product_count +'][product_id]" value="'+ product.uuid +'">'+
         '<input class="count" type="hidden" name="bill['+ product_count +'][count]" value="1">'+
         '<span class="product_name">'+ product.name +'</span>'+
@@ -148,12 +148,28 @@ jQuery(function()
       product_in_list.find('input.count').val( count + 1 );
       product_in_list.find('span.count').html( count + 1 );
     }
+    calculate_total( order_form );
+  }
 
+  var calculate_total = function( order_form )
+  {
+    var total = 0;
+    order_form.find('.purchase_item').each(function()
+    {
+      var item = jQuery(this);
+      var price = parseFloat( item.attr('data-price') );
+      var count = parseFloat( item.find('input.count').val() );
+
+      total += price * count;
+    });
+
+    order_form.find('.total .amount').html( total );
   }
 
   container.on('click', '.product_list .purchase_item', function()
   {
     var target = jQuery(this);
+    var order_form = target.parents('form');
     var count = parseInt( target.find('input.count').val() );
     if( count > 1 )
     {
@@ -164,6 +180,8 @@ jQuery(function()
     {
       target.remove();
     }
+
+    calculate_total( order_form );
   });
 
   container.on('data_load', 'section', function()
