@@ -26,7 +26,7 @@ window.Nfc = {
   },
   onNfc: function(nfcEvent)
   {
-    Nfc.tag = nfcEvent.tag;
+    Nfc.tag = nfc.bytesToHexString(nfcEvent.tag.id);
     Nfc.trigger( 'tag_read' );
   },
   events: {},
