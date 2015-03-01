@@ -38,10 +38,6 @@
 
 
   <section id="products">
-    <button class="big" action="section/add_products">Pievienot produktu</button>
-    <br>
-    <button class="big" action="section/add_product_groups">Pievienot produkta grupu</button>
-    <br>
     <button class="big" action="section/browse_products">Meklēt produktus</button>
     <br>
     <button class="big" action="section/browse_product_groups">Meklēt produkta grupu</button>
@@ -118,10 +114,6 @@
   </section>
 
   <section id="clients">
-    <button class="big" action="section/add_clients">Pievienot lietotāju</button>
-    <br>
-    <button class="big" action="section/add_client_groups">Pievienot grupu</button>
-    <br>
     <button class="big" action="section/browse_clients">Pārskatīt lietotājus</button>
     <br>
     <button class="big" action="section/browse_client_groups">Pārskatīt grupas</button>
@@ -214,6 +206,7 @@
   </section>
 
   <section id="browse_products">
+    <button class="big" action="section/add_products">Pievienot produktu</button>
     <form action="search/products">
       <div class="field">
         <label for="search_name">Meklēt produktus:</label>
@@ -225,6 +218,7 @@
   </section>
 
   <section id="browse_clients">
+    <button class="big" action="section/add_clients">Pievienot lietotāju</button>
     <form action="search/clients">
       <div class="field">
         <label for="search_name">Meklēt lietotāju:</label>
@@ -236,11 +230,12 @@
   </section>
 
   <section id="browse_client_groups">
+    <button class="big" action="section/add_client_groups">Pievienot grupu</button>
     <div class="contents"></div>
   </section>
 
   <section id="browse_product_groups">
-
+    <button class="big" action="section/add_product_groups">Pievienot produkta grupu</button>
     <div class="contents"></div>
   </section>
 
@@ -251,9 +246,6 @@
 
     <div class="right">
       <form action="new/bills">
-        <div class="client_data"></div>
-        <div class="product_list"></div>
-        <div class="total"><span class="amount"></div>
 
         <button action="new/bills" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
       </form>
