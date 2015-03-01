@@ -271,7 +271,6 @@ jQuery(function()
     var action = form.attr('action') || form.find('button, .button').attr('action');
     var resource_id = form.attr('resource_uuid') || form.find('[name="uuid"]').val();
     var resource_name = action.split('/')[1];
-
     switch( action.split('/')[0] )
     {
       case 'new':
@@ -282,7 +281,7 @@ jQuery(function()
 
           for(var i = 0; i < form_obj.product_id.length; i++)
           {
-            Mints[resource_name].new( { product_id:form_obj.product_id[i], count: form_obj.count[i], bill_id: bill.uuid } );
+            Mints.purchases.new( { product_id:form_obj.product_id[i], count: form_obj.count[i], bill_id: bill.uuid } );
           }
         }
         else
