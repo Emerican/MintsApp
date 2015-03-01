@@ -107,12 +107,12 @@ jQuery(function()
     var data_source = section.attr('data-source');
     switch (section_id)
     {
-      case "add_client":
+      case "add_clients":
 
         section.find('select').html( get_list_options('client_groups') );
 
       break;
-      case "add_product":
+      case "add_products":
 
         section.find('select').html( get_list_options('product_groups') );
 
@@ -135,6 +135,7 @@ jQuery(function()
       case "edit_clients":
       case "edit_client_groups":
         var resource_name = section_id.substr(5);
+        section.find('select').html( get_list_options(resource_name) );
         populate_form( section, Mints[resource_name].get( data_source ) );
       break;
     }
