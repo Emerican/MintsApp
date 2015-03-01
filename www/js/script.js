@@ -157,10 +157,10 @@ jQuery(function()
     order_form.find('.purchase_item').each(function()
     {
       var item = jQuery(this);
-      var price = parseFloat( item.attr('data-price') );
-      var count = parseFloat( item.find('input.count').val() );
+      var price = parseFloat( item.attr('data-price') )*100;
+      var count = parseInt( item.find('input.count').val() );
 
-      total += price * count;
+      total += price * count/100;
     });
 
     order_form.find('.total .amount').html( total );
