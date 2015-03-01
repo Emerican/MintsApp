@@ -123,7 +123,11 @@ jQuery(function()
           success: function( json )
           {
             callback( json );
-          }
+          },
+          error:function (xhr, ajaxOptions, thrownError)
+  				{
+  					alert("Nevar pieslēgties serverim. Pārbaudiet interneta savienojumu!");
+  				}
         });
       },
       create_relations: function(resource,data)
