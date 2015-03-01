@@ -308,6 +308,11 @@ textarea{
   font-weight:bold;
 }
 
+#new_order .right .product_list .purchase_item span{
+  height:100%;
+  width:100%;
+}
+
 #new_order .right > form > button{
   margin-top:5px;
   border:solid 3px black;

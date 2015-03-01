@@ -132,10 +132,8 @@ nav button span
 /*TextFields*/
 #add_clients,
 #add_client_groups,
-#browse_clients,
 #browse_groups,
 #add_products,
-#browse_products,
 #add_product_groups,
 #edit_client_groups,
 #edit_product_groups,
@@ -151,6 +149,24 @@ nav button span
   padding:0;
   padding-top:30px;
   width:100%;
+}
+
+#browse_products input{
+  width:45%;
+
+}
+#browse_clients{
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+}
+#search_client{ /*optimizēt šeit un augstāk*/
+  width:45%;
+}
+#search_product{
+  width:45%;
+  font-size:16px;
+  padding:10px;
 }
 
 
