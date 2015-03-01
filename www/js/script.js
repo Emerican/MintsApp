@@ -62,7 +62,16 @@ jQuery(function()
     {
       var value = data[key];
 
-      form.find('[name="' + key + '"]').val( value );
+      var input = form.find('[name="' + key + '"]')
+      if( input.is('select') )
+      {
+        input.find('[value="' + value + '"]').prop('selected', true);
+      }
+      else
+      {
+        input.val( value );
+      }
+
     }
   }
 
@@ -135,7 +144,9 @@ jQuery(function()
       case "edit_clients":
       case "edit_client_groups":
         var resource_name = section_id.substr(5);
+
         section.find('select').html( get_list_options(resource_name) );
+
         populate_form( section, Mints[resource_name].get( data_source ) );
       break;
     }
