@@ -2,7 +2,6 @@ jQuery(function()
 {
 
   var container = jQuery('body');
-  var buttons = container.find('button, .button');
   var back_button = container.find('button[action="back"]');
   var navigation = container.find('nav');
 
@@ -10,12 +9,12 @@ jQuery(function()
   var current_section = "main";
   var last_section = current_section;
 
-  var section_change = function(section_name)
+  var section_change = function(section_name, data_target)
   {
     current_section = section_name;
     navigation.trigger('change');
     jQuery('section').hide();
-    jQuery("#"+section_name).trigger('data_load').show();
+    jQuery("#"+section_name).attr('data-source', data_target).trigger('data_load').show();
 
   };
 
@@ -31,6 +30,42 @@ jQuery(function()
     return list_opts;
   }
 
+  var resource_list = function( resource_name, resources )
+  {
+    var items = resources || Mints[resource_name].get();
+
+    var html_output = "";
+    items.forEach(function(item)
+    {
+      var resource_data = "";
+      switch ( resource_name )
+      {
+        case "products":
+        case "client_groups":
+        case "product_groups":
+          resource_data = item.name
+        break;
+        case "clients":
+          resource_data = item.name + " " + item.surname
+        break;
+      }
+      html_output +=  "<li>" + resource_data + '<button data-target="' + item.uuid + '" action="section/edit_' + resource_name + '">Labot</button>' + "</li>";
+    });
+
+    return "<ul>" + html_output + "</ul>";
+  }
+  var populate_form = function( section, data )
+  {
+    var form = section.find('form');
+
+    for( var key in data )
+    {
+      var value = data[key];
+
+      form.find('[name="' + key + '"]').val( value );
+    }
+  }
+
   var notice = function(msg)
   {
     container.addClass( "show_notice" );
@@ -41,7 +76,7 @@ jQuery(function()
     }, 5000);
   }
 
-  var trigger_action = function( action )
+  var trigger_action = function( action, data_target )
   {
     var prevent_default = false;
 
@@ -51,8 +86,7 @@ jQuery(function()
 
         var section_name = action.split('/')[1];
         section_history.push( current_section );
-        section_change( section_name );
-
+        section_change( section_name, data_target );
       break;
       case 'back':
         section_change( section_history.pop() );
@@ -69,10 +103,11 @@ jQuery(function()
   {
     var section = jQuery(this);
     var section_id = section.attr('id');
-
+    var content = section.find('.contents');
+    var data_source = section.attr('data-source');
     switch (section_id)
     {
-      case "add_user":
+      case "add_client":
 
         section.find('select').html( get_list_options('client_groups') );
 
@@ -81,6 +116,26 @@ jQuery(function()
 
         section.find('select').html( get_list_options('product_groups') );
 
+      break;
+      case "browse_products":
+        content.html( resource_list("products") );
+      break;
+      case "browse_product_groups":
+        content.html( resource_list("product_groups") );
+      break;
+      case "browse_clients":
+        content.html( resource_list("clients") );
+      break;
+      case "browse_client_groups":
+        content.html( resource_list("client_groups") );
+      break;
+
+      case "edit_products":
+      case "edit_product_groups":
+      case "edit_clients":
+      case "edit_client_groups":
+        var resource_name = section_id.substr(5);
+        populate_form( section, Mints[resource_name].get( data_source ) );
       break;
     }
 
@@ -94,12 +149,11 @@ jQuery(function()
   }).trigger('change');;
 
 
-  buttons.on('click',function()
+  container.on('click', 'button, .button', function()
   {
     var target = jQuery(this);
-    var action = target.attr('action');
 
-    return trigger_action( action );
+    return trigger_action( target.attr('action'), target.attr('data-target') );
   });
 
   container.on('submit', 'form',function(e)
@@ -132,7 +186,8 @@ jQuery(function()
 
       case 'search':
         var search_result = Mints[resource_name].search( form.serializeObject().search );
-        // do something with search result
+        var content = form.parent().find('.content');
+        content.html( resource_list( resource_name, search_result ) );
       break;
 
     }

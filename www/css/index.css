@@ -128,14 +128,14 @@ nav button span
 
 
 /*TextFields*/
-#add_client,
-#add_group,
+#add_clients,
+#add_client_groups,
 #browse_clients,
 #browse_groups,
-#add_product,
+#add_products,
 #browse_products,
-#add_product_group,
-#browse_product_group
+#add_product_groups,
+#browse_product_groups
 {
   width:45%;
   margin-left:auto;
@@ -175,16 +175,6 @@ select{
   padding:10px;
   width:80%;
   margin-bottom:30px;
-}
-
-#new_client_btn,
-#new_product_btn,
-#new_client_group_btn,
-#new_product_group_btn,
-#new_client_group_btn
-{
-  float:right;
-  margin-right:50px;
 }
 
 textarea{

@@ -9,32 +9,32 @@ window.Lang = {
       case "products":
         return "Produkti"
       break;
-      case "add_product":
+      case "add_products":
         return "Pievienot produktu"
       break;
-      case "add_product_group":
+      case "add_product_groups":
         return "Pievienot produkta grupu"
       break;
       case "browse_product":
-        return "Meklēt produktu"
+        return "Produktu saraksts"
       break;
-      case "browse_product_group":
-        return "Meklēt produkta grupu"
+      case "browse_product_groups":
+        return "Produktu grupu saraksts"
       break;
-      case "users":
+      case "clients":
         return "Lietotāji"
       break;
-      case "add_user":
+      case "add_clients":
         return "Pievienot lietotāju"
       break;
-      case "add_group":
+      case "add_client_groups":
         return "Pievienot lietotāju grupu"
       break;
-      case "browse_users":
-        return "Meklēt lietotājus"
+      case "browse_clients":
+        return "Klientu saraksts"
       break;
-      case "browse_groups":
-        return "Meklēt lietotāju grupu"
+      case "browse_client_groups":
+        return "Lietotāju grupu saraksts"
       break;
       case "settings":
         return "Iestatījumi"
@@ -43,7 +43,7 @@ window.Lang = {
         return "Atskaites"
       break;
       case "new_order":
-        return "Pasūtījumi"
+        return "Jauns pasūtījums"
       break;
       default:
         return section;
