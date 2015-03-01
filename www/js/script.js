@@ -49,7 +49,7 @@ jQuery(function()
           resource_data = item.name + " " + item.surname
         break;
       }
-      html_output +=  "<li>" + resource_data + '<button data-target="' + item.uuid + '" action="section/edit_' + resource_name + '">Labot</button>' + "</li>";
+      html_output +=  "<li><span>" + resource_data + '</span><button data-target="' + item.uuid + '" action="section/edit_' + resource_name + '">Labot</button>' + "</li>";
     });
 
     return "<ul>" + html_output + "</ul>";
