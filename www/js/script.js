@@ -230,6 +230,19 @@ jQuery(function()
       break;
       case "new_order":
         content.html( product_list() );
+
+        Nfc.unbind('tag_read');
+        Nfc.on('tag_read', function()
+        {
+          var client = Mints.clients.search_by_card( Nfc.tag ) );
+          if(client)
+          {
+            section.find('.client_data').html('<input type="hidden" name="client_id" value="'+ client.uuid +'"><span>'+ client.name + ' ' + client.surname  +'</span>');
+          }
+          
+          Nfc.unbind('tag_read');
+        });
+
       break;
     }
 
