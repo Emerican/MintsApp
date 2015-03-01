@@ -37,7 +37,7 @@ jQuery(function()
     container.find('.notice .text').html( msg );
     setTimeout(function()
     {
-      container.addClass( "show_notice" );
+      container.removeClass( "show_notice" );
     }, 5000);
   }
 
@@ -62,7 +62,7 @@ jQuery(function()
         prevent_default = true;
 
     }
-    return !prevent_default;
+    return prevent_default;
   }
 
   container.on('data_load', 'section', function()
