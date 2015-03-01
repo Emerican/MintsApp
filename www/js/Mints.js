@@ -91,7 +91,7 @@ jQuery(function()
         var sub_resource = "";
         var data={};
 
-        if( id && !isNaN(id) )
+        if( id )
         {
           resource_id = "/" + id;
         }
@@ -145,7 +145,7 @@ jQuery(function()
               self[param] = params[param];
             }
           });
-
+          self.synced = false;
           resource.sync();
         };
 
