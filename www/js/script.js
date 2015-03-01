@@ -136,8 +136,8 @@ jQuery(function()
       var product_count = order_form.find('.purchase_item').length;
       var product = Mints.products.get( data_source );
       order_form.find('.product_list').append('<div class="purchase_item" data-source="'+ product.uuid +'" data-price="'+ product.price +'">'+
-        '<input type="hidden" name="bill['+ product_count +'][product_id]" value="'+ product.uuid +'">'+
-        '<input class="count" type="hidden" name="bill['+ product_count +'][count]" value="1">'+
+        '<input type="hidden" name="product_id" value="'+ product.uuid +'">'+
+        '<input class="count" type="hidden" name="count" value="1">'+
         '<span class="product_name">'+ product.name +'</span>'+
         '<span class="count">1</span>'+
       '</div>');
@@ -234,7 +234,7 @@ jQuery(function()
         Nfc.unbind('tag_read');
         Nfc.on('tag_read', function()
         {
-          var client = Mints.clients.search_by_card( Nfc.tag ) );
+          var client = Mints.clients.search_by_card( Nfc.tag );
           if(client)
           {
             section.find('.client_data').html('<input type="hidden" name="client_id" value="'+ client.uuid +'"><span>'+ client.name + ' ' + client.surname  +'</span>');
@@ -275,7 +275,21 @@ jQuery(function()
     switch( action.split('/')[0] )
     {
       case 'new':
-        Mints[resource_name].new( form.serializeObject() );
+        if (resource_name == 'bills' )
+        {
+          var form_obj = form.serializeObject();
+          var bill = Mints[resource_name].new( {client_id:form_obj.client_id} );
+
+          for(var i = 0; i < form_obj.product_id.length; i++)
+          {
+            Mints[resource_name].new( { product_id:form_obj.product_id[i], count: form_obj.count[i], bill_id: bill.uuid } );
+          }
+        }
+        else
+        {
+          Mints[resource_name].new( form.serializeObject() );
+        }
+
         Mints[resource_name].on('sync', function()
         {
           notice( "Izveidots" );
