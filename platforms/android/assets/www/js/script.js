@@ -1,4 +1,3 @@
-
 jQuery(function()
 {
 
@@ -11,7 +10,6 @@ jQuery(function()
   var current_section = "main";
   var last_section = current_section;
 
-  var object
   var section_change = function(section_name)
   {
     current_section = section_name;
@@ -21,103 +19,31 @@ jQuery(function()
 
   };
 
-  var section_names = function( section )
+  var get_list_options = function( resource_name )
   {
-    switch(section)
+    var list_opts = "";
+    var list = Mints[resource_name].get();
+
+    list.forEach(function(item)
     {
-      case "main":
-        return "Sākums"
-      break;
-      case "products":
-        return "Produkti"
-      break;
-      case "add_product":
-        return "Pievienot produktu"
-      break;
-      case "add_product_group":
-        return "Pievienot produkta grupu"
-      break;
-      case "browse_product":
-        return "Meklēt produktu"
-      break;
-      case "browse_product_group":
-        return "Meklēt produkta grupu"
-      break;
-      case "users":
-        return "Lietotāji"
-      break;
-      case "add_user":
-        return "Pievienot lietotāju"
-      break;
-      case "add_group":
-        return "Pievienot lietotāju grupu"
-      break;
-      case "browse_users":
-        return "Meklēt lietotājus"
-      break;
-      case "browse_groups":
-        return "Meklēt lietotāju grupu"
-      break;
-      case "settings":
-        return "Iestatījumi"
-      break;
-      case "reports":
-        return "Atskaites"
-      break;
-      case "new_order":
-        return "Pasūtījumi"
-      break;
-      default:
-        return section;
-    }
-  };
+      list_opts += '<option value="' + item.uuid + '">' + item.name + '</option>'
+    });
+    return list_opts;
+  }
 
-  container.on('data_load', 'section', function()
+  var notice = function(msg)
   {
-    var section = jQuery(this);
-    var section_id = section.attr('id');
-
-    switch (section_id)
+    container.addClass( "show_notice" );
+    container.find('.notice .text').html( msg );
+    setTimeout(function()
     {
-      case "add_user":
+      container.removeClass( "show_notice" );
+    }, 5000);
+  }
 
-        var list_opts = "";
-        var list = Mints.client_groups.get();
-        list.forEach(function(item){
-          list_opts += '<option value="' + item.uuid + '">' + item.name + '<option>'
-        });
-
-        section.find('select').html(list_opts);
-      break;
-      case "add_product":
-
-        var product_list_opts = "";
-        var product_list = Mints.product_groups.get();
-        product_list.forEach(function(item){
-          product_list_opts += '<option value="' + item.uuid + '">' + item.name + '<option>'
-        });
-
-        section.find('select').html(product_list_opts);
-      break;
-    }
-
-
-  });
-
-  navigation.on('change',function()
+  var trigger_action = function( action )
   {
-    back_button.toggle( section_history.length > 0 );
-    navigation.find('.title').html( section_names(current_section) );
-
-  }).trigger('change');;
-
-
-  buttons.on('click',function()
-  {
-    var target = jQuery(this);
-    var action = target.attr('action');
-
-    var prevent_default = true;
+    var prevent_default = false;
 
     switch( action.split('/')[0] )
     {
@@ -132,31 +58,81 @@ jQuery(function()
         section_change( section_history.pop() );
       break;
 
-      case 'new':
-      case 'set':
-        prevent_default = false;
-      break;
+      default:
+        prevent_default = true;
 
     }
-    return !prevent_default;
+    return prevent_default;
+  }
+
+  container.on('data_load', 'section', function()
+  {
+    var section = jQuery(this);
+    var section_id = section.attr('id');
+
+    switch (section_id)
+    {
+      case "add_user":
+
+        section.find('select').html( get_list_options('client_groups') );
+
+      break;
+      case "add_product":
+
+        section.find('select').html( get_list_options('product_groups') );
+
+      break;
+    }
+
+  });
+
+  navigation.on('change',function()
+  {
+    back_button.toggle( section_history.length > 0 );
+    navigation.find('.title').html( Lang.section_names(current_section) );
+
+  }).trigger('change');;
+
+
+  buttons.on('click',function()
+  {
+    var target = jQuery(this);
+    var action = target.attr('action');
+
+    return trigger_action( action );
   });
 
   container.on('submit', 'form',function(e)
   {
     e.preventDefault();
+
     var form = jQuery(this);
     var action = form.attr('action') || form.find('button, .button').attr('action');
     var resource_id = form.attr('resource_uuid') || form.find('[name="uuid"]').val();
     var resource_name = action.split('/')[1];
-    console.log( form.serializeObject() );
+
     switch( action.split('/')[0] )
     {
       case 'new':
         Mints[resource_name].new( form.serializeObject() );
+        Mints[resource_name].on('sync', function()
+        {
+          notice( "Izveidots" );
+        });
       break;
 
-      case 'set':
+      case 'update':
         Mints[resource_name].get(resource_id).set( form.serializeObject() );
+        Mints[resource_name].on('sync', function()
+        {
+          notice( "Saglabāts" );
+          trigger_action( "section/browse_" + resource_name );
+        });
+      break;
+
+      case 'search':
+        var search_result = Mints[resource_name].search( form.serializeObject().search );
+        // do something with search result
       break;
 
     }
@@ -164,12 +140,7 @@ jQuery(function()
 
     // handle data refresh in .on('change',function(){}) event
     form.parents('section').trigger('change');
-    //return false;
+
   });
-
-
-
-
-
 
 });

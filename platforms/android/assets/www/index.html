@@ -15,6 +15,7 @@
 <body class="main">
   <h1>HI</h1>
   <nav>
+    <div class="notice"><div class="text"></div></div>
     <div class="left">
       <button action="back"><span class="fa fa-arrow-left fa-5x "></span></button>
       <button action="section/main"><span class="fa fa-home fa-5x"></span></button>
@@ -29,7 +30,8 @@
     <button action="section/users"><span class="fa fa-user fa-5x"></span></button>
     <br>
     <button action="section/reports"><span class="fa fa-bar-chart fa-5x"></span></button>
-    <button action="section/settings"><span class="fa fa-gears fa-5x"></span></button>
+    <button action="section/new_order"><span class="fa fa-shopping-cart fa-5x"></span></button>
+
   </section>
 
 
@@ -68,7 +70,7 @@
   </section>
 
 
-  <section id="browse_product">
+  <section id="browse_products">
       <!-- nav skaidrs vēl -->
   </section>
 
@@ -109,7 +111,7 @@
       </div>
       <div class="field">
         <label for="cars_id">ID:</label>
-        <input type="text" name="card_id" id="card_id" required="true">
+        <input class="nfc" type="text" name="card_id" id="card_id" required="true">
       </div>
       <div class="field">
         <label for="group">Grupa:</label>
@@ -148,8 +150,16 @@
   </section>
 
   <section id="new_order">
+    <div id="left_order_side">
+      <form>
 
+      </form>
+    </div>
 
+    <div id="right_order_side">
+      <button>Apmaksāt</button>
+      <button>Saglabāt</button>
+    </div>
   </section>
 
 
@@ -163,18 +173,21 @@
 </section>
 
 
-
+  <!-- vendor -->
   <script type="text/javascript" src="cordova.js"></script>
-
   <script type="text/javascript" src="js/jquery-2.1.3.min.js"> </script>
   <script type="text/javascript" src="js/uuid.core.js"></script>
   <script type="text/javascript" src="js/jquery.serializeObject.js"></script>
   <script type="text/javascript" src="js/phonegap-nfc.js"></script>
-  <script type="text/javascript" src="js/index.js"></script>
 
+  <!-- classes -->
+  <script type="text/javascript" src="js/Nfc.js"></script>
   <script type="text/javascript" src="js/Mints.js"></script>
 
+  <!-- user script -->
+  <script type="text/javascript" src="js/lang.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
+  <script type="text/javascript" src="js/script2.js"></script>
 
 </body>
 

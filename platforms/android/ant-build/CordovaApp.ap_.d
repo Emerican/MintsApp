@@ -77,13 +77,14 @@
 /Users/vellameita/Shroom/platforms/android/assets/www/css/font-awesome-4.3.0/scss/_variables.scss \
 /Users/vellameita/Shroom/platforms/android/assets/www/css/font-awesome-4.3.0/scss/font-awesome.scss \
 /Users/vellameita/Shroom/platforms/android/assets/www/img/logo.png \
-/Users/vellameita/Shroom/platforms/android/assets/www/js/index.js \
 /Users/vellameita/Shroom/platforms/android/assets/www/js/jquery-2.1.3.min.js \
 /Users/vellameita/Shroom/platforms/android/assets/www/js/jquery.serializeObject.js \
+/Users/vellameita/Shroom/platforms/android/assets/www/js/lang.js \
 /Users/vellameita/Shroom/platforms/android/assets/www/js/Mints.js \
-/Users/vellameita/Shroom/platforms/android/assets/www/js/nfclistener.js \
+/Users/vellameita/Shroom/platforms/android/assets/www/js/Nfc.js \
 /Users/vellameita/Shroom/platforms/android/assets/www/js/phonegap-nfc.js \
 /Users/vellameita/Shroom/platforms/android/assets/www/js/script.js \
+/Users/vellameita/Shroom/platforms/android/assets/www/js/script2.js \
 /Users/vellameita/Shroom/platforms/android/assets/www/js/uuid.core.js \
 /Users/vellameita/Shroom/platforms/android/assets/www/plugins/com.chariotsolutions.nfc.plugin \
 /Users/vellameita/Shroom/platforms/android/assets/www/plugins/com.chariotsolutions.nfc.plugin/www \
