@@ -1,5 +1,5 @@
  * {
-     -webkit-tap-highlight-color: transparent;
+     -webkit-tap-highlight-color: transparent;/*just in case*/
     }
 html,body
 {
@@ -25,7 +25,7 @@ section
 }
 button
 {
-  outline:none;
+  outline:none; 
   cursor:pointer;
   background-color: transparent;
   border: 0;
