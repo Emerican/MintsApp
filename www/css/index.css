@@ -275,8 +275,10 @@ textarea{
   height:100%;
   float:left;
   width:60%;
+  overflow:scroll;
 }
 #new_order .right{
+  overflow:scroll;
   float:left;
   width:40%;
 }
