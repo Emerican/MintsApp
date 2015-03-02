@@ -275,8 +275,10 @@ textarea{
   height:100%;
   float:left;
   width:60%;
+  overflow:scroll;
 }
 #new_order .right{
+  overflow:scroll;
   float:left;
   width:40%;
 }
@@ -306,6 +308,11 @@ textarea{
   height:50px;
   line-height:50px;
   font-weight:bold;
+}
+
+#new_order .right .product_list .purchase_item span{
+  height:100%;
+  width:100%;
 }
 
 #new_order .right > form > button{

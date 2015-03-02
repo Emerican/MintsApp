@@ -280,6 +280,9 @@ textarea{
 }
 #new_order .right{
   background-color:#93646A;
+}
+#new_order .right{
+
   float:left;
   width:40%;
 }
