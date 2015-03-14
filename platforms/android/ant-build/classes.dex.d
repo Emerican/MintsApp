@@ -17,5 +17,8 @@
 /Users/vellameita/Shroom/platforms/android/ant-build/classes/com/mints/shroom/R$string.class \
 /Users/vellameita/Shroom/platforms/android/ant-build/classes/com/mints/shroom/R$xml.class \
 /Users/vellameita/Shroom/platforms/android/ant-build/classes/com/mints/shroom/R.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/toluhta/immersify/ImmersiveMode$1.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/toluhta/immersify/ImmersiveMode$2.class \
+/Users/vellameita/Shroom/platforms/android/ant-build/classes/com/toluhta/immersify/ImmersiveMode.class \
 /Users/vellameita/Shroom/platforms/android/ant-build/classes/org/apache/cordova/api/Dummy.class \
 /Users/vellameita/Shroom/platforms/android/ant-build/dexedLibs/classes-345674641829c8f4b30c7f0ffba6b7a1.jar \

@@ -87,6 +87,9 @@
 /Users/vellameita/Shroom/platforms/android/assets/www/js/script2.js \
 /Users/vellameita/Shroom/platforms/android/assets/www/js/uuid.core.js \
 /Users/vellameita/Shroom/platforms/android/assets/www/plugins/com.chariotsolutions.nfc.plugin \
+/Users/vellameita/Shroom/platforms/android/assets/www/plugins/com.toluhta.immersify \
 /Users/vellameita/Shroom/platforms/android/assets/www/plugins/com.chariotsolutions.nfc.plugin/www \
 /Users/vellameita/Shroom/platforms/android/assets/www/plugins/com.chariotsolutions.nfc.plugin/www/phonegap-nfc.js \
+/Users/vellameita/Shroom/platforms/android/assets/www/plugins/com.toluhta.immersify/www \
+/Users/vellameita/Shroom/platforms/android/assets/www/plugins/com.toluhta.immersify/www/ImmersiveModePlugin.js \
 /Users/vellameita/Shroom/platforms/android/ant-build/AndroidManifest.xml \

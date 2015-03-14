@@ -5,6 +5,9 @@
         <param name="android-package" value="com.chariotsolutions.nfc.plugin.NfcPlugin" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="Immersify">
+        <param name="android-package" value="com.toluhta.immersify.ImmersiveMode" />
+    </feature>
     <name>Shroom</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.

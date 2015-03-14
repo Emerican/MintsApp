@@ -3,7 +3,7 @@
     }
 html,body
 {
-    background-color:#ff6c40;
+    background-color:#558062;
     height:100%;
 }
 body {
@@ -69,7 +69,7 @@ button.big
 
 nav{
   z-index:99;
-  background-color:#7e0032;
+  background-color:#48646C;
   position:fixed;
   width:100%;
   top:0;
@@ -252,6 +252,7 @@ textarea{
 
 
 #new_order{
+  background-color:#93646A;
   padding-top:70px;
   height:100%;
   margin-top:-13px;
@@ -269,16 +270,19 @@ textarea{
 }
 
 #new_order .left {
+  background-color:#9A7C69;
   border-left:none;
   border-top:none;
   border-bottom:none;
   height:100%;
   float:left;
   width:60%;
-  overflow:scroll;
 }
 #new_order .right{
-  overflow:scroll;
+  background-color:#93646A;
+}
+#new_order .right{
+
   float:left;
   width:40%;
 }
@@ -288,6 +292,7 @@ textarea{
 }
 
 #new_order .left .contents ul li >button{
+  background-color:#8F6D85;
   width:20%;
   margin-right:5%;
   float:left;
@@ -297,13 +302,14 @@ textarea{
   padding-top:30px;
 }
 #new_order .right .total{
-  background-color:#609732;
+  background-color:#6F5645;
   border:solid 2px black;
   font-size:50px;
 }
 
 #new_order .right .product_list .purchase_item{
-  border:solid 1px black;
+  background-color:#DDBDC1;
+  border:solid 3px black;
   margin-bottom:5px;
   height:50px;
   line-height:50px;
@@ -321,7 +327,7 @@ textarea{
   border-radius:7px;
   font-weight:bold;
   font-size:16px;
-  background-color:red;
+  background-color:#625175;
   height:80px;
   width:40%;
 }
