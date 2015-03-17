@@ -1,2 +1,2 @@
-/Users/vellameita/Shroom/platforms/android/ant-build/AndroidManifest.xml : \
-/Users/vellameita/Shroom/platforms/android/AndroidManifest.xml \
+/users/vellameita/Shroom/platforms/android/ant-build/AndroidManifest.xml : \
+/users/vellameita/Shroom/platforms/android/AndroidManifest.xml \
