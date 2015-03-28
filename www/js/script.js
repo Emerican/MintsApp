@@ -19,7 +19,7 @@ jQuery(function()
         var img = target.find('img');
         if( img.length == 0 )
         {
-          target.append('<img class="avatar_image" src="'+ "data:image/jpeg;base64," + imageData +'">');
+          target.append('<img width="150" class="avatar_image" src="'+ "data:image/jpeg;base64," + imageData +'">');
         }
         else
         {
