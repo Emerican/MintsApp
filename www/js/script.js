@@ -294,15 +294,45 @@ jQuery(function()
         }
         else
         {
-          Mints[resource_name].new( form.serializeObject() );
-
-          Mints[resource_name].on('sync', function()
+          var file_input = form.find('input[type="file"]');
+          if( file_input.length > 0 )
           {
-            notice( "Izveidots" );
-            Mints[resource_name].unbind('sync');
-            trigger_action( "section/browse_" + resource_name );
-            form.find('input, textarea').val("")
-          });
+            var avatar = file_input.get(0).files[0];
+            var reader = new FileReader();
+
+            reader.onload = function(f)
+            {
+              var form_data = form.serializeObject();
+              form_data.avatar = f.target.result;
+
+              Mints[resource_name].new( form_data );
+
+              Mints[resource_name].on('sync', function()
+              {
+                notice( "Izveidots" );
+                Mints[resource_name].unbind('sync');
+                trigger_action( "section/browse_" + resource_name );
+                form.find('input, textarea').val("")
+              });
+
+            };
+            reader.readAsDataURL(avatar);
+
+          }
+          else
+          {
+            Mints[resource_name].new( form.serializeObject() );
+
+            Mints[resource_name].on('sync', function()
+            {
+              notice( "Izveidots" );
+              Mints[resource_name].unbind('sync');
+              trigger_action( "section/browse_" + resource_name );
+              form.find('input, textarea').val("")
+            });
+          }
+
+
         }
 
 

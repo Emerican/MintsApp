@@ -45,7 +45,7 @@ jQuery(function()
     ['name']
   );
   resource_params.clients = resource_params.clients.concat(
-    ['card_id','name','surname','client_group_id','phone','email','postpay']
+    ['card_id','name','surname','client_group_id','phone','email','postpay','avatar', 'avatar_path']
   );
   resource_params.discounts = resource_params.discounts.concat(
     ['client_id','client_group_id','product_id','product_group_id','amount']
