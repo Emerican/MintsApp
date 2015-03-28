@@ -1,5 +1,5 @@
 function takePicture() {
-    navigator.camera.getPicture(function onSuccess(imageData) {
+    navigator.camera.getPicture(function(imageData) {
     var img = document.getElementById('camera_image');
     img.style.visibility = "visible";
     img.style.display = "block";
@@ -10,5 +10,5 @@ function takePicture() {
        console.log("Error getting picture: " + e);
         document.getElementById('camera_status').innerHTML = "Error getting picture.";
         },
-        { quality: 50, destinationType: navigator.camera.DestinationType.DATA_URL});
+        { quality: 80, destinationType: navigator.camera.DestinationType.DATA_URL});
       };
