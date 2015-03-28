@@ -16,6 +16,7 @@ jQuery(function()
       navigator.camera.getPicture(function(imageData)
       {
         target.find('.avatar_path_image').remove();
+        target.find('.avatar_image').remove();
         var img = target.find('img');
         if( img.length == 0 )
         {
@@ -120,6 +121,8 @@ jQuery(function()
       }
       else
       {
+        form.find('.avatar_path_image').remove();
+        form.find('.avatar_image').remove();
         form.find('.field.avatar').append('<img class="avatar_path_image" src="'+value+'">');
       }
 
