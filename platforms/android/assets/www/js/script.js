@@ -15,7 +15,7 @@ jQuery(function()
     navigation.trigger('change');
     jQuery('section').hide();
     jQuery("#"+section_name).attr('data-source', data_target).trigger('data_load').show();
-
+    ImmersiveMode.initialize();
   };
 
   var get_list_options = function( resource_name )

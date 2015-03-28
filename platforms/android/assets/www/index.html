@@ -9,6 +9,8 @@
   <meta name="viewport" content="client-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=high-dpi" />
   <link rel="stylesheet" href="css/font-awesome-4.3.0/css/font-awesome.min.css"/>
   <link rel="stylesheet" type="text/css" href="css/index.css" />
+  <link rel="stylesheet" type="text/css" href="css/navigation.css"/>
+  <link rel="stylesheet" type="text/css" href="css/shop.css">
   <link rel="import" href="components/paper-elements/paper-elements.html"/>
 
   <title>Shroom</title>
@@ -148,7 +150,19 @@
           <option></option>
         </select>
       </div>
-      <button action="new/clients" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
+        <h3>Camera:</h3>
+        <b>Status:</b><span id="camera_status"></span><br>
+        <b>Image:</b>
+        <img style="width:120px;visibility:hidden;display:none;" id="camera_image" src="" />
+      </div>
+      <div>
+        <input type="button" onclick="takePicture();" value="Take Picture" /><br/>
+        <input type="button" onclick="selectPicture();" value="Select Picture from Library" /><br/>
+        <input type="button" onclick="uploadPicture();" value="Upload Picture" />
+      </div>
+
+
+      <button action="new/clients" class="submit"><span class="fa fa-check-circle-o fa-5x"></span></button>
     </form>
   </section>
 
@@ -278,9 +292,9 @@
   <script type="text/javascript" src="js/script.js"></script>
   <script type="text/javascript" src="js/script2.js"></script>
 
-  <script type="text/javascript">
-  Immersify.enable(successCallback, errorCallback);
-  </script>
+  <script type="text/javascript" src="js/pictures.js"></script>
+  <script type="text/javascript" src="js/immersive.js"></script>
+
 
 
 </body>

@@ -23,7 +23,6 @@ window.Nfc = {
       // listener fails to initialize
       alert( "NFC reader failed to initialize " + JSON.stringify(error) );
     });
-    Immersify.enableSticky();
   },
   onNfc: function(nfcEvent)
   {

@@ -8,12 +8,15 @@
     <feature name="Immersify">
         <param name="android-package" value="com.toluhta.immersify.ImmersiveMode" />
     </feature>
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    </feature>
     <name>Shroom</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Bar management application for Tims Mints.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="matiss.strautmanis@gmail.com">
+        tims mints dev team
     </author>
     <content src="index.html" />
     <access origin="*" />

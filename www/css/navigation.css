@@ -1,0 +1,62 @@
+nav{
+  z-index:99;
+/*  background-color:#48646C; */
+background-color:#673AB7; /*deep purple 500*/
+  position:fixed;
+  width:100%;
+  top:0;
+  left:0;
+  height: 75px;
+  box-shadow: 0px 6px 9px 1px rgba(0,0,0,0.34);
+}
+.notice
+{
+  background-color: #c8293f;
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  height: 75px;
+  -webkit-transition: top 0.1s ease-in-out 0s;
+  transition: top 0.1s ease-in-out 0s;
+  font-size: 50px;
+  text-align: center;
+  line-height: 75px;
+}
+.show_notice .notice
+{
+  top: 150%;
+}
+nav .left
+{
+  position: absolute;
+  top: 0;
+  left:0;
+  z-index:2;
+}
+nav .right
+{
+  position: absolute;
+  top: 0;
+  right:0;
+  z-index:2;
+}
+nav button
+{
+  height:75px;
+  width:75px;
+}
+nav button span
+{
+  color: black;
+}
+.title
+{
+  overflow: hidden;
+  font-size: 35px;
+  text-align: center;
+  line-height: 75px;
+  position: relative;
+  background-color: inherit;
+  z-index:1;
+}
