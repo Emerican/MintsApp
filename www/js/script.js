@@ -34,6 +34,8 @@ jQuery(function()
       },
       {
         quality: 80,
+        targetWidth: 600,
+        targetHeight: 800,
         destinationType: navigator.camera.DestinationType.DATA_URL
       });
     }
