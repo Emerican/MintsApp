@@ -9,6 +9,36 @@ jQuery(function()
   var current_section = "main";
   var last_section = current_section;
 
+  var takePicture = function( target )
+  {
+    if(navigator.camera)
+    {
+      navigator.camera.getPicture(function(imageData)
+      {
+        target.find('.avatar_path_image').remove();
+        var img = target.find('img');
+        if( img.length == 0 )
+        {
+          target.append('<img class="avatar_image" src="'+ "data:image/jpeg;base64," + imageData +'">');
+        }
+        else
+        {
+          img.attr('src', "data:image/jpeg;base64," + imageData );
+        }
+      },
+      function(e)
+      {
+        console.log("Error getting picture: " + e);
+        document.getElementById('camera_status').innerHTML = "Error getting picture.";
+      },
+      {
+        quality: 80,
+        destinationType: navigator.camera.DestinationType.DATA_URL
+      });
+    }
+
+  };
+
   var section_change = function(section_name, data_target)
   {
     current_section = section_name;
@@ -75,15 +105,24 @@ jQuery(function()
     {
       var value = data[key];
 
-      var input = form.find('[name="' + key + '"]')
-      if( input.is('select') )
+      if( key != "avatar_path" )
       {
-        input.find('[value="' + value + '"]').prop('selected', true);
+
+        var input = form.find('[name="' + key + '"]')
+        if( input.is('select') )
+        {
+          input.find('[value="' + value + '"]').prop('selected', true);
+        }
+        else
+        {
+          input.val( value );
+        }
       }
       else
       {
-        input.val( value );
+        form.find('.field.avatar').append('<img class="avatar_path_image" src="'+value+'">');
       }
+
 
     }
   }
@@ -256,6 +295,11 @@ jQuery(function()
   }).trigger('change');
 
 
+  container.on('click', '.add_avatar_button', function()
+  {
+    takePicture( jQuery(this).parent() );
+  });
+
   container.on('click', 'button, .button', function()
   {
     var target = jQuery(this);
@@ -294,43 +338,24 @@ jQuery(function()
         }
         else
         {
-          var file_input = form.find('input[type="file"]');
-          if( file_input.length > 0 )
+          var form_data = form.serializeObject();
+          var avatar_image = form.find('.avatar_image');
+          if( avatar_image.length > 0 )
           {
-            var avatar = file_input.get(0).files[0];
-            var reader = new FileReader();
-
-            reader.onload = function(f)
-            {
-              var form_data = form.serializeObject();
-              form_data.avatar = f.target.result;
-
-              Mints[resource_name].new( form_data );
-
-              Mints[resource_name].on('sync', function()
-              {
-                notice( "Izveidots" );
-                Mints[resource_name].unbind('sync');
-                trigger_action( "section/browse_" + resource_name );
-                form.find('input, textarea').val("")
-              });
-
-            };
-            reader.readAsDataURL(avatar);
-
+            form_data.avatar = avatar_image.attr('src');
           }
-          else
+
+          Mints[resource_name].new( form_data );
+
+          Mints[resource_name].on('sync', function()
           {
-            Mints[resource_name].new( form.serializeObject() );
+            notice( "Izveidots" );
+            Mints[resource_name].unbind('sync');
+            trigger_action( "section/browse_" + resource_name );
+            form.find('input, textarea').val("");
+            form.find('img').remove();
+          });
 
-            Mints[resource_name].on('sync', function()
-            {
-              notice( "Izveidots" );
-              Mints[resource_name].unbind('sync');
-              trigger_action( "section/browse_" + resource_name );
-              form.find('input, textarea').val("")
-            });
-          }
 
 
         }
@@ -339,7 +364,15 @@ jQuery(function()
       break;
 
       case 'update':
-        Mints[resource_name].get(resource_id).set( form.serializeObject() );
+
+        var form_data = form.serializeObject();
+        var avatar_image = form.find('.avatar_image');
+        if( avatar_image.length > 0 )
+        {
+          form_data.avatar = avatar_image.attr('src');
+        }
+
+        Mints[resource_name].get(resource_id).set( form_data );
         Mints[resource_name].on('sync', function()
         {
           notice( "Saglabāts" );

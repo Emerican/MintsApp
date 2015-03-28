@@ -149,15 +149,10 @@
           <option></option>
         </select>
       </div>
-        <h3>Camera:</h3>
-        <b>Status:</b><span id="camera_status"></span><br>
-        <b>Image:</b>
-        <img id="camera_image" src="" />
+      <div class="field avatar">
+        <label for="add_avatar">Bilde:</label>
+        <input class="add_avatar_button" id="add_avatar" type="button" value="Take Picture">
       </div>
-      <div>
-        <input type="button" onclick="takePicture();" value="Take Picture" /><br/>
-      </div>
-
 
       <button action="new/clients" class="submit"><span class="fa fa-check-circle-o fa-5x"></span></button>
     </form>
@@ -192,6 +187,11 @@
           <option></option>
         </select>
       </div>
+      <div class="field avatar">
+        <label for="add_avatar">Bilde:</label>
+        <input class="add_avatar_button" id="add_avatar" type="button" value="Take Picture">
+      </div>
+
       <button action="update/clients" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
     </form>
   </section>
@@ -289,7 +289,6 @@
   <script type="text/javascript" src="js/script.js"></script>
   <script type="text/javascript" src="js/script2.js"></script>
 
-  <script type="text/javascript" src="js/pictures.js"></script>
   <script type="text/javascript" src="js/immersive.js"></script>
 
 

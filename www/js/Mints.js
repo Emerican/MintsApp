@@ -232,6 +232,11 @@ jQuery(function()
       {
         var ds = Mints.data_store[resource.class_name];
 
+        if( data.avatar_path )
+        {
+          data.avatar_path = serverAdress + data.avatar_path;
+        }
+
         if( typeof data.synced == 'undefined' )
         {
           data.synced = true;
