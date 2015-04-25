@@ -1,4 +1,4 @@
-/platforms
+/platforms/*
 
 platforms/*
 
@@ -7,3 +7,5 @@ platforms/*
 *.apk
 
 *.ap_
+
+platforms/android/*
