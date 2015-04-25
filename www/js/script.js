@@ -361,7 +361,7 @@ jQuery(function()
 
       case 'search':
         var search_result = Mints[resource_name].search( form.serializeObject().search );
-        var content = form.parent().find('.content');
+        var content = form.parent().find('.contents');
         content.html( resource_list( resource_name, search_result ) );
       break;
 
