@@ -2,6 +2,8 @@ jQuery(function()
 {
   var serverAdress = "http://mints.strautmanis.lv";
 
+  var container = jQuery('body');
+
   // the database structure
   var resources = [ "bills", "client_groups", "clients", "discounts", "payments", "product_groups", "products", "purchases"];
 
@@ -48,7 +50,7 @@ jQuery(function()
     ['card_id','name','surname','client_group_id','phone','email','postpay','avatar', 'avatar_path']
   );
   resource_params.discounts = resource_params.discounts.concat(
-    ['client_id','client_group_id','product_id','product_group_id','amount']
+    ['client_id','client_group_id','product_id','product_group_id','amount','weekdays','happy_hours']
   );
   resource_params.payments = resource_params.payments.concat(
     ['client_id','amount']
@@ -80,7 +82,37 @@ jQuery(function()
   // bind event handlers to resources
   window.Mints = {
     data_store: {},
+    active_transfers: [],
     utilities:{
+      calculate_total: function( order_form )
+      {
+        var total = 0;
+        order_form.find('.purchase_item').each(function()
+        {
+          var item = jQuery(this);
+          var price = parseFloat( item.attr('data-price') )*100;
+          var count = parseInt( item.find('input.count').val() );
+
+          total += price * count/100;
+        });
+
+        return total;
+      },
+      alert: function( msg )
+      {
+        alert(msg);
+      },
+      notice: function(msg, time)
+      {
+        time = time || 1000;
+        container.addClass( "show_notice" );
+        container.find('.notice .text').html( msg );
+        setTimeout(function()
+        {
+          container.removeClass( "show_notice" );
+          container.find('.notice .text').html( "" );
+        }, time);
+      },
       singular:function( name )
       {
         return name.substring(0, name.length - 1);
@@ -114,7 +146,7 @@ jQuery(function()
           data.utf8 = "✓";
         }
 
-        jQuery.ajax(
+        var transfer = jQuery.ajax(
         {
           url: serverAdress+"/"+ resource + resource_id + sub_resource +".json",
           type: type,
@@ -123,12 +155,14 @@ jQuery(function()
           success: function( json )
           {
             callback( json );
+            Mints.active_transfers = Mints.active_transfers.filter(function(i){ return i.readyState != 4 });
           },
           error:function (xhr, ajaxOptions, thrownError)
   				{
-  					alert("Nevar pieslēgties serverim. Pārbaudiet interneta savienojumu!");
+            Mints.u.notice("Nevar pieslēgties serverim. Pārbaudiet interneta savienojumu!",5000);
   				}
         });
+        Mints.active_transfers.push( transfer );
       },
       create_relations: function(resource,data)
       {

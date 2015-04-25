@@ -132,16 +132,6 @@ jQuery(function()
     }
   }
 
-  var notice = function(msg)
-  {
-    container.addClass( "show_notice" );
-    container.find('.notice .text').html( msg );
-    setTimeout(function()
-    {
-      container.removeClass( "show_notice" );
-    }, 1000);
-  }
-
   var trigger_action = function( action, data_target )
   {
     var prevent_default = false;
@@ -192,23 +182,10 @@ jQuery(function()
       product_in_list.find('input.count').val( count + 1 );
       product_in_list.find('span.count').html( count + 1 );
     }
-    calculate_total( order_form );
+
+    order_form.find('.total .amount').html( Mints.u.calculate_total( order_form ) );
   }
 
-  var calculate_total = function( order_form )
-  {
-    var total = 0;
-    order_form.find('.purchase_item').each(function()
-    {
-      var item = jQuery(this);
-      var price = parseFloat( item.attr('data-price') )*100;
-      var count = parseInt( item.find('input.count').val() );
-
-      total += price * count/100;
-    });
-
-    order_form.find('.total .amount').html( total );
-  }
 
   container.on('click', '.product_list .purchase_item', function()
   {
@@ -224,8 +201,7 @@ jQuery(function()
     {
       target.remove();
     }
-
-    calculate_total( order_form );
+    order_form.find('.total .amount').html( Mints.u.calculate_total( order_form ) );
   });
 
   container.on('data_load', 'section', function()
@@ -335,7 +311,7 @@ jQuery(function()
 
           Mints[resource_name].on('sync', function()
           {
-            notice( "Izveidots" );
+            Mints.u.notice( "Izveidots" );
             Mints[resource_name].unbind('sync');
             trigger_action( "section/main" );
             form.find('.client_data, .product_list, .amount').html("");
@@ -354,17 +330,14 @@ jQuery(function()
 
           Mints[resource_name].on('sync', function()
           {
-            notice( "Izveidots" );
+            Mints.u.notice( "Izveidots" );
             Mints[resource_name].unbind('sync');
             trigger_action( "section/browse_" + resource_name );
             form.find('input, textarea').val("");
             form.find('img').remove();
           });
 
-
-
         }
-
 
       break;
 
@@ -380,7 +353,7 @@ jQuery(function()
         Mints[resource_name].get(resource_id).set( form_data );
         Mints[resource_name].on('sync', function()
         {
-          notice( "Saglabāts" );
+          Mints.u.notice( "Saglabāts" );
           Mints[resource_name].unbind('sync');
           trigger_action( "section/browse_" + resource_name );
         });
