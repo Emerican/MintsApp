@@ -233,6 +233,15 @@ jQuery(function()
       break;
       case "browse_client_groups":
         content.html( resource_list("client_groups") );
+        Nfc.unbind('tag_read');
+        Nfc.on('tag_read', function()
+        {
+          var client = Mints.clients.search_by_card( Nfc.tag );
+
+          trigger_action("section/edit_clients", client.id);
+
+          Nfc.unbind('tag_read');
+        });
       break;
       case "edit_clients":
         section.find('select').html( get_list_options( 'client_groups' ) );
