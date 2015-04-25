@@ -86,13 +86,16 @@ jQuery(function()
       var resource_data = "";
       switch ( resource_name )
       {
+        case "discounts":
+          resource_data = item.client_groups().name + " " + item.product_groups().name + " " + item.amount;
+        break;
         case "products":
         case "client_groups":
         case "product_groups":
-          resource_data = item.name
+          resource_data = item.name;
         break;
         case "clients":
-          resource_data = item.name + " " + item.surname
+          resource_data = item.name + " " + item.surname;
         break;
       }
       html_output +=  '<li><button data-target="' + item.uuid + '" action="section/edit_' + resource_name + '">' + resource_data + '</button>' + "</li>";
@@ -135,6 +138,7 @@ jQuery(function()
   var trigger_action = function( action, data_target )
   {
     var prevent_default = false;
+    Nfc.unbind('tag_read');
 
     switch( action.split('/')[0] )
     {
@@ -222,6 +226,15 @@ jQuery(function()
         section.find('select').html( get_list_options('product_groups') );
 
       break;
+      case "add_discounts":
+
+        section.find('select.client_groups').html( get_list_options('client_groups') );
+        section.find('select.product_groups').html( get_list_options('product_groups') );
+
+      break;
+      case "browse_discounts":
+        content.html( resource_list("discounts") );
+      break;
       case "browse_products":
         content.html( resource_list("products") );
       break;
@@ -230,7 +243,6 @@ jQuery(function()
       break;
       case "browse_clients":
         content.html( resource_list("clients") );
-        Nfc.unbind('tag_read');
         Nfc.on('tag_read', function()
         {
           var client = Mints.clients.search_by_card( Nfc.tag );
@@ -260,7 +272,6 @@ jQuery(function()
       case "new_order":
         content.html( product_list() );
 
-        Nfc.unbind('tag_read');
         Nfc.on('tag_read', function()
         {
           var client = Mints.clients.search_by_card( Nfc.tag );

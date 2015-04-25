@@ -31,13 +31,46 @@
   <section id="main">
 
     <button action="section/products"><span class="fa fa-list fa-5x"></span></button>
-    <button action="section/clients"><span class="fa fa-user fa-5x"></span></button>
+    <br>
+    <button action="section/browse_clients"><span class="fa fa-user fa-5x"></span></button>
+    <button action="section/browse_client_groups"><span class="fa fa-users fa-5x"></span></button>
     <br>
     <button action="section/reports"><span class="fa fa-bar-chart fa-5x"></span></button>
     <button action="section/new_order"><span class="fa fa-shopping-cart fa-5x"></span></button>
+    <br>
+    <button action="section/browse_discounts"><span class="fa-5x">%</span></button>
 
   </section>
 
+  <section id="browse_discounts">
+    <button class="big" action="section/add_discounts">Pievienot Atlaidi</button>
+    <div class="contents"></div>
+  </section>
+
+  <section id="add_discounts">
+    <form id="new_discounts_form" action="new/discounts" enctype='multipart/form-data'>
+
+      <div class="field">
+        <label for="group">Klientu Grupa:</label>
+        <select class="client_groups" id="client_group_list" name="client_group_id">
+          <option></option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="group">Produktu Grupa:</label>
+        <select class="product_groups" id="product_group_list" name="product_group_id">
+          <option></option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="amount">Lielums:</label>
+        <input type="text" id="amount" name="amount"  required="true">
+      </div>
+
+      <button action="new/discounts" class="submit"><span class="fa fa-check-circle-o fa-5x"></span></button>
+    </form>
+  </section>
 
   <section id="products">
     <button class="big" action="section/browse_products">Meklēt produktus</button>
@@ -115,11 +148,6 @@
     </form>
   </section>
 
-  <section id="clients">
-    <button class="big" action="section/browse_clients">Pārskatīt lietotājus</button>
-    <br>
-    <button class="big" action="section/browse_client_groups">Pārskatīt grupas</button>
-  </section>
 
   <section id="add_clients">
     <form id="new_client_form" action="new/clients" enctype='multipart/form-data'>

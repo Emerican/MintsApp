@@ -11,8 +11,7 @@ jQuery(function()
     product_groups: ["products"],
     client_groups: ["clients"],
     clients: ["payments","bills"],
-    bills: ["purchases"],
-    discounts: ['clients','client_groups','products','product_groups']
+    bills: ["purchases"]
   };
 
   var belongs_to = {
@@ -20,7 +19,8 @@ jQuery(function()
     clients:['client_groups'],
     payments:['clients'],
     products:['product_groups'],
-    purchases:['bills']
+    purchases:['bills'],
+    discounts: ['clients','client_groups','products','product_groups']
   };
 
   var has_one = {
