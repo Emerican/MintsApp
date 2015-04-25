@@ -9,3 +9,11 @@ platforms/*
 *.ap_
 
 platforms/android/*
+
+*.prop
+
+*.apk
+
+*.ap_
+
+*.d
