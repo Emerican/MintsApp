@@ -230,9 +230,6 @@ jQuery(function()
       break;
       case "browse_clients":
         content.html( resource_list("clients") );
-      break;
-      case "browse_client_groups":
-        content.html( resource_list("client_groups") );
         Nfc.unbind('tag_read');
         Nfc.on('tag_read', function()
         {
@@ -242,6 +239,9 @@ jQuery(function()
 
           Nfc.unbind('tag_read');
         });
+      break;
+      case "browse_client_groups":
+        content.html( resource_list("client_groups") );
       break;
       case "edit_clients":
         section.find('select').html( get_list_options( 'client_groups' ) );
