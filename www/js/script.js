@@ -235,7 +235,7 @@ jQuery(function()
         {
           var client = Mints.clients.search_by_card( Nfc.tag );
 
-          trigger_action("section/edit_clients", client.id);
+          trigger_action("section/edit_clients", client.uuid);
 
           Nfc.unbind('tag_read');
         });
