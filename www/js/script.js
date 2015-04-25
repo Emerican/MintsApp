@@ -95,7 +95,7 @@ jQuery(function()
           resource_data = item.name + " " + item.surname
         break;
       }
-      html_output +=  '<li><button data-target="' + item.uuid + '" action="section/edit_' + resource_name + '">' + resource_data + '/button>' + "</li>";
+      html_output +=  '<li><button data-target="' + item.uuid + '" action="section/edit_' + resource_name + '">' + resource_data + '</button>' + "</li>";
     });
 
     return "<ul>" + html_output + "</ul>";
