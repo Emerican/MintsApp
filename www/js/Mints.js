@@ -8,8 +8,8 @@ jQuery(function()
   var resources = [ "bills", "client_groups", "clients", "discounts", "payments", "product_groups", "products", "purchases"];
 
   var has_many = {
-    product_groups: ["products"],
-    client_groups: ["clients"],
+    product_groups: ["products","discounts"],
+    client_groups: ["clients","discounts"],
     clients: ["payments","bills"],
     bills: ["purchases"]
   };
@@ -24,11 +24,7 @@ jQuery(function()
   };
 
   var has_one = {
-    clients:['discounts'],
-    client_groups:['discounts'],
-    products:['discounts'],
-    product_groups:['discounts'],
-    purchases:['products'],
+    purchases:['products']
   };
 
   var resource_params = {};
@@ -59,7 +55,7 @@ jQuery(function()
     ['name']
   );
   resource_params.products = resource_params.products.concat(
-    ['product_group_id','name','price','description']
+    ['product_group_id','name','price','description','special_offer']
   );
   resource_params.purchases = resource_params.purchases.concat(
     ['product_id','bill_id','count']
@@ -84,6 +80,38 @@ jQuery(function()
     data_store: {},
     active_transfers: [],
     utilities:{
+      discount: function( product, client )
+      {
+        if( product.special_offer )
+        {
+          return 0;
+        }
+        var max_discount = 0;
+        var all_product_discounts = product.product_group().discounts();
+
+        var product_discounts = all_product_discounts.filter(function(d){ return d.client_group_id.length == 0 });
+        product_discounts.forEach(function(d)
+        {
+          max_discount = Math.max( max_discount, d.amount );
+        });
+
+        if( client )
+        {
+          var client_discounts = client.client_group().discounts().filter(function(d){ return d.product_group_id.length == 0 });
+          var joint_discounts = all_product_discounts.filter(function(d){ return d.client_group_id == client.uuid  });
+
+          client_discounts.forEach(function(d)
+          {
+            max_discount = Math.max( max_discount, d.amount );
+          });
+          joint_discounts.forEach(function(d)
+          {
+            max_discount = Math.max( max_discount, d.amount );
+          });
+        }
+
+        return max_discount;
+      },
       calculate_total: function( order_form )
       {
         var total = 0;
@@ -93,10 +121,10 @@ jQuery(function()
           var price = parseFloat( item.attr('data-price') )*100;
           var count = parseInt( item.find('input.count').val() );
 
-          total += price * count/100;
+          total += price * count;
         });
 
-        return total;
+        return total/100;
       },
       alert: function( msg )
       {
@@ -194,9 +222,9 @@ jQuery(function()
               for(var id in Mints.data_store[rel])
               {
                 var item = Mints.data_store[rel][id];
-                if( item[ res.substring(0, res.length - 1) + "_id" ] == resource.id )
+                if( item[ Mints.u.singular(res) + "_id" ] == this.uuid )
                 {
-                  result_set.push(item);
+                  result_set.push(Mints.u.create_relations(Mints[rel],item));
                 }
               };
 
@@ -216,14 +244,14 @@ jQuery(function()
         {
           has_one[res].forEach(function(rel)
           {
-            data[rel] = function(){
+            data[Mints.u.singular(rel)] = function(){
 
               var result = null;
               for( var i in Mints.data_store[rel] )
               {
                 var item = Mints.data_store[rel][i];
 
-                if( item[ res.substring(0, res.length - 1) + "_id" ] == resource.id )
+                if( item[ Mints.u.singular(res) + "_id" ] == this.uuid )
                 {
                   result = item;
                   break;
@@ -240,14 +268,14 @@ jQuery(function()
         {
           belongs_to[res].forEach(function(rel)
           {
-            data[rel] = function(){
+            data[Mints.u.singular(rel)] = function(){
 
               var result = null;
               for( var i in Mints.data_store[rel] )
               {
                 var item = Mints.data_store[rel][i];
 
-                if(resource[ rel.substring(0, rel.length - 1) + "_id" ] == item.id )
+                if(resource[ Mints.u.singular(rel) + "_id" ] == item.id )
                 {
                   result = item;
                   break;

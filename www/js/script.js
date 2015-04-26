@@ -87,7 +87,7 @@ jQuery(function()
       switch ( resource_name )
       {
         case "discounts":
-          resource_data = item.client_groups().name + " " + item.product_groups().name + " " + item.amount;
+          resource_data = item.client_group().name + " " + item.product_group().name + " " + item.amount;
         break;
         case "products":
         case "client_groups":
