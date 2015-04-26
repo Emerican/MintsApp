@@ -60,6 +60,16 @@ window.Lang = {
       case "edit_client_groups":
         return "Labot klientu grupas"
       break;
+      case "browse_discounts":
+        return "Atlaides"
+      break;
+      case "edit_discounts":
+        return "Labot atlaides"
+      break;
+      case "add_discounts":
+        return "Pievienot atlaidi"
+      break;
+
       default:
         return section;
     }

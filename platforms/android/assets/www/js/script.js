@@ -9,6 +9,39 @@ jQuery(function()
   var current_section = "main";
   var last_section = current_section;
 
+  var takePicture = function( target )
+  {
+    if(navigator.camera)
+    {
+      navigator.camera.getPicture(function(imageData)
+      {
+        target.find('.avatar_path_image').remove();
+        target.find('.avatar_image').remove();
+        var img = target.find('img');
+        if( img.length == 0 )
+        {
+          target.append('<img width="150" class="avatar_image" src="'+ "data:image/jpeg;base64," + imageData +'">');
+        }
+        else
+        {
+          img.attr('src', "data:image/jpeg;base64," + imageData );
+        }
+      },
+      function(e)
+      {
+        console.log("Error getting picture: " + e);
+        document.getElementById('camera_status').innerHTML = "Error getting picture.";
+      },
+      {
+        quality: 80,
+        targetWidth: 600,
+        targetHeight: 800,
+        destinationType: navigator.camera.DestinationType.DATA_URL
+      });
+    }
+
+  };
+
   var section_change = function(section_name, data_target)
   {
     current_section = section_name;
@@ -53,16 +86,19 @@ jQuery(function()
       var resource_data = "";
       switch ( resource_name )
       {
+        case "discounts":
+          resource_data = item.client_groups().name + " " + item.product_groups().name + " " + item.amount;
+        break;
         case "products":
         case "client_groups":
         case "product_groups":
-          resource_data = item.name
+          resource_data = item.name;
         break;
         case "clients":
-          resource_data = item.name + " " + item.surname
+          resource_data = item.name + " " + item.surname;
         break;
       }
-      html_output +=  "<li><span>" + resource_data + '</span><button data-target="' + item.uuid + '" action="section/edit_' + resource_name + '">Labot</button>' + "</li>";
+      html_output +=  '<li><button data-target="' + item.uuid + '" action="section/edit_' + resource_name + '">' + resource_data + '</button>' + "</li>";
     });
 
     return "<ul>" + html_output + "</ul>";
@@ -75,32 +111,34 @@ jQuery(function()
     {
       var value = data[key];
 
-      var input = form.find('[name="' + key + '"]')
-      if( input.is('select') )
+      if( key != "avatar_path" )
       {
-        input.find('[value="' + value + '"]').prop('selected', true);
+
+        var input = form.find('[name="' + key + '"]')
+        if( input.is('select') )
+        {
+          input.find('[value="' + value + '"]').prop('selected', true);
+        }
+        else
+        {
+          input.val( value );
+        }
       }
       else
       {
-        input.val( value );
+        form.find('.avatar_path_image').remove();
+        form.find('.avatar_image').remove();
+        form.find('.field.avatar').append('<img class="avatar_path_image" src="'+value+'">');
       }
 
-    }
-  }
 
-  var notice = function(msg)
-  {
-    container.addClass( "show_notice" );
-    container.find('.notice .text').html( msg );
-    setTimeout(function()
-    {
-      container.removeClass( "show_notice" );
-    }, 1000);
+    }
   }
 
   var trigger_action = function( action, data_target )
   {
     var prevent_default = false;
+    Nfc.unbind('tag_read');
 
     switch( action.split('/')[0] )
     {
@@ -148,23 +186,10 @@ jQuery(function()
       product_in_list.find('input.count').val( count + 1 );
       product_in_list.find('span.count').html( count + 1 );
     }
-    calculate_total( order_form );
+
+    order_form.find('.total .amount').html( Mints.u.calculate_total( order_form ) );
   }
 
-  var calculate_total = function( order_form )
-  {
-    var total = 0;
-    order_form.find('.purchase_item').each(function()
-    {
-      var item = jQuery(this);
-      var price = parseFloat( item.attr('data-price') )*100;
-      var count = parseInt( item.find('input.count').val() );
-
-      total += price * count/100;
-    });
-
-    order_form.find('.total .amount').html( total );
-  }
 
   container.on('click', '.product_list .purchase_item', function()
   {
@@ -180,8 +205,7 @@ jQuery(function()
     {
       target.remove();
     }
-
-    calculate_total( order_form );
+    order_form.find('.total .amount').html( Mints.u.calculate_total( order_form ) );
   });
 
   container.on('data_load', 'section', function()
@@ -202,6 +226,15 @@ jQuery(function()
         section.find('select').html( get_list_options('product_groups') );
 
       break;
+      case "add_discounts":
+
+        section.find('select.client_groups').html( get_list_options('client_groups') );
+        section.find('select.product_groups').html( get_list_options('product_groups') );
+
+      break;
+      case "browse_discounts":
+        content.html( resource_list("discounts") );
+      break;
       case "browse_products":
         content.html( resource_list("products") );
       break;
@@ -210,6 +243,14 @@ jQuery(function()
       break;
       case "browse_clients":
         content.html( resource_list("clients") );
+        Nfc.on('tag_read', function()
+        {
+          var client = Mints.clients.search_by_card( Nfc.tag );
+
+          trigger_action("section/edit_clients", client.uuid);
+
+          Nfc.unbind('tag_read');
+        });
       break;
       case "browse_client_groups":
         content.html( resource_list("client_groups") );
@@ -231,7 +272,6 @@ jQuery(function()
       case "new_order":
         content.html( product_list() );
 
-        Nfc.unbind('tag_read');
         Nfc.on('tag_read', function()
         {
           var client = Mints.clients.search_by_card( Nfc.tag );
@@ -255,6 +295,11 @@ jQuery(function()
 
   }).trigger('change');
 
+
+  container.on('click', '.add_avatar_button', function()
+  {
+    takePicture( jQuery(this).parent() );
+  });
 
   container.on('click', 'button, .button', function()
   {
@@ -286,7 +331,7 @@ jQuery(function()
 
           Mints[resource_name].on('sync', function()
           {
-            notice( "Izveidots" );
+            Mints.u.notice( "Izveidots" );
             Mints[resource_name].unbind('sync');
             trigger_action( "section/main" );
             form.find('.client_data, .product_list, .amount').html("");
@@ -294,25 +339,41 @@ jQuery(function()
         }
         else
         {
-          Mints[resource_name].new( form.serializeObject() );
+          var form_data = form.serializeObject();
+          var avatar_image = form.find('.avatar_image');
+          if( avatar_image.length > 0 )
+          {
+            form_data.avatar = avatar_image.attr('src');
+          }
+
+          Mints[resource_name].new( form_data );
 
           Mints[resource_name].on('sync', function()
           {
-            notice( "Izveidots" );
+            Mints.u.notice( "Izveidots" );
             Mints[resource_name].unbind('sync');
             trigger_action( "section/browse_" + resource_name );
-            form.find('input, textarea').val("")
+            form.find('input, textarea').val("");
+            form.find('img').remove();
           });
-        }
 
+        }
 
       break;
 
       case 'update':
-        Mints[resource_name].get(resource_id).set( form.serializeObject() );
+
+        var form_data = form.serializeObject();
+        var avatar_image = form.find('.avatar_image');
+        if( avatar_image.length > 0 )
+        {
+          form_data.avatar = avatar_image.attr('src');
+        }
+
+        Mints[resource_name].get(resource_id).set( form_data );
         Mints[resource_name].on('sync', function()
         {
-          notice( "Saglabāts" );
+          Mints.u.notice( "Saglabāts" );
           Mints[resource_name].unbind('sync');
           trigger_action( "section/browse_" + resource_name );
         });
@@ -320,7 +381,7 @@ jQuery(function()
 
       case 'search':
         var search_result = Mints[resource_name].search( form.serializeObject().search );
-        var content = form.parent().find('.content');
+        var content = form.parent().find('.contents');
         content.html( resource_list( resource_name, search_result ) );
       break;
 

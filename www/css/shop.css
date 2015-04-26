@@ -16,7 +16,7 @@
 }
 
 #new_order .left {
-  background-color:#B39DDB; /* deep purple 200 */
+  background-color:#A7DBD8; /* deep purple 200 */
   border-left:none;
   border-top:none;
   float:left;
@@ -25,7 +25,7 @@
 }
 #new_order .right{
   margin-top:60px;
-  background-color:#9575CD;
+  background-color:#69D2E7;
 }
 #new_order .right{
   float:left;
@@ -34,12 +34,14 @@
 
 #new_order .left .contents ul {
   margin-top:40px;
+  padding-top:0px;
 }
 
 #new_order .left .contents ul li >button{
-  background-color:#625175;
+  background-color:#F38630;
   width:20%;
   margin-right:5%;
+  margin-left:5%;
   float:left;
   margin-bottom:20px;
   box-shadow: 0px 5px 4px 1px rgba(0,0,0,0.20);
@@ -50,7 +52,7 @@
   padding-top:30px;
 }
 #new_order .right .total{
-  background-color:#673AB7;
+  background-color:#E0E4CC;
   border:none;
   font-size:50px;
   margin-top:15px;
@@ -78,7 +80,7 @@
   margin-top:20px;
   border:none;
   font-size:16px;
-  background-color:#625175;
+  background-color:#F38630;
   height:80px;
   width:40%;
   box-shadow:0px 6px 9px 1px rgba(0,0,0,0.30);

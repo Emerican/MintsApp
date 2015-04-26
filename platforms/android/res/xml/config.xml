@@ -20,4 +20,5 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <icon src="logo.png" />
 </widget>
