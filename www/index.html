@@ -29,7 +29,7 @@
     <div class="title">title</div>
   </nav>
   <section id="main">
-  
+
     <button action="section/products"><span class="fa fa-list fa-5x"></span></button>
     <br>
     <button action="section/browse_clients"><span class="fa fa-user fa-5x"></span></button>
@@ -39,13 +39,13 @@
     <button action="section/new_order"><span class="fa fa-shopping-cart fa-5x"></span></button>
     <br>
     <button action="section/browse_discounts"><span class="fa-5x">%</span></button>
-  
+
   </section>
   <section id="browse_discounts">
     <button class="big" action="section/add_discounts">Pievienot Atlaidi</button>
     <div class="contents"></div>
   </section>
-  
+
   <section id="add_discounts">
     <form id="new_discounts_form" action="new/discounts" enctype='multipart/form-data'>
       <input type="hidden" name="uuid">
@@ -57,16 +57,16 @@
         <label for="new_discounts_product_group_id">Produktu Grupa:</label>
         <select class="product_groups" id="new_discounts_product_group_id" name="product_group_id"></select>
       </div>
-    
+
       <div class="field">
         <label for="new_discounts_amount">Lielums:</label>
         <input type="text" id="new_discounts_amount" name="amount"  required="true">
       </div>
-    
+
       <button action="new/discounts" class="submit"><span class="fa fa-check-circle-o fa-5x"></span></button>
     </form>
   </section>
-  
+
   <section id="edit_discounts">
     <form id="update_discounts_form" action="update/discounts" enctype='multipart/form-data'>
       <input type="hidden" name="uuid">
@@ -78,12 +78,12 @@
         <label for="update_discounts_product_group_id">Produktu Grupa:</label>
         <select class="product_groups" id="update_discounts_product_group_id" name="product_group_id"></select>
       </div>
-    
+
       <div class="field">
         <label for="update_discounts_amount">Lielums:</label>
         <input type="text" id="update_discounts_amount" name="amount"  required="true">
       </div>
-    
+
       <button action="update/discounts" class="submit"><span class="fa fa-check-circle-o fa-5x"></span></button>
     </form>
   </section>
@@ -92,7 +92,7 @@
     <br>
     <button class="big" action="section/browse_product_groups">Meklēt produkta grupu</button>
   </section>
-  
+
   <section id="browse_products">
     <button class="big" action="section/add_products">Pievienot produktu</button>
     <form action="search/products">
@@ -104,7 +104,7 @@
     </form>
     <div class="contents"></div>
   </section>
-  
+
   <section id="add_products">
     <form id="new_product_groups_form" action="new/product_groups">
       <input type="hidden" name="uuid">
@@ -115,7 +115,7 @@
       <button action="new/product_groups" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
     </form>
   </section>
-  
+
   <section id="edit_products">
     <form id="update_product_groups_form" action="update/product_groups">
       <input type="hidden" name="uuid">
@@ -130,7 +130,7 @@
     <button class="big" action="section/add_product_groups">Pievienot produkta grupu</button>
     <div class="contents"></div>
   </section>
-  
+
   <section id="add_product_groups">
     <form id="new_product_groups_form" action="new/product_groups">
       <input type="hidden" name="uuid">
@@ -141,7 +141,7 @@
       <button action="new/product_groups" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
     </form>
   </section>
-  
+
   <section id="edit_product_groups">
     <form id="update_product_groups_form" action="update/product_groups">
       <input type="hidden" name="uuid">
@@ -163,7 +163,7 @@
     </form>
     <div class="contents"></div>
   </section>
-  
+
   <section id="add_clients">
     <form id="new_clients_form" action="new/clients">
       <input type="hidden" name="uuid">
@@ -197,11 +197,11 @@
         <label for="new_clients_avatar">Bilde:</label>
         <input class="add_avatar_button" id="new_clients_avatar" type="button" value="Take Picture">
       </div>
-    
+
       <button action="new/clients" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
     </form>
   </section>
-  
+
   <section id="edit_clients">
     <form id="update_clients_form" action="update/clients">
       <input type="hidden" name="uuid">
@@ -235,7 +235,7 @@
         <label for="update_clients_avatar">Bilde:</label>
         <input class="add_avatar_button" id="update_clients_avatar" type="button" value="Take Picture">
       </div>
-    
+
       <button action="update/clients" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
     </form>
   </section>
@@ -243,7 +243,7 @@
     <button class="big" action="section/add_client_groups">Pievienot grupu</button>
     <div class="contents"></div>
   </section>
-  
+
   <section id="add_client_groups">
     <form id="new_client_groups_form" action="new/client_groups">
       <input type="hidden" name="uuid">
@@ -254,7 +254,7 @@
       <button action="new/client_groups" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
     </form>
   </section>
-  
+
   <section id="edit_client_groups">
     <form id="update_client_groups_form" action="update/client_groups">
       <input type="hidden" name="uuid">
@@ -270,14 +270,14 @@
     <div class="left">
       <div class="contents"></div>
     </div>
-  
+
     <div class="right">
       <form action="new/bills">
         <div class="client_data"></div>
         <div class="product_list"></div>
         <br>
         <div class="total"><span class="amount"></span> € </div>
-  
+
         <button action="new/bills" class="submit">Izveidot rēķinu</button>
       </form>
     </div>

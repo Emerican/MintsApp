@@ -19,3 +19,4 @@ platforms/android/*
 *.d
 
 /node_modules/*
+/www/index.html
