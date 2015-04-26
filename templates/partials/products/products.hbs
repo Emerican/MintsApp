@@ -1,0 +1,25 @@
+<section id="products">
+  <button class="big" action="section/browse_products">Meklēt produktus</button>
+  <br>
+  <button class="big" action="section/browse_product_groups">Meklēt produkta grupu</button>
+</section>
+
+<section id="browse_products">
+  <button class="big" action="section/add_products">Pievienot produktu</button>
+  <form action="search/products">
+    <div class="field">
+      <label for="search_name">Meklēt produktus:</label>
+      <input type="search" id="search_product" name="search">
+      <button action="search/products" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
+    </div>
+  </form>
+  <div class="contents"></div>
+</section>
+
+<section id="add_products">
+  {{> product_groups_form action="new" }}
+</section>
+
+<section id="edit_products">
+  {{> product_groups_form action="update" }}
+</section>

@@ -1,0 +1,22 @@
+<form id="{{action}}_products_form" action="{{action}}/products">
+  <input type="hidden" name="uuid">
+  <div class="field>">
+    <label for="{{action}}_products_product_group_id">Grupa:</label>
+    <select id="{{action}}_products_product_group_id" name="product_group_id" required="true">
+      <option></option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="{{action}}_products_name">Nosaukums:</label>
+    <input type="text" id="{{action}}_products_name" name="name" required="true">
+  </div>
+  <div class="field">
+    <label for="{{action}}_products_price">Cena:</label>
+    <input type="number" min="0" step="0.01" id="{{action}}_products_price" name="price" required="true">
+  </div>
+  <div class="field">
+    <label for="{{action}}_products_description">Apraksts:</label>
+    <textarea id="{{action}}_products_description" name="description"></textarea>
+  </div>
+  <button action="{{action}}/products" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
+</form>

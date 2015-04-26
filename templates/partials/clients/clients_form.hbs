@@ -1,0 +1,35 @@
+<form id="{{action}}_clients_form" action="{{action}}/clients">
+  <input type="hidden" name="uuid">
+  <div class="field">
+    <label for="{{action}}_clients_name">Vārds:</label>
+    <input type="text" id="{{action}}_clients_name" name="name" required="true">
+  </div>
+  <div class="field">
+    <label for="{{action}}_clients_surname">Uzvārds:</label>
+    <input type="text" id="{{action}}_clients_surname" name="surname"  required="true">
+  </div>
+  <div class="field">
+    <label for="{{action}}_clients_phone">Tālrunis:</label>
+    <input type="number" name="phone" id="{{action}}_clients_phone">
+  </div>
+  <div class="field">
+    <label for="{{action}}_email">E-Pasts:</label>
+    <input type="email" name="email"  id="{{action}}_clients_email">
+  </div>
+  <div class="field">
+    <label for="{{action}}_clients_card_id">ID:</label>
+    <input class="nfc" type="text" name="card_id" id="{{action}}_clients_card_id" required="true">
+  </div>
+  <div class="field">
+    <label for="{{action}}_clients_client_group_id">Grupa:</label>
+    <select id="{{action}}_clients_client_group_id" name="client_group_id">
+      <option></option>
+    </select>
+  </div>
+  <div class="field avatar">
+    <label for="{{action}}_clients_avatar">Bilde:</label>
+    <input class="add_avatar_button" id="{{action}}_clients_avatar" type="button" value="Take Picture">
+  </div>
+
+  <button action="{{action}}/clients" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
+</form>

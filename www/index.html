@@ -16,6 +16,7 @@
 </head>
 
 <body class="main">
+
   <nav>
     <div class="notice"><div class="text"></div></div>
     <div class="left">
@@ -27,9 +28,8 @@
     </div>
     <div class="title">title</div>
   </nav>
-
   <section id="main">
-
+  
     <button action="section/products"><span class="fa fa-list fa-5x"></span></button>
     <br>
     <button action="section/browse_clients"><span class="fa fa-user fa-5x"></span></button>
@@ -39,212 +39,60 @@
     <button action="section/new_order"><span class="fa fa-shopping-cart fa-5x"></span></button>
     <br>
     <button action="section/browse_discounts"><span class="fa-5x">%</span></button>
-
+  
   </section>
-
   <section id="browse_discounts">
     <button class="big" action="section/add_discounts">Pievienot Atlaidi</button>
     <div class="contents"></div>
   </section>
-
+  
   <section id="add_discounts">
     <form id="new_discounts_form" action="new/discounts" enctype='multipart/form-data'>
-
+      <input type="hidden" name="uuid">
       <div class="field">
-        <label for="group">Klientu Grupa:</label>
-        <select class="client_groups" id="client_group_list" name="client_group_id">
-          <option></option>
-        </select>
+        <label for="new_discounts_client_group_id">Klientu Grupa:</label>
+        <select class="client_groups" id="new_discounts_client_group_id" name="client_group_id"></select>
       </div>
       <div class="field">
-        <label for="group">Produktu Grupa:</label>
-        <select class="product_groups" id="product_group_list" name="product_group_id">
-          <option></option>
-        </select>
+        <label for="new_discounts_product_group_id">Produktu Grupa:</label>
+        <select class="product_groups" id="new_discounts_product_group_id" name="product_group_id"></select>
       </div>
-
+    
       <div class="field">
-        <label for="amount">Lielums:</label>
-        <input type="text" id="amount" name="amount"  required="true">
+        <label for="new_discounts_amount">Lielums:</label>
+        <input type="text" id="new_discounts_amount" name="amount"  required="true">
       </div>
-
+    
       <button action="new/discounts" class="submit"><span class="fa fa-check-circle-o fa-5x"></span></button>
     </form>
   </section>
-
+  
+  <section id="edit_discounts">
+    <form id="update_discounts_form" action="update/discounts" enctype='multipart/form-data'>
+      <input type="hidden" name="uuid">
+      <div class="field">
+        <label for="update_discounts_client_group_id">Klientu Grupa:</label>
+        <select class="client_groups" id="update_discounts_client_group_id" name="client_group_id"></select>
+      </div>
+      <div class="field">
+        <label for="update_discounts_product_group_id">Produktu Grupa:</label>
+        <select class="product_groups" id="update_discounts_product_group_id" name="product_group_id"></select>
+      </div>
+    
+      <div class="field">
+        <label for="update_discounts_amount">Lielums:</label>
+        <input type="text" id="update_discounts_amount" name="amount"  required="true">
+      </div>
+    
+      <button action="update/discounts" class="submit"><span class="fa fa-check-circle-o fa-5x"></span></button>
+    </form>
+  </section>
   <section id="products">
     <button class="big" action="section/browse_products">Meklēt produktus</button>
     <br>
     <button class="big" action="section/browse_product_groups">Meklēt produkta grupu</button>
   </section>
-
-  <section id="add_products">
-    <form id="new_product_form" action="new/products">
-      <div class="field>">
-        <label for="product_group_list">Grupa:</label>
-        <select id="product_group_list" name="product_group_id" required="true">
-          <option></option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="product_name">Nosaukums:</label>
-        <input type="text" id="product_name" name="name" required="true">
-      </div>
-      <div class="field">
-        <label for="product_price">Cena:</label>
-        <input type="number" min="0" step="0.01" id="product_price" name="price" required="true">
-      </div>
-      <div class="field">
-        <label for="product_description">Apraksts:</label>
-        <textarea id="product_description" name="description"></textarea>
-      </div>
-      <button action="new/products" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
-    </form>
-  </section>
-
-  <section id="edit_products">
-    <form id="edit_product_form" action="update/products">
-      <input type="hidden" name="uuid">
-      <div class="field>">
-        <label for="edit_product_group_list">Grupa:</label>
-        <select id="edit_product_group_list" name="product_group_id" required="true">
-          <option></option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="edit_product_name">Nosaukums:</label>
-        <input type="text" id="edit_product_name" name="name" required="true">
-      </div>
-      <div class="field">
-        <label for="edit_product_price">Cena:</label>
-        <input type="number" min="0" step="0.01" id="edit_product_price" name="price" required="true">
-      </div>
-      <div class="field">
-        <label for="edit_product_description">Apraksts:</label>
-        <textarea id="edit_product_description" name="description"></textarea>
-      </div>
-      <button action="update/products" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
-    </form>
-  </section>
-
-  <section id="add_product_groups">
-    <form action="new/product_groups">
-      <div class="field">
-        <label for="product_group_name">Nosaukums</label>
-        <input type="text" id="product_group_name" name="name">
-      </div>
-      <button action="new/product_groups" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
-    </form>
-  </section>
-
-  <section id="edit_product_groups">
-    <form action="update/product_groups">
-      <input type="hidden" name="uuid">
-      <div class="field">
-        <label for="edit_product_group_name">Nosaukums</label>
-        <input type="text" id="edit_product_group_name" name="name">
-      </div>
-      <button action="update/product_groups" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
-    </form>
-  </section>
-
-
-  <section id="add_clients">
-    <form id="new_client_form" action="new/clients" enctype='multipart/form-data'>
-      <div class="field">
-        <label for="name">Vārds:</label>
-        <input type="text" id="name" name="name" required="true">
-      </div>
-      <div class="field">
-        <label for="surname">Uzvārds:</label>
-        <input type="text" id="surname" name="surname"  required="true">
-      </div>
-      <div class="field">
-        <label for="phone">Tālrunis:</label>
-        <input type="number" name="phone" id="phone">
-      </div>
-      <div class="field">
-        <label for="email">E-Pasts:</label>
-        <input type="email" name="email"  id="email">
-      </div>
-      <div class="field">
-        <label for="cars_id">ID:</label>
-        <input class="nfc" type="text" name="card_id" id="card_id" required="true">
-      </div>
-      <div class="field">
-        <label for="group">Grupa:</label>
-        <select id="client_group_list" name="client_group_id">
-          <option></option>
-        </select>
-      </div>
-      <div class="field avatar">
-        <label for="add_avatar">Bilde:</label>
-        <input class="add_avatar_button" id="add_avatar" type="button" value="Take Picture">
-      </div>
-
-      <button action="new/clients" class="submit"><span class="fa fa-check-circle-o fa-5x"></span></button>
-    </form>
-  </section>
-
-  <section id="edit_clients">
-    <form id="edit_client_form" action="update/clients">
-      <input type="hidden" name="uuid">
-      <div class="field">
-        <label for="edit_name">Vārds:</label>
-        <input type="text" id="edit_name" name="name" required="true">
-      </div>
-      <div class="field">
-        <label for="edit_surname">Uzvārds:</label>
-        <input type="text" id="edit_surname" name="surname"  required="true">
-      </div>
-      <div class="field">
-        <label for="edit_phone">Tālrunis:</label>
-        <input type="number" name="phone" id="edit_phone">
-      </div>
-      <div class="field">
-        <label for="edit_email">E-Pasts:</label>
-        <input type="email" name="email"  id="edit_email">
-      </div>
-      <div class="field">
-        <label for="edit_cars_id">ID:</label>
-        <input class="nfc" type="text" name="card_id" id="edit_card_id" required="true">
-      </div>
-      <div class="field">
-        <label for="edit_client_group_list">Grupa:</label>
-        <select id="edit_client_group_list" name="client_group_id">
-          <option></option>
-        </select>
-      </div>
-      <div class="field avatar">
-        <label for="add_avatar">Bilde:</label>
-        <input class="add_avatar_button" id="add_avatar" type="button" value="Take Picture">
-      </div>
-
-      <button action="update/clients" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
-    </form>
-  </section>
-
-  <section id="add_client_groups">
-    <form action="new/client_groups">
-      <div class="field">
-        <label for="client_group_name">Nosaukums</label>
-        <input type="text" id="client_group_name" name="name">
-      </div>
-      <button action="new/client_groups" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
-    </form>
-  </section>
-
-  <section id="edit_client_groups">
-    <form action="update/client_groups">
-      <input type="hidden" name="uuid">
-      <div class="field">
-        <label for="edit_client_group_name">Nosaukums</label>
-        <input type="text" id="edit_client_group_name" name="name">
-      </div>
-      <button action="update/client_groups" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
-    </form>
-  </section>
-
+  
   <section id="browse_products">
     <button class="big" action="section/add_products">Pievienot produktu</button>
     <form action="search/products">
@@ -256,7 +104,54 @@
     </form>
     <div class="contents"></div>
   </section>
-
+  
+  <section id="add_products">
+    <form id="new_product_groups_form" action="new/product_groups">
+      <input type="hidden" name="uuid">
+      <div class="field">
+        <label for="new_product_groups_name">Nosaukums</label>
+        <input type="text" id="new_product_groups_name" name="name">
+      </div>
+      <button action="new/product_groups" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
+    </form>
+  </section>
+  
+  <section id="edit_products">
+    <form id="update_product_groups_form" action="update/product_groups">
+      <input type="hidden" name="uuid">
+      <div class="field">
+        <label for="update_product_groups_name">Nosaukums</label>
+        <input type="text" id="update_product_groups_name" name="name">
+      </div>
+      <button action="update/product_groups" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
+    </form>
+  </section>
+  <section id="browse_product_groups">
+    <button class="big" action="section/add_product_groups">Pievienot produkta grupu</button>
+    <div class="contents"></div>
+  </section>
+  
+  <section id="add_product_groups">
+    <form id="new_product_groups_form" action="new/product_groups">
+      <input type="hidden" name="uuid">
+      <div class="field">
+        <label for="new_product_groups_name">Nosaukums</label>
+        <input type="text" id="new_product_groups_name" name="name">
+      </div>
+      <button action="new/product_groups" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
+    </form>
+  </section>
+  
+  <section id="edit_product_groups">
+    <form id="update_product_groups_form" action="update/product_groups">
+      <input type="hidden" name="uuid">
+      <div class="field">
+        <label for="update_product_groups_name">Nosaukums</label>
+        <input type="text" id="update_product_groups_name" name="name">
+      </div>
+      <button action="update/product_groups" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
+    </form>
+  </section>
   <section id="browse_clients">
     <button class="big" action="section/add_clients">Pievienot lietotāju</button>
     <form action="search/clients">
@@ -268,38 +163,129 @@
     </form>
     <div class="contents"></div>
   </section>
-
+  
+  <section id="add_clients">
+    <form id="new_clients_form" action="new/clients">
+      <input type="hidden" name="uuid">
+      <div class="field">
+        <label for="new_clients_name">Vārds:</label>
+        <input type="text" id="new_clients_name" name="name" required="true">
+      </div>
+      <div class="field">
+        <label for="new_clients_surname">Uzvārds:</label>
+        <input type="text" id="new_clients_surname" name="surname"  required="true">
+      </div>
+      <div class="field">
+        <label for="new_clients_phone">Tālrunis:</label>
+        <input type="number" name="phone" id="new_clients_phone">
+      </div>
+      <div class="field">
+        <label for="new_email">E-Pasts:</label>
+        <input type="email" name="email"  id="new_clients_email">
+      </div>
+      <div class="field">
+        <label for="new_clients_card_id">ID:</label>
+        <input class="nfc" type="text" name="card_id" id="new_clients_card_id" required="true">
+      </div>
+      <div class="field">
+        <label for="new_clients_client_group_id">Grupa:</label>
+        <select id="new_clients_client_group_id" name="client_group_id">
+          <option></option>
+        </select>
+      </div>
+      <div class="field avatar">
+        <label for="new_clients_avatar">Bilde:</label>
+        <input class="add_avatar_button" id="new_clients_avatar" type="button" value="Take Picture">
+      </div>
+    
+      <button action="new/clients" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
+    </form>
+  </section>
+  
+  <section id="edit_clients">
+    <form id="update_clients_form" action="update/clients">
+      <input type="hidden" name="uuid">
+      <div class="field">
+        <label for="update_clients_name">Vārds:</label>
+        <input type="text" id="update_clients_name" name="name" required="true">
+      </div>
+      <div class="field">
+        <label for="update_clients_surname">Uzvārds:</label>
+        <input type="text" id="update_clients_surname" name="surname"  required="true">
+      </div>
+      <div class="field">
+        <label for="update_clients_phone">Tālrunis:</label>
+        <input type="number" name="phone" id="update_clients_phone">
+      </div>
+      <div class="field">
+        <label for="update_email">E-Pasts:</label>
+        <input type="email" name="email"  id="update_clients_email">
+      </div>
+      <div class="field">
+        <label for="update_clients_card_id">ID:</label>
+        <input class="nfc" type="text" name="card_id" id="update_clients_card_id" required="true">
+      </div>
+      <div class="field">
+        <label for="update_clients_client_group_id">Grupa:</label>
+        <select id="update_clients_client_group_id" name="client_group_id">
+          <option></option>
+        </select>
+      </div>
+      <div class="field avatar">
+        <label for="update_clients_avatar">Bilde:</label>
+        <input class="add_avatar_button" id="update_clients_avatar" type="button" value="Take Picture">
+      </div>
+    
+      <button action="update/clients" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
+    </form>
+  </section>
   <section id="browse_client_groups">
     <button class="big" action="section/add_client_groups">Pievienot grupu</button>
     <div class="contents"></div>
   </section>
-
-  <section id="browse_product_groups">
-    <button class="big" action="section/add_product_groups">Pievienot produkta grupu</button>
-    <div class="contents"></div>
+  
+  <section id="add_client_groups">
+    <form id="new_client_groups_form" action="new/client_groups">
+      <input type="hidden" name="uuid">
+      <div class="field">
+        <label for="new_client_groups_name">Nosaukums</label>
+        <input type="text" id="new_client_groups_name" name="name">
+      </div>
+      <button action="new/client_groups" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
+    </form>
+  </section>
+  
+  <section id="edit_client_groups">
+    <form id="update_client_groups_form" action="update/client_groups">
+      <input type="hidden" name="uuid">
+      <div class="field">
+        <label for="update_client_groups_name">Nosaukums</label>
+        <input type="text" id="update_client_groups_name" name="name">
+      </div>
+      <button action="update/client_groups" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
+    </form>
   </section>
 
   <section id="new_order">
     <div class="left">
       <div class="contents"></div>
     </div>
-
+  
     <div class="right">
       <form action="new/bills">
         <div class="client_data"></div>
         <div class="product_list"></div>
         <br>
         <div class="total"><span class="amount"></span> € </div>
-
+  
         <button action="new/bills" class="submit">Izveidot rēķinu</button>
       </form>
     </div>
   </section>
+  <section id="reports">
+    <!-- placehorlder -->
+  </section>
 
-
-<section id="reports">
-  <!-- placehorlder -->
-</section>
 
   <!-- vendor -->
   <script type="text/javascript" src="cordova.js"></script>

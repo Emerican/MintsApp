@@ -17,3 +17,5 @@ platforms/android/*
 *.ap_
 
 *.d
+
+/node_modules/*

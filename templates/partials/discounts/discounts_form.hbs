@@ -1,0 +1,18 @@
+<form id="{{action}}_discounts_form" action="{{action}}/discounts" enctype='multipart/form-data'>
+  <input type="hidden" name="uuid">
+  <div class="field">
+    <label for="{{action}}_discounts_client_group_id">Klientu Grupa:</label>
+    <select class="client_groups" id="{{action}}_discounts_client_group_id" name="client_group_id"></select>
+  </div>
+  <div class="field">
+    <label for="{{action}}_discounts_product_group_id">Produktu Grupa:</label>
+    <select class="product_groups" id="{{action}}_discounts_product_group_id" name="product_group_id"></select>
+  </div>
+
+  <div class="field">
+    <label for="{{action}}_discounts_amount">Lielums:</label>
+    <input type="text" id="{{action}}_discounts_amount" name="amount"  required="true">
+  </div>
+
+  <button action="{{action}}/discounts" class="submit"><span class="fa fa-check-circle-o fa-5x"></span></button>
+</form>

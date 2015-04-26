@@ -173,6 +173,7 @@ jQuery(function()
     {
       var product_count = order_form.find('.purchase_item').length;
       var product = Mints.products.get( data_source );
+      var discount = Mints.u.discount( product, null );
       order_form.find('.product_list').append('<div class="purchase_item" data-source="'+ product.uuid +'" data-price="'+ product.price +'">'+
         '<input type="hidden" name="product_id" value="'+ product.uuid +'">'+
         '<input class="count" type="hidden" name="count" value="1">'+

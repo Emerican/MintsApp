@@ -1,0 +1,19 @@
+<section id="browse_clients">
+  <button class="big" action="section/add_clients">Pievienot lietotāju</button>
+  <form action="search/clients">
+    <div class="field">
+      <label for="search_name">Meklēt lietotāju:</label>
+      <input type="search" id="search_client" name="search">
+      <button action="search/clients" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
+    </div>
+  </form>
+  <div class="contents"></div>
+</section>
+
+<section id="add_clients">
+  {{> clients_form action="new" }}
+</section>
+
+<section id="edit_clients">
+  {{> clients_form action="update" }}
+</section>
