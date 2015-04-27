@@ -14,5 +14,19 @@
     <input type="number" min="0" max="100" step="1" id="{{action}}_discounts_amount" name="amount"  required="true">
   </div>
 
+  <div class="field">
+    <label for="{{action}}_discounts_weekdays">Dienas:</label>
+    <select id="{{action}}_discounts_weekdays" name="weekdays" multiple="true" >
+      <option></option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+    </select>
+  </div>
+
   <button action="{{action}}/discounts" class="submit"><span class="fa fa-check-circle-o fa-5x"></span></button>
 </form>

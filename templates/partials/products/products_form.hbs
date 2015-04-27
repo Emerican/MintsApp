@@ -2,7 +2,7 @@
   <input type="hidden" name="uuid">
   <div class="field>">
     <label for="{{action}}_products_product_group_id">Grupa:</label>
-    <select id="{{action}}_products_product_group_id" name="product_group_id" required="true">
+    <select class="product_groups" id="{{action}}_products_product_group_id" name="product_group_id" required="true">
       <option></option>
     </select>
   </div>
@@ -18,5 +18,23 @@
     <label for="{{action}}_products_description">Apraksts:</label>
     <textarea id="{{action}}_products_description" name="description"></textarea>
   </div>
+  <div class="field">
+    <label for="{{action}}_products_special_offer">Specpiedāvājums:</label>
+    <input id="{{action}}_products_special_offer" name="special_offer" type="checkbox" value="1">
+  </div>
+  <div class="field">
+    <label for="{{action}}_products_weekdays">Dienas:</label>
+    <select id="{{action}}_products_weekdays" name="weekdays" multiple="true" >
+      <option></option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+    </select>
+  </div>
+
   <button action="{{action}}/products" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
 </form>

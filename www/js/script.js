@@ -9,6 +9,12 @@ jQuery(function()
   var current_section = "main";
   var last_section = current_section;
 
+  var weekday = function()
+  {
+    var wkday = new Date().getDay();
+    return wkday == 0 ? 7 : wkday;
+  }
+
   var takePicture = function( target )
   {
     if(navigator.camera)
@@ -77,7 +83,11 @@ jQuery(function()
     var html_output = "";
     items.forEach(function(item)
     {
-      html_output +=  '<li><button data-target="' + item.uuid + '" action="add/product">'+ item.name +'</button>' + "</li>";
+      if( !item.weekdays || item.weekdays.indexOf( weekday() ) != -1 )
+      {
+        html_output +=  '<li><button data-target="' + item.uuid + '" action="add/product">'+ item.name +'</button>' + "</li>";
+      }
+
     });
 
     return "<ul>" + html_output + "</ul>";
@@ -124,7 +134,23 @@ jQuery(function()
         var input = form.find('[name="' + key + '"]')
         if( input.is('select') )
         {
-          input.find('[value="' + value + '"]').prop('selected', true);
+          input.find('option').prop('selected', false);
+          if(typeof value === "string" )
+          {
+            input.find('[value="' + value + '"]').prop('selected', true);
+          }
+          else if( value != null && typeof value === "object" )
+          {
+            value.forEach(function(v)
+            {
+              input.find('[value="' + v + '"]').prop('selected', true);
+            });
+          }
+
+        }
+        else if( input.is('[type="checkbox"]') )
+        {
+          input.find('[value="' + value + '"]').prop('checked', true);
         }
         else
         {
@@ -271,12 +297,12 @@ jQuery(function()
     {
       case "add_clients":
 
-        section.find('select').html( get_list_options('client_groups') );
+        section.find('select.client_groups').html( get_list_options('client_groups') );
 
       break;
       case "add_products":
 
-        section.find('select').html( get_list_options('product_groups') );
+        section.find('select.product_groups').html( get_list_options('product_groups') );
 
       break;
       case "add_discounts":
@@ -309,11 +335,11 @@ jQuery(function()
         content.html( resource_list("client_groups") );
       break;
       case "edit_clients":
-        section.find('select').html( get_list_options( 'client_groups' ) );
+        section.find('select.client_groups').html( get_list_options( 'client_groups' ) );
         populate_form( section, Mints.clients.get( data_source ) );
       break;
       case "edit_products":
-        section.find('select').html( get_list_options( 'product_groups' ) );
+        section.find('select.product_groups').html( get_list_options( 'product_groups' ) );
         populate_form( section, Mints.products.get( data_source ) );
       break;
       case "edit_product_groups":

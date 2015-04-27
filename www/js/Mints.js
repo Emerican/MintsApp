@@ -55,7 +55,7 @@ jQuery(function()
     ['name']
   );
   resource_params.products = resource_params.products.concat(
-    ['product_group_id','name','price','description','special_offer']
+    ['product_group_id','name','price','description','special_offer','weekdays']
   );
   resource_params.purchases = resource_params.purchases.concat(
     ['product_id','bill_id','count','discount']
