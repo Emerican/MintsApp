@@ -48,14 +48,21 @@ jQuery(function()
     navigation.trigger('change');
     jQuery('section').hide();
     jQuery("#"+section_name).attr('data-source', data_target).trigger('data_load').show();
-    ImmersiveMode.initialize();
+    if(typeof ImmersiveMode !== 'undefined')
+    {
+      ImmersiveMode.initialize();
+    }
   };
 
-  var get_list_options = function( resource_name )
+  var get_list_options = function( resource_name, blank )
   {
     var list_opts = "";
     var list = Mints[resource_name].get();
 
+    if(blank)
+    {
+      list_opts += '<option></option>';
+    }
     list.forEach(function(item)
     {
       list_opts += '<option value="' + item.uuid + '">' + item.name + '</option>'
@@ -229,8 +236,8 @@ jQuery(function()
       break;
       case "add_discounts":
 
-        section.find('select.client_groups').html( get_list_options('client_groups') );
-        section.find('select.product_groups').html( get_list_options('product_groups') );
+        section.find('select.client_groups').html( get_list_options('client_groups',true) );
+        section.find('select.product_groups').html( get_list_options('product_groups',true) );
 
       break;
       case "browse_discounts":

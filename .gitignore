@@ -20,3 +20,7 @@ platforms/android/*
 
 /node_modules/*
 /www/index.html
+
+npm-debug.log
+
+www/index.html

@@ -11,7 +11,7 @@
 
   <div class="field">
     <label for="{{action}}_discounts_amount">Lielums:</label>
-    <input type="text" id="{{action}}_discounts_amount" name="amount"  required="true">
+    <input type="number" min="0" max="100" step="1" id="{{action}}_discounts_amount" name="amount"  required="true">
   </div>
 
   <button action="{{action}}/discounts" class="submit"><span class="fa fa-check-circle-o fa-5x"></span></button>
