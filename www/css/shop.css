@@ -46,7 +46,7 @@
   margin-bottom:20px;
   box-shadow: 0px 5px 4px 1px rgba(0,0,0,0.20);
 }
-}
+
 
 #new_order .right .product_list{
   padding-top:30px;
@@ -60,7 +60,8 @@
 
 }
 
-#new_order .right .product_list .purchase_item{
+#new_order .right .product_list .purchase_item
+{
   cursor:pointer;
   background-color:#5C6BC0;
   border:none;
@@ -68,12 +69,19 @@
   height:50px;
   line-height:50px;
   box-shadow:0px 6px 9px 1px rgba(0,0,0,0.39);
-}
+  padding: 0 20px;
 }
 
-#new_order .right .product_list .purchase_item span{
-  height:100%;
-  width:100%;
+
+#new_order .right .product_list .purchase_item .count,
+#new_order .right .product_list .purchase_item .product_name
+{
+  float: left;
+}
+#new_order .right .product_list .purchase_item .discount,
+#new_order .right .product_list .purchase_item .price
+{
+  float: right;
 }
 
 #new_order .right > form > button{

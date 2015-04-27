@@ -58,7 +58,7 @@ jQuery(function()
     ['product_group_id','name','price','description','special_offer']
   );
   resource_params.purchases = resource_params.purchases.concat(
-    ['product_id','bill_id','count']
+    ['product_id','bill_id','count','discount']
   );
 
   resource_search.client_groups = resource_search.client_groups.concat(
@@ -118,10 +118,11 @@ jQuery(function()
         order_form.find('.purchase_item').each(function()
         {
           var item = jQuery(this);
-          var price = parseFloat( item.attr('data-price') )*100;
-          var count = parseInt( item.find('input.count').val() );
+          var discount = parseInt( item.find('input[name="discount"]').val() );
+          var price = parseFloat( item.find('input[name="price"]').val() )*100;
+          var count = parseInt( item.find('input[name="count"]').val() );
 
-          total += price * count;
+          total += count * price * ( 100 - discount ) / 100 ;
         });
 
         return total/100;
@@ -253,7 +254,7 @@ jQuery(function()
 
                 if( item[ Mints.u.singular(res) + "_id" ] == this.uuid )
                 {
-                  result = item;
+                  result = Mints.u.create_relations(Mints[rel],item);
                   break;
                 }
 
@@ -277,7 +278,7 @@ jQuery(function()
 
                 if(resource[ Mints.u.singular(rel) + "_id" ] == item.id )
                 {
-                  result = item;
+                  result = Mints.u.create_relations(Mints[rel],item);
                   break;
                 }
 

@@ -175,39 +175,84 @@ jQuery(function()
   var add_products_to_bill = function( data_source )
   {
     var order_form = jQuery('#new_order form');
+    var client_id = order_form.find('input[name="client_id"]').val();
     var product_in_list = order_form.find('[data-source="'+ data_source +'"]');
     if( product_in_list.length == 0 )
     {
       var product_count = order_form.find('.purchase_item').length;
+      var client = client_id ? Mints.users.get(client_id) : null;
       var product = Mints.products.get( data_source );
-      var discount = Mints.u.discount( product, null );
-      order_form.find('.product_list').append('<div class="purchase_item" data-source="'+ product.uuid +'" data-price="'+ product.price +'">'+
+      var discount = Mints.u.discount( product, client );
+      order_form.find('.product_list').append('<div class="purchase_item" data-source="'+ product.uuid +'" >'+
+
         '<input type="hidden" name="product_id" value="'+ product.uuid +'">'+
-        '<input class="count" type="hidden" name="count" value="1">'+
+        '<input type="hidden" name="count" value="1">'+
+        '<input type="hidden" name="price" value="' + product.price + '">'+
+        '<input type="hidden" name="discount" value="'+discount+'">'+
+
         '<span class="product_name">'+ product.name + ' x ' +'</span>'+
         '<span class="count">1</span>'+
+        '<span class="price"> '+ ( product.price * (100 - discount) / 100 ) + "€" + ' </span>'+
+        '<span class="discount"> -'+ discount +'% </span>'+
+
       '</div>');
     }
     else
     {
-      var count = parseInt( product_in_list.find('input.count').val() );
-      product_in_list.find('input.count').val( count + 1 );
-      product_in_list.find('span.count').html( count + 1 );
+      var count = parseInt( product_in_list.find('input[name="count"]').val() );
+      update_products_in_bill( product_in_list, count+1 );
     }
 
     order_form.find('.total .amount').html( Mints.u.calculate_total( order_form ) );
   }
 
+  var update_product_discounts_in_bill = function( )
+  {
+    var order_form = jQuery('#new_order form');
+    var client_id = order_form.find('input[name="client_id"]').val();
+    var client = Mints.users.get(client_id);
+
+    order_form.find(".purchase_item").each(function()
+    {
+      var item = jQuery(this);
+      var product = Mints.products.get( item.attr("data-source") );
+      var discount = Mints.u.discount( product, client );
+
+      item.find('input[name="discount"]').val(discount);
+    });
+
+    update_products_in_bill();
+  }
+
+  var update_products_in_bill = function( product_in_list, new_count )
+  {
+    product_in_list = product_in_list || jQuery('#new_order form').find(".purchase_item");
+    if(new_count)
+    {
+      product_in_list.find('input[name="count"]').val( new_count );
+    }
+
+    product_in_list.each(function()
+    {
+      var item = jQuery(this);
+      var count = parseInt( item.find('input[name="count"]').val() );
+      var discount = parseInt(  item.find('input[name="discount"]').val() );
+      var price = parseFloat( item.find('input[name="price"]').val() );
+      item.find('span.count').html( count );
+      item.find('span.discount').html( 0 - discount + "%" );
+      item.find('span.price').html( count * price * (100 - discount) / 100 + "€" );
+    });
+
+  }
 
   container.on('click', '.product_list .purchase_item', function()
   {
     var target = jQuery(this);
     var order_form = target.parents('form');
-    var count = parseInt( target.find('input.count').val() );
+    var count = parseInt( target.find('input[name="count"]').val() );
     if( count > 1 )
     {
-      target.find('input.count').val( count - 1 );
-      target.find('span.count').html( count - 1 );
+      update_products_in_bill( target, count-1 );
     }
     else
     {
@@ -286,6 +331,7 @@ jQuery(function()
           if(client)
           {
             section.find('.client_data').html('<input type="hidden" name="client_id" value="'+ client.uuid +'"><span>'+ client.name + ' ' + client.surname  +'</span>');
+            update_product_discounts_in_bill();
           }
 
           Nfc.unbind('tag_read');
