@@ -7,7 +7,6 @@ jQuery(function()
 
   var section_history = [];
   var current_section = "main";
-  var last_section = current_section;
 
   var weekday = function()
   {
@@ -176,10 +175,28 @@ jQuery(function()
     switch( action.split('/')[0] )
     {
       case 'section':
-
-        var section_name = action.split('/')[1];
+      var section_name = action.split('/')[1];
+      console.log(section_name);
+      if(section_name =="new_order"){
+        section_history = ["main"];
+        section_change (section_name,data_target);
+        console.log(section_history);
+      }
+      else if(section_name =="main"){
+        section_history = [];
+        section_change (section_name,data_target);
+      }
+      else if(current_section != section_name)
+      {
         section_history.push( current_section );
         section_change( section_name, data_target );
+      }
+      else{
+        section_history.push( current_section);
+        section_change( section_name, data_target);
+
+      }
+
       break;
       case 'back':
         section_change( section_history.pop() );
