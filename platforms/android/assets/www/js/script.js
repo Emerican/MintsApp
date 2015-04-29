@@ -9,6 +9,12 @@ jQuery(function()
   var current_section = "main";
   var last_section = current_section;
 
+  var weekday = function()
+  {
+    var wkday = new Date().getDay();
+    return wkday == 0 ? 7 : wkday;
+  }
+
   var takePicture = function( target )
   {
     if(navigator.camera)
@@ -48,14 +54,21 @@ jQuery(function()
     navigation.trigger('change');
     jQuery('section').hide();
     jQuery("#"+section_name).attr('data-source', data_target).trigger('data_load').show();
-    ImmersiveMode.initialize();
+    if(typeof ImmersiveMode !== 'undefined')
+    {
+      ImmersiveMode.initialize();
+    }
   };
 
-  var get_list_options = function( resource_name )
+  var get_list_options = function( resource_name, blank )
   {
     var list_opts = "";
     var list = Mints[resource_name].get();
 
+    if(blank)
+    {
+      list_opts += '<option></option>';
+    }
     list.forEach(function(item)
     {
       list_opts += '<option value="' + item.uuid + '">' + item.name + '</option>'
@@ -70,7 +83,11 @@ jQuery(function()
     var html_output = "";
     items.forEach(function(item)
     {
-      html_output +=  '<li><button data-target="' + item.uuid + '" action="add/product">'+ item.name +'</button>' + "</li>";
+      if( !item.weekdays || item.weekdays.indexOf( weekday() ) != -1 )
+      {
+        html_output +=  '<li><button data-target="' + item.uuid + '" action="add/product">'+ item.name +'</button>' + "</li>";
+      }
+
     });
 
     return "<ul>" + html_output + "</ul>";
@@ -87,7 +104,7 @@ jQuery(function()
       switch ( resource_name )
       {
         case "discounts":
-          resource_data = item.client_groups().name + " " + item.product_groups().name + " " + item.amount;
+          resource_data = item.client_group().name + " " + item.product_group().name + " " + item.amount;
         break;
         case "products":
         case "client_groups":
@@ -117,7 +134,23 @@ jQuery(function()
         var input = form.find('[name="' + key + '"]')
         if( input.is('select') )
         {
-          input.find('[value="' + value + '"]').prop('selected', true);
+          input.find('option').prop('selected', false);
+          if(typeof value === "string" )
+          {
+            input.find('[value="' + value + '"]').prop('selected', true);
+          }
+          else if( value != null && typeof value === "object" )
+          {
+            value.forEach(function(v)
+            {
+              input.find('[value="' + v + '"]').prop('selected', true);
+            });
+          }
+
+        }
+        else if( input.is('[type="checkbox"]') )
+        {
+          input.find('[value="' + value + '"]').prop('checked', true);
         }
         else
         {
@@ -168,38 +201,84 @@ jQuery(function()
   var add_products_to_bill = function( data_source )
   {
     var order_form = jQuery('#new_order form');
+    var client_id = order_form.find('input[name="client_id"]').val();
     var product_in_list = order_form.find('[data-source="'+ data_source +'"]');
     if( product_in_list.length == 0 )
     {
       var product_count = order_form.find('.purchase_item').length;
+      var client = client_id ? Mints.users.get(client_id) : null;
       var product = Mints.products.get( data_source );
-      order_form.find('.product_list').append('<div class="purchase_item" data-source="'+ product.uuid +'" data-price="'+ product.price +'">'+
+      var discount = Mints.u.discount( product, client );
+      order_form.find('.product_list').append('<div class="purchase_item" data-source="'+ product.uuid +'" >'+
+
         '<input type="hidden" name="product_id" value="'+ product.uuid +'">'+
-        '<input class="count" type="hidden" name="count" value="1">'+
+        '<input type="hidden" name="count" value="1">'+
+        '<input type="hidden" name="price" value="' + product.price + '">'+
+        '<input type="hidden" name="discount" value="'+discount+'">'+
+
         '<span class="product_name">'+ product.name + ' x ' +'</span>'+
         '<span class="count">1</span>'+
+        '<span class="price"> '+ ( product.price * (100 - discount) / 100 ) + "€" + ' </span>'+
+        '<span class="discount"> -'+ discount +'% &nbsp; </span>'+
+
       '</div>');
     }
     else
     {
-      var count = parseInt( product_in_list.find('input.count').val() );
-      product_in_list.find('input.count').val( count + 1 );
-      product_in_list.find('span.count').html( count + 1 );
+      var count = parseInt( product_in_list.find('input[name="count"]').val() );
+      update_products_in_bill( product_in_list, count+1 );
     }
 
     order_form.find('.total .amount').html( Mints.u.calculate_total( order_form ) );
   }
 
+  var update_product_discounts_in_bill = function( )
+  {
+    var order_form = jQuery('#new_order form');
+    var client_id = order_form.find('input[name="client_id"]').val();
+    var client = Mints.users.get(client_id);
+
+    order_form.find(".purchase_item").each(function()
+    {
+      var item = jQuery(this);
+      var product = Mints.products.get( item.attr("data-source") );
+      var discount = Mints.u.discount( product, client );
+
+      item.find('input[name="discount"]').val(discount);
+    });
+
+    update_products_in_bill();
+  }
+
+  var update_products_in_bill = function( product_in_list, new_count )
+  {
+    product_in_list = product_in_list || jQuery('#new_order form').find(".purchase_item");
+    if(new_count)
+    {
+      product_in_list.find('input[name="count"]').val( new_count );
+    }
+
+    product_in_list.each(function()
+    {
+      var item = jQuery(this);
+      var count = parseInt( item.find('input[name="count"]').val() );
+      var discount = parseInt(  item.find('input[name="discount"]').val() );
+      var price = parseFloat( item.find('input[name="price"]').val() );
+      item.find('span.count').html( count );
+      item.find('span.discount').html( 0 - discount + "% &nbsp;" );
+      item.find('span.price').html( count * price * (100 - discount) / 100 + "€" );
+    });
+
+  }
 
   container.on('click', '.product_list .purchase_item', function()
   {
     var target = jQuery(this);
     var order_form = target.parents('form');
-    var count = parseInt( target.find('input.count').val() );
+    var count = parseInt( target.find('input[name="count"]').val() );
     if( count > 1 )
     {
-      target.find('input.count').val( count - 1 );
-      target.find('span.count').html( count - 1 );
+      update_products_in_bill( target, count-1 );
     }
     else
     {
@@ -218,18 +297,18 @@ jQuery(function()
     {
       case "add_clients":
 
-        section.find('select').html( get_list_options('client_groups') );
+        section.find('select.client_groups').html( get_list_options('client_groups') );
 
       break;
       case "add_products":
 
-        section.find('select').html( get_list_options('product_groups') );
+        section.find('select.product_groups').html( get_list_options('product_groups') );
 
       break;
       case "add_discounts":
 
-        section.find('select.client_groups').html( get_list_options('client_groups') );
-        section.find('select.product_groups').html( get_list_options('product_groups') );
+        section.find('select.client_groups').html( get_list_options('client_groups',true) );
+        section.find('select.product_groups').html( get_list_options('product_groups',true) );
 
       break;
       case "browse_discounts":
@@ -256,11 +335,11 @@ jQuery(function()
         content.html( resource_list("client_groups") );
       break;
       case "edit_clients":
-        section.find('select').html( get_list_options( 'client_groups' ) );
+        section.find('select.client_groups').html( get_list_options( 'client_groups' ) );
         populate_form( section, Mints.clients.get( data_source ) );
       break;
       case "edit_products":
-        section.find('select').html( get_list_options( 'product_groups' ) );
+        section.find('select.product_groups').html( get_list_options( 'product_groups' ) );
         populate_form( section, Mints.products.get( data_source ) );
       break;
       case "edit_product_groups":
@@ -270,6 +349,7 @@ jQuery(function()
         populate_form( section, Mints.client_groups.get( data_source ) );
       break;
       case "new_order":
+
         content.html( product_list() );
 
         Nfc.on('tag_read', function()
@@ -277,7 +357,10 @@ jQuery(function()
           var client = Mints.clients.search_by_card( Nfc.tag );
           if(client)
           {
-            section.find('.client_data').html('<input type="hidden" name="client_id" value="'+ client.uuid +'"><span>'+ client.name + ' ' + client.surname  +'</span>');
+            section.find('img').remove();
+            section.find('avatar_path').remove();
+            section.find('.client_data').html('<input type="hidden" name="client_id" value="'+ client.uuid +'"><span>'+ client.name + ' ' + client.surname  +' <img width="100px" height="150"src="'+ client.avatar_path + '"></span>');
+            update_product_discounts_in_bill();
           }
 
           Nfc.unbind('tag_read');

@@ -219,7 +219,7 @@ jQuery(function()
         '<span class="product_name">'+ product.name + ' x ' +'</span>'+
         '<span class="count">1</span>'+
         '<span class="price"> '+ ( product.price * (100 - discount) / 100 ) + "€" + ' </span>'+
-        '<span class="discount"> -'+ discount +'% </span>'+
+        '<span class="discount"> -'+ discount +'% &nbsp; </span>'+
 
       '</div>');
     }
@@ -265,7 +265,7 @@ jQuery(function()
       var discount = parseInt(  item.find('input[name="discount"]').val() );
       var price = parseFloat( item.find('input[name="price"]').val() );
       item.find('span.count').html( count );
-      item.find('span.discount').html( 0 - discount + "%" );
+      item.find('span.discount').html( 0 - discount + "% &nbsp;" );
       item.find('span.price').html( count * price * (100 - discount) / 100 + "€" );
     });
 
@@ -349,6 +349,7 @@ jQuery(function()
         populate_form( section, Mints.client_groups.get( data_source ) );
       break;
       case "new_order":
+
         content.html( product_list() );
 
         Nfc.on('tag_read', function()
@@ -356,7 +357,9 @@ jQuery(function()
           var client = Mints.clients.search_by_card( Nfc.tag );
           if(client)
           {
-            section.find('.client_data').html('<input type="hidden" name="client_id" value="'+ client.uuid +'"><span>'+ client.name + ' ' + client.surname  +'</span>');
+            section.find('img').remove();
+            section.find('avatar_path').remove();
+            section.find('.client_data').html('<input type="hidden" name="client_id" value="'+ client.uuid +'"><span>'+ client.name + ' ' + client.surname  +' <img width="100px" height="150"src="'+ client.avatar_path + '"></span>');
             update_product_discounts_in_bill();
           }
 

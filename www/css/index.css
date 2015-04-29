@@ -38,8 +38,8 @@ section > button
   border:none;
   background-color: rgba(255,255,255,0.2);
   margin:10px;
-  height:100px;
-  width:100px;
+  height:150px;
+  width:150px;
 }
 button.big
 {
@@ -68,43 +68,22 @@ button.big
 
 
 /*TextFields*/
-#add_clients,
-#add_client_groups,
-#browse_groups,
-#add_products,
-#add_product_groups,
-#edit_client_groups,
-#edit_product_groups,
-#edit_products,
-#edit_clients
+input
 {
-  width:45%;
+  width:35%;
   margin-left:auto;
   margin-right:auto;
 }
+
+select{
+  width:35%;
+}
+
 #new_client_form{
   margin:0;
   padding:0;
   padding-top:30px;
   width:100%;
-}
-
-#browse_products input{
-  width:45%;
-
-}
-#browse_clients{
-  width:100%;
-  margin-left:auto;
-  margin-right:auto;
-}
-#search_client{ /*optimizēt šeit un augstāk*/
-  width:45%;
-}
-#search_product{
-  width:45%;
-  font-size:16px;
-  padding:10px;
 }
 
 
@@ -121,7 +100,6 @@ select
 input{
   font-size:18px;
   padding:10px;
-  width:70%;
   margin-bottom:30px;
 }
 label{
@@ -132,13 +110,12 @@ label{
 select{
   font-size:20px;
   padding:10px;
-  width:80%;
   margin-bottom:30px;
 }
 
 textarea{
   height:100px;
-  width:70%;
+  width:35%;
   resize:vertical;
   margin-left:auto;
   margin-right:auto;

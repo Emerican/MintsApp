@@ -20,7 +20,7 @@
   border-left:none;
   border-top:none;
   float:left;
-  width:60%;
+  width:65%;
   height:100vh;
 }
 #new_order .right{
@@ -29,7 +29,7 @@
 }
 #new_order .right{
   float:left;
-  width:40%;
+  width:35%;
 }
 
 #new_order .left .contents ul {
@@ -39,9 +39,8 @@
 
 #new_order .left .contents ul li >button{
   background-color:#F38630;
-  width:20%;
-  margin-right:5%;
-  margin-left:5%;
+  width:21%;
+  margin-left:22px;
   float:left;
   margin-bottom:20px;
   box-shadow: 0px 5px 4px 1px rgba(0,0,0,0.20);
