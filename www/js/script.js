@@ -176,13 +176,11 @@ jQuery(function()
     {
       case 'section':
       var section_name = action.split('/')[1];
-      console.log(section_name);
       if(section_name =="new_order"){
         section_history = ["main"];
         section_change (section_name,data_target);
-        console.log(section_history);
       }
-      else if(section_name =="main"){
+      else if(section_name == "main"){
         section_history = [];
         section_change (section_name,data_target);
       }
@@ -191,7 +189,8 @@ jQuery(function()
         section_history.push( current_section );
         section_change( section_name, data_target );
       }
-      else{
+      else
+      {
         section_history.push( current_section);
         section_change( section_name, data_target);
 
