@@ -7,7 +7,6 @@ jQuery(function()
 
   var section_history = [];
   var current_section = "main";
-  var last_section = current_section;
 
   var weekday = function()
   {
@@ -176,12 +175,30 @@ jQuery(function()
     switch( action.split('/')[0] )
     {
       case 'section':
-
-        var section_name = action.split('/')[1];
+      var section_name = action.split('/')[1];
+      if(section_name =="new_order"){
+        section_history = ["main"];
+        section_change (section_name,data_target);
+      }
+      else if(section_name == "main"){
+        section_history = [];
+        section_change (section_name,data_target);
+      }
+      else if(current_section != section_name)
+      {
         section_history.push( current_section );
         section_change( section_name, data_target );
+      }
+      else
+      {
+        section_history.push( current_section);
+        section_change( section_name, data_target);
+
+      }
+
       break;
       case 'back':
+        jQuery("nav").show();
         section_change( section_history.pop() );
       break;
       case "add":
@@ -350,6 +367,8 @@ jQuery(function()
       break;
       case "new_order":
 
+      jQuery("nav").hide();
+
         content.html( product_list() );
 
         Nfc.on('tag_read', function()
@@ -359,7 +378,7 @@ jQuery(function()
           {
             section.find('img').remove();
             section.find('avatar_path').remove();
-            section.find('.client_data').html('<input type="hidden" name="client_id" value="'+ client.uuid +'"><span>'+ client.name + ' ' + client.surname  +' <img width="100px" height="150"src="'+ client.avatar_path + '"></span>');
+            section.find('.client_data').html('<input type="hidden" name="client_id" value="'+ client.uuid +'"><span>'+ client.name + ' ' + client.surname  +' <img width="150px" height="200"src="'+ client.avatar_path + '"></span>');
             update_product_discounts_in_bill();
           }
 
@@ -416,7 +435,7 @@ jQuery(function()
           {
             Mints.u.notice( "Izveidots" );
             Mints[resource_name].unbind('sync');
-            trigger_action( "section/main" );
+            trigger_action( "section/new_order" );
             form.find('.client_data, .product_list, .amount').html("");
           });
         }

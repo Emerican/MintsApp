@@ -1,6 +1,5 @@
 #new_order{
   background-color:#9575CD;
-  padding-top:70px;
   height:100%;
   margin-top:-13px;
   width:100%;
@@ -23,8 +22,13 @@
   width:65%;
   height:100vh;
 }
+#shop_back{
+  margin-top:10px;
+  float:left;
+}
+
 #new_order .right{
-  margin-top:60px;
+  margin-top:10px;
   background-color:#69D2E7;
 }
 #new_order .right{
@@ -33,7 +37,7 @@
 }
 
 #new_order .left .contents ul {
-  margin-top:40px;
+  margin-top:90px;
   padding-top:0px;
 }
 
@@ -48,7 +52,7 @@
 
 
 #new_order .right .product_list{
-  padding-top:30px;
+  margin-top:210px;
 }
 #new_order .right .total{
   background-color:#E0E4CC;
@@ -92,6 +96,12 @@
   width:40%;
   box-shadow:0px 6px 9px 1px rgba(0,0,0,0.30);
 }
+
+img{
+  float:right;
+}
+
+
 
 .left .contents ul{
   background-color:inherit;
