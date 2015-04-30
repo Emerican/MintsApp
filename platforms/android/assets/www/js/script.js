@@ -236,7 +236,7 @@ jQuery(function()
         '<span class="product_name">'+ product.name + ' x ' +'</span>'+
         '<span class="count">1</span>'+
         '<span class="price"> '+ ( product.price * (100 - discount) / 100 ) + "€" + ' </span>'+
-        '<span class="discount"> -'+ discount +'% &nbsp; </span>'+
+        '<span class="discount"> -'+ discount +'% </span>'+
 
       '</div>');
     }
@@ -282,7 +282,7 @@ jQuery(function()
       var discount = parseInt(  item.find('input[name="discount"]').val() );
       var price = parseFloat( item.find('input[name="price"]').val() );
       item.find('span.count').html( count );
-      item.find('span.discount').html( 0 - discount + "% &nbsp;" );
+      item.find('span.discount').html( 0 - discount + "%" );
       item.find('span.price').html( count * price * (100 - discount) / 100 + "€" );
     });
 
@@ -367,6 +367,11 @@ jQuery(function()
       break;
       case "new_order":
 
+      section.find('.client_data').html('<div id="client_facecontrol"><span class="shop_client_name">Tims Mints' + '<img id="shop_avatar" width="170px" height="200"src="img/logo.png"</span></div>');
+
+
+
+
       jQuery("nav").hide();
 
         content.html( product_list() );
@@ -378,7 +383,7 @@ jQuery(function()
           {
             section.find('img').remove();
             section.find('avatar_path').remove();
-            section.find('.client_data').html('<input type="hidden" name="client_id" value="'+ client.uuid +'"><span>'+ client.name + ' ' + client.surname  +' <img width="150px" height="200"src="'+ client.avatar_path + '"></span>');
+            section.find('.client_data').html('<input type="hidden" name="client_id" value="'+ client.uuid +'"><span class="shop_client_name">'+ client.name + ' ' + client.surname  +' <img id="shop_avatar" width="150px" height="200"src="'+ client.avatar_path + '"></span>');
             update_product_discounts_in_bill();
           }
 

@@ -97,12 +97,22 @@
   box-shadow:0px 6px 9px 1px rgba(0,0,0,0.30);
 }
 
-img{
+#shop_avatar{
   float:right;
 }
+.shop_client_name{
+  font-weight:bold;
+  font-size:20px;
+}
 
+#client_facecontrol{
+  margin-top:5px;
+}
 
 
 .left .contents ul{
   background-color:inherit;
+}
+.discount{
+  margin-right:10px;
 }
