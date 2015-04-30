@@ -164,7 +164,6 @@ jQuery(function()
 
         if( type == 'post' )
         {
-          Mints.data_store[resource][id].synced = true;
           data[ Mints.u.singular(resource) ] = Mints.data_store[resource][id];
 
           if(id && !Mints.data_store[resource][id].new )
@@ -193,22 +192,18 @@ jQuery(function()
         });
         Mints.active_transfers.push( transfer );
       },
-      create_relations: function(resource,data)
       {
         var res = resource.class_name;
 
         data.set = function(params)
         {
           var self = this;
-
           resource_params[res].forEach(function(param)
           {
             if( params && params[param] )
             {
-              self[param] = params[param];
             }
           });
-          self.synced = false;
           resource.sync();
         };
 
@@ -457,7 +452,6 @@ jQuery(function()
       {
         if( !ds[id].synced )
         {
-          Mints.u.connection( self.class_name, id, "post", function(){ self.trigger('sync') } );
         }
       }
     };

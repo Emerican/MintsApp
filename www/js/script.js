@@ -176,11 +176,13 @@ jQuery(function()
     {
       case 'section':
       var section_name = action.split('/')[1];
-      if(section_name =="new_order"){
+      if(section_name =="new_order")
+      {
         section_history = ["main"];
         section_change (section_name,data_target);
       }
-      else if(section_name == "main"){
+      else if(section_name == "main")
+      {
         section_history = [];
         section_change (section_name,data_target);
       }
@@ -254,15 +256,18 @@ jQuery(function()
     var order_form = jQuery('#new_order form');
     var client_id = order_form.find('input[name="client_id"]').val();
     var client = Mints.users.get(client_id);
-
-    order_form.find(".purchase_item").each(function()
+    var products =  order_form.find(".purchase_item");
+    if(products)
     {
-      var item = jQuery(this);
-      var product = Mints.products.get( item.attr("data-source") );
-      var discount = Mints.u.discount( product, client );
+      products.each(function()
+      {
+        var item = jQuery(this);
+        var product = Mints.products.get( item.attr("data-source") );
+        var discount = Mints.u.discount( product, client );
 
-      item.find('input[name="discount"]').val(discount);
-    });
+        item.find('input[name="discount"]').val(discount);
+      });
+    }
 
     update_products_in_bill();
   }
@@ -431,11 +436,6 @@ jQuery(function()
           var form_obj = form.serializeObject();
           var bill = Mints[resource_name].new( {client_id:form_obj.client_id} );
 
-          for(var i = 0; i < form_obj.product_id.length; i++)
-          {
-            Mints.purchases.new( { product_id:form_obj.product_id[i], count: form_obj.count[i], bill_id: bill.uuid } );
-          }
-
           Mints[resource_name].on('sync', function()
           {
             Mints.u.notice( "Izveidots" );
@@ -443,17 +443,25 @@ jQuery(function()
             trigger_action( "section/new_order" );
             form.find('.client_data, .product_list, .amount').html("");
           });
+          for(var i = 0; i < form_obj.product_id.length; i++)
+          {
+            Mints.purchases.new( { product_id:form_obj.product_id[i], count: form_obj.count[i], bill_id: bill.uuid } );
+          }
         }
         else
         {
           var form_data = form.serializeObject();
+          if( typeof form_data.weekdays == "string" )
+          {
+            form_data.weekdays = [form_data.weekdays];
+          }
           var avatar_image = form.find('.avatar_image');
           if( avatar_image.length > 0 )
           {
             form_data.avatar = avatar_image.attr('src');
           }
 
-          Mints[resource_name].new( form_data );
+
 
           Mints[resource_name].on('sync', function()
           {
@@ -463,7 +471,7 @@ jQuery(function()
             form.find('input, textarea').val("");
             form.find('img').remove();
           });
-
+          Mints[resource_name].new( form_data );
         }
 
       break;
@@ -471,19 +479,24 @@ jQuery(function()
       case 'update':
 
         var form_data = form.serializeObject();
+        if( typeof form_data.weekdays == "string" )
+        {
+          form_data.weekdays = [form_data.weekdays];
+        }
         var avatar_image = form.find('.avatar_image');
         if( avatar_image.length > 0 )
         {
           form_data.avatar = avatar_image.attr('src');
         }
 
-        Mints[resource_name].get(resource_id).set( form_data );
+
         Mints[resource_name].on('sync', function()
         {
           Mints.u.notice( "Saglabāts" );
           Mints[resource_name].unbind('sync');
           trigger_action( "section/browse_" + resource_name );
         });
+        Mints[resource_name].get(resource_id).set( form_data );
       break;
 
       case 'search':
