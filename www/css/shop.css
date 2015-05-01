@@ -1,7 +1,5 @@
 #new_order{
-  background-color:#9575CD;
-  height:100%;
-  width:100%;
+  margin-top:0px;
 }
 
 #new_order .contents{
@@ -16,15 +14,13 @@
 #shop_back{
   margin-top:10px;
   float:left;
+  position:fixed;
+  bottom:0;
 }
 
 .shop_client_name{
   font-weight:bold;
   font-size:20px;
-}
-
-#client_facecontrol{
-  margin-top:5px;
 }
 
 .discount{

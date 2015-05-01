@@ -34,6 +34,8 @@
 /Users/vellameita/Shroom/platforms/android/assets/www/css/index.css \
 /Users/vellameita/Shroom/platforms/android/assets/www/css/navigation.css \
 /Users/vellameita/Shroom/platforms/android/assets/www/css/shop.css \
+/Users/vellameita/Shroom/platforms/android/assets/www/css/shop_left.css \
+/Users/vellameita/Shroom/platforms/android/assets/www/css/shop_right.css \
 /Users/vellameita/Shroom/platforms/android/assets/www/css/font-awesome-4.3.0/css \
 /Users/vellameita/Shroom/platforms/android/assets/www/css/font-awesome-4.3.0/fonts \
 /Users/vellameita/Shroom/platforms/android/assets/www/css/font-awesome-4.3.0/less \

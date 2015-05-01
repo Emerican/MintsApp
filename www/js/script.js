@@ -325,7 +325,9 @@ jQuery(function()
       var discount = parseInt(  item.find('input[name="discount"]').val() );
       var price = parseFloat( item.find('input[name="price"]').val() );
       item.find('span.count').html( count );
+      if(discount){
       item.find('span.discount').html( 0 - discount + "%" );
+    }
       item.find('span.price').html( count * price * (100 - discount) / 100 + "€" );
     });
 
