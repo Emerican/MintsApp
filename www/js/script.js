@@ -77,19 +77,49 @@ jQuery(function()
 
   var product_list = function( resources )
   {
-    var items = resources || Mints.products.get();
+    var product_groups = Mints.product_groups.get();
 
-    var html_output = "";
-    items.forEach(function(item)
+    var html_tabs_buttons = "";
+    var html_tabs = "";
+
+    product_groups.forEach(function(pg)
     {
-      if( !item.weekdays || item.weekdays.indexOf( weekday() ) != -1 )
+      var items = pg.products();
+      var pg_output = "";
+      html_tabs_buttons += '<button action="switch_tab/new_order" data-target="'+pg.uuid+'">' + pg.name + '</button>';
+
+      items.sort(function(a,b)
       {
-        html_output +=  '<li><button data-target="' + item.uuid + '" action="add/product">'+ item.name +'</button>' + "</li>";
-      }
+        if (a.name > b.name)
+        {
+          return 1;
+        }
+        if (a.name < b.name)
+        {
+          return -1;
+        }
+        return 0;
+
+      }).forEach(function(item)
+      {
+        if( !item.weekdays || item.weekdays.indexOf( weekday() ) != -1 )
+        {
+          var color_class= "";
+          if ( /0,3/i.test(item.name) ){ color_class = "color3" }
+          if ( /0,5/i.test(item.name) ){ color_class = "color5" }
+          if ( /0,7/i.test(item.name) ){ color_class = "color7" }
+          pg_output +=  '<li><button class="'+ color_class +'" data-target="' + item.uuid + '" action="add/product">'+ item.name +'</button>' + "</li>";
+        }
+
+      });
+
+      html_tabs += '<ul class="product_group" data-product_group="'+ pg.uuid +'">' + pg_output + "</ul>";
 
     });
 
-    return "<ul>" + html_output + "</ul>";
+
+
+    return '<div class="tab_buttons">' + html_tabs_buttons + '</div><div class="tabs">'+html_tabs+'</div>';
   }
 
   var resource_list = function( resource_name, resources )
@@ -175,29 +205,28 @@ jQuery(function()
     switch( action.split('/')[0] )
     {
       case 'section':
-      var section_name = action.split('/')[1];
-      if(section_name =="new_order")
-      {
-        section_history = ["main"];
-        section_change (section_name,data_target);
-      }
-      else if(section_name == "main")
-      {
-        section_history = [];
-        section_change (section_name,data_target);
-      }
-      else if(current_section != section_name)
-      {
-        section_history.push( current_section );
-        section_change( section_name, data_target );
-      }
-      else
-      {
-        section_history.push( current_section);
-        section_change( section_name, data_target);
+        var section_name = action.split('/')[1];
+        if(section_name =="new_order")
+        {
+          section_history = ["main"];
+          section_change (section_name,data_target);
+        }
+        else if(section_name == "main")
+        {
+          section_history = [];
+          section_change (section_name,data_target);
+        }
+        else if(current_section != section_name)
+        {
+          section_history.push( current_section );
+          section_change( section_name, data_target );
+        }
+        else
+        {
+          section_history.push( current_section);
+          section_change( section_name, data_target);
 
-      }
-
+        }
       break;
       case 'back':
         jQuery("nav").show();
@@ -209,7 +238,16 @@ jQuery(function()
           add_products_to_bill( data_target );
         }
       break;
+      case "switch_tab":
+        var section_name = action.split('/')[1];
 
+        container.find( '#'+section_name+' .tab_buttons > *' ).removeClass('active');
+        container.find( '#'+section_name+' .tab_buttons [data-target="'+ data_target +'"]' ).addClass('active');
+        container.find( '#'+section_name+' .tabs > *' ).hide();
+        container.find( '#'+section_name+' .tabs [data-product_group="'+data_target+'"]' ).show();
+
+
+      break;
       default:
         prevent_default = true;
 
@@ -372,12 +410,10 @@ jQuery(function()
       break;
       case "new_order":
 
-      section.find('.client_data').html('<div id="client_facecontrol"><span class="shop_client_name">Tims Mints' + '<img id="shop_avatar" width="170px" height="200"src="img/logo.png"</span></div>');
+        navigation.hide();
+        section.find('.client_data').html('<div id="client_facecontrol"><span class="shop_client_name">Tims Mints' + '<img id="shop_avatar" width="170px" height="200"src="img/logo.png"</span></div>');
 
 
-
-
-      jQuery("nav").hide();
 
         content.html( product_list() );
 
@@ -488,7 +524,6 @@ jQuery(function()
         {
           form_data.avatar = avatar_image.attr('src');
         }
-
 
         Mints[resource_name].on('sync', function()
         {
