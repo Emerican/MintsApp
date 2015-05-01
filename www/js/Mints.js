@@ -1,6 +1,5 @@
 jQuery(function()
 {
-  var serverAdress = "http://mints.strautmanis.lv";
 
   var container = jQuery('body');
 
@@ -97,17 +96,20 @@ jQuery(function()
 
         if( client )
         {
+          if( all_product_discounts )
+          {
+            var joint_discounts = all_product_discounts.filter(function(d){ return d.client_group_id == client.uuid  });
+            joint_discounts.forEach(function(d)
+            {
+              max_discount = Math.max( max_discount, d.amount );
+            });
+          }
           var client_discounts = client.client_group().discounts().filter(function(d){ return d.product_group_id.length == 0 });
-          var joint_discounts = all_product_discounts.filter(function(d){ return d.client_group_id == client.uuid  });
-
           client_discounts.forEach(function(d)
           {
             max_discount = Math.max( max_discount, d.amount );
           });
-          joint_discounts.forEach(function(d)
-          {
-            max_discount = Math.max( max_discount, d.amount );
-          });
+
         }
 
         return max_discount;
@@ -182,7 +184,6 @@ jQuery(function()
           data: data,
           success: function( json )
           {
-
             if( type == 'post' )
             {
               Mints.data_store[resource][id].synced = true;
