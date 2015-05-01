@@ -24,4 +24,3 @@ platforms/android/*
 npm-debug.log
 
 www/index.html
-www/js/config.js
