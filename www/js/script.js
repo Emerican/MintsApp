@@ -263,7 +263,7 @@ jQuery(function()
     if( product_in_list.length == 0 )
     {
       var product_count = order_form.find('.purchase_item').length;
-      var client = client_id ? Mints.users.get(client_id) : null;
+      var client = client_id ? Mints.clients.get(client_id) : null;
       var product = Mints.products.get( data_source );
       var discount = Mints.u.discount( product, client );
       order_form.find('.product_list').append('<div class="purchase_item" data-source="'+ product.uuid +'" >'+
@@ -293,7 +293,7 @@ jQuery(function()
   {
     var order_form = jQuery('#new_order form');
     var client_id = order_form.find('input[name="client_id"]').val();
-    var client = Mints.users.get(client_id);
+    var client = Mints.clients.get(client_id);
     var products =  order_form.find(".purchase_item");
     if(products)
     {

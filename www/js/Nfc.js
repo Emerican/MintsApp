@@ -11,6 +11,11 @@ window.Nfc = {
   {
     document.addEventListener('deviceready', this.onDeviceReady, false);
   },
+  debug: function()
+  {
+    Nfc.tag = "b8d56400";
+    Nfc.trigger( 'tag_read' );
+  },
   // deviceready Event Handler
   onDeviceReady: function()
   {
