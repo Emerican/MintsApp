@@ -1,1 +1,1 @@
-var serverAdress = "http://mints.strautmanis.lv";
+var serverAdress = "http://beta.strautmanis.lv";
