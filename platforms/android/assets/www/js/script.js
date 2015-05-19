@@ -105,9 +105,9 @@ jQuery(function()
         if( !item.weekdays || item.weekdays.indexOf( weekday() ) != -1 )
         {
           var color_class= "";
-          if ( /0,3/i.test(item.name) ){ color_class = "color3" }
-          if ( /0,5/i.test(item.name) ){ color_class = "color5" }
-          if ( /0,7/i.test(item.name) ){ color_class = "color7" }
+          if ( /0,3|0.3/i.test(item.name) ){ color_class = "color3" }
+          if ( /0,5|0.5/i.test(item.name) ){ color_class = "color5" }
+          if ( /0,7|0.7/i.test(item.name) ){ color_class = "color7" }
           pg_output +=  '<li><button class="'+ color_class +'" data-target="' + item.uuid + '" action="add/product">'+ item.name +'</button>' + "</li>";
         }
 
@@ -116,8 +116,6 @@ jQuery(function()
       html_tabs += '<ul class="product_group" data-product_group="'+ pg.uuid +'">' + pg_output + "</ul>";
 
     });
-
-
 
     return '<div class="tab_buttons">' + html_tabs_buttons + '</div><div class="tabs">'+html_tabs+'</div>';
   }
@@ -265,18 +263,18 @@ jQuery(function()
       var product_count = order_form.find('.purchase_item').length;
       var client = client_id ? Mints.clients.get(client_id) : null;
       var product = Mints.products.get( data_source );
-      var discount = Mints.u.discount( product, client );
+      product.discount = Mints.u.discount( product, client );
       order_form.find('.product_list').append('<div class="purchase_item" data-source="'+ product.uuid +'" >'+
 
         '<input type="hidden" name="product_id" value="'+ product.uuid +'">'+
         '<input type="hidden" name="count" value="1">'+
         '<input type="hidden" name="price" value="' + product.price + '">'+
-        '<input type="hidden" name="discount" value="'+discount+'">'+
+        '<input type="hidden" name="discount" value="'+product.discount+'">'+
 
         '<span class="product_name">'+ product.name + ' x ' +'</span>'+
         '<span class="count">1</span>'+
-        '<span class="price"> '+ ( product.price * (100 - discount) / 100 ) + "€" + ' </span>'+
-        '<span class="discount"> -'+ discount +'% </span>'+
+        '<span class="price"> '+ ( product.price * (100 - product.discount) / 100 ) + "€" + ' </span>'+
+        '<span class="discount">'+ ( product.discount ? ("-" + product.discount +'%') : "" ) + ' </span>'+
 
       '</div>');
     }
@@ -323,12 +321,10 @@ jQuery(function()
       var item = jQuery(this);
       var count = parseInt( item.find('input[name="count"]').val() );
       var discount = parseInt(  item.find('input[name="discount"]').val() );
-      var price = parseFloat( item.find('input[name="price"]').val() );
+      var price = parseFloat( item.find('input[name="price"]').val() ) * 100;
       item.find('span.count').html( count );
-      if(discount){
-      item.find('span.discount').html( 0 - discount + "%" );
-    }
-      item.find('span.price').html( count * price * (100 - discount) / 100 + "€" );
+      item.find('span.discount').html( discount ? "-" + discount + "%" : "" );
+      item.find('span.price').html( ( count * price * (100 - discount) / 100 ) / 100 + "€" );
     });
 
   }
@@ -384,6 +380,7 @@ jQuery(function()
       break;
       case "browse_clients":
         content.html( resource_list("clients") );
+      /*
         Nfc.on('tag_read', function()
         {
           var client = Mints.clients.search_by_card( Nfc.tag );
@@ -392,6 +389,7 @@ jQuery(function()
 
           Nfc.unbind('tag_read');
         });
+        */ /*Kautkas te sapiš visu*/
       break;
       case "browse_client_groups":
         content.html( resource_list("client_groups") );

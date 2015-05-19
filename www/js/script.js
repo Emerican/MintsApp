@@ -380,6 +380,7 @@ jQuery(function()
       break;
       case "browse_clients":
         content.html( resource_list("clients") );
+      /*
         Nfc.on('tag_read', function()
         {
           var client = Mints.clients.search_by_card( Nfc.tag );
@@ -388,6 +389,7 @@ jQuery(function()
 
           Nfc.unbind('tag_read');
         });
+        */ /*Kautkas te sapiš visu*/
       break;
       case "browse_client_groups":
         content.html( resource_list("client_groups") );

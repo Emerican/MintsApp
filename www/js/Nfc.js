@@ -13,7 +13,7 @@ window.Nfc = {
   },
   debug: function()
   {
-    Nfc.tag = "b8d56400";
+    Nfc.tag = "dcc76400";
     Nfc.trigger( 'tag_read' );
   },
   // deviceready Event Handler

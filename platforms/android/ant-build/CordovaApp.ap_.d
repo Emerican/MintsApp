@@ -83,6 +83,7 @@
 /Users/vellameita/Shroom/platforms/android/assets/www/fonts/NotoSans-Italic.ttf \
 /Users/vellameita/Shroom/platforms/android/assets/www/fonts/NotoSans-Regular.ttf \
 /Users/vellameita/Shroom/platforms/android/assets/www/img/logo.png \
+/Users/vellameita/Shroom/platforms/android/assets/www/js/config.js \
 /Users/vellameita/Shroom/platforms/android/assets/www/js/immersive.js \
 /Users/vellameita/Shroom/platforms/android/assets/www/js/jquery-2.1.3.min.js \
 /Users/vellameita/Shroom/platforms/android/assets/www/js/jquery.serializeObject.js \
