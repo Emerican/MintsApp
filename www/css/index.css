@@ -1,9 +1,11 @@
  * {
      -webkit-tap-highlight-color: transparent;/*just in case*/
     }
-html,body
+html
 {
-    background-color:#69D2E7; /*deep purple 300*/
+  background-image: url('/img/mints_bg.png');
+  background-size: cover;
+  background-position: center;
 }
 body {
 
@@ -35,17 +37,13 @@ button
 
 section > button
 {
-  border:none;
-  background-color: rgba(255,255,255,0.2);
   margin:10px;
-  height:150px;
-  width:150px;
-}
-button.big
-{
-  width:300px;
-  height:80px;
-  font-size:18px;
+  background-color: white;
+  border-radius: 100%;
+  font-size: 16px;
+  height: 150px;
+  width: 150px;
+  vertical-align: top;
 }
 #main
 {
@@ -70,13 +68,18 @@ button.big
 /*TextFields*/
 input
 {
-  width:35%;
-  margin-left:auto;
-  margin-right:auto;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 7px;
+  color: white;
 }
 
 select{
-  width:35%;
+  width:50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 7px;
+  color: white;
 }
 
 #new_client_form{
@@ -85,7 +88,11 @@ select{
   padding-top:30px;
   width:100%;
 }
-
+.search_form,
+.search_field
+{
+  display: inline-block;
+}
 
 label,
 input,
@@ -106,6 +113,7 @@ label{
   width:70%;
   margin-bottom:8px;
   font-size:20px;
+  color: white;
 }
 select{
   font-size:20px;
@@ -120,13 +128,15 @@ textarea{
   margin-left:auto;
   margin-right:auto;
   font-size:20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 7px;
+  color: white;
 }
 
 .contents{
   border:none;
-  background-color: rgba(255,255,255,0.2);
-
-  width:45%;
+  width:90%;
   margin-left:auto;
   margin-right:auto;
   margin-bottom:25px;
@@ -140,14 +150,48 @@ textarea{
 
 .contents > ul > li{
   border:none;
+  display: inline-block;
 }
-.contents > ul > li > button{
-  margin-bottom:10px;
-  border:none;
-  background-color: rgba(255,255,255,0.6);
-  height:81px;
-  width:100%;
-  font-size:16px;
+.contents > ul > li > button
+{
+  margin:10px;
+  background-color: white;
+  border-radius: 100% 100% 0 100%;
+  font-size: 16px;
+  height: 100px;
+  width: 100px;
+  vertical-align: top;
+  position: relative;
+}
+ul li >button .price
+{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 14px;
+  color: #F26101;
+  padding: 1px 5px;
+}
+ul li >button .color_label
+{
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  height: 35px;
+  width: 35px;
+  border-radius: 100%;
+}
+ul li >button.color3 .color_label
+{
+  background-color:#218559;
+}
+ul li >button.color5 .color_label
+{
+  background-color:#06A2CB;
+}
+ul li >button.color7 .color_label
+{
+  background-color:#DD1E2F;
 }
 
 .contents > ul > li > span {
@@ -164,4 +208,24 @@ textarea{
   width:150px;
   visibility:hidden;
   display:none;
+}
+
+#main .open_bills button
+{
+  border-radius: 100% 100% 0;
+  font-size: 16px;
+  height: 100px;
+  width: 100px;
+  background-color: white;
+  position: relative;
+  margin: 10px;
+}
+#main .open_bills button .price
+{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 14px;
+  color: #F26101;
+  padding: 1px 5px;
 }

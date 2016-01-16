@@ -1,77 +1,34 @@
 window.Lang = {
   section_names: function( section )
   {
-    switch(section)
-    {
-      case "main":
-        return "Sākums"
-      break;
-      case "products":
-        return "Produkti"
-      break;
-      case "add_products":
-        return "Pievienot produktu"
-      break;
-      case "add_product_groups":
-        return "Pievienot produkta grupu"
-      break;
-      case "browse_product":
-        return "Produktu saraksts"
-      break;
-      case "browse_product_groups":
-        return "Produktu grupu saraksts"
-      break;
-      case "clients":
-        return "Lietotāji"
-      break;
-      case "add_clients":
-        return "Pievienot lietotāju"
-      break;
-      case "add_client_groups":
-        return "Pievienot lietotāju grupu"
-      break;
-      case "browse_clients":
-        return "Klientu saraksts"
-      break;
-      case "browse_client_groups":
-        return "Lietotāju grupu saraksts"
-      break;
-      case "settings":
-        return "Iestatījumi"
-      break;
-      case "reports":
-        return "Atskaites"
-      break;
-      case "new_order":
-        return "Jauns pasūtījums"
-      break;
-      case "edit_clients":
-        return "Labot klientu"
-      break;
-      case "browse_products":
-        return "Meklēt produktus"
-      break;
-      case "edit_products":
-        return "Labot produktus"
-      break;
-      case "edit_product_groups":
-        return "Labot produktu grupas"
-      break;
-      case "edit_client_groups":
-        return "Labot klientu grupas"
-      break;
-      case "browse_discounts":
-        return "Atlaides"
-      break;
-      case "edit_discounts":
-        return "Labot atlaides"
-      break;
-      case "add_discounts":
-        return "Pievienot atlaidi"
-      break;
 
-      default:
-        return section;
-    }
+    var values =
+    {
+      "main": "Sākums",
+      "products": "Produkti",
+      "add_products": "Pievienot produktu",
+      "add_product_groups": "Pievienot produkta grupu",
+      "browse_product": "Produktu saraksts",
+      "browse_product_groups": "Produktu grupu saraksts",
+      "clients": "Lietotāji",
+      "add_clients": "Pievienot lietotāju",
+      "add_client_groups": "Pievienot lietotāju grupu",
+      "browse_clients": "Klientu saraksts",
+      "browse_client_groups": "Lietotāju grupu saraksts",
+      "settings": "Iestatījumi",
+      "reports": "Atskaites",
+      "new_order": "Jauns pasūtījums",
+      "edit_order": "Labot pasūtījumu",
+      "edit_clients": "Labot klientu",
+      "browse_products": "Meklēt produktus",
+      "edit_products": "Labot produktus",
+      "edit_product_groups": "Labot produktu grupas",
+      "edit_client_groups": "Labot klientu grupas",
+      "browse_discounts": "Atlaides",
+      "edit_discounts": "Labot atlaides",
+      "add_discounts": "Pievienot atlaidi",
+    };
+
+    return values[section] ? values[section] : section;
   }
 }

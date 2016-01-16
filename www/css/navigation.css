@@ -1,7 +1,7 @@
 nav{
   z-index:99;
 /*  background-color:#48646C; */
-background-color:#FA6900; /*deep purple 500*/
+  background-color:#4F637C;
   position:fixed;
   width:100%;
   top:0;
@@ -9,14 +9,22 @@ background-color:#FA6900; /*deep purple 500*/
   height: 75px;
   box-shadow: 0px 6px 9px 1px rgba(0,0,0,0.34);
 }
+.notice_wrap
+{
+  position: fixed;
+  top:0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
 .notice
 {
   background-color: #c8293f;
   position: absolute;
-  top: 0;
+  top: -100px;
   left: 5%;
   right: 5%;
-  height: 75px;
+  height: auto;
   -webkit-transition: top 0.1s ease-in-out 0s;
   transition: top 0.1s ease-in-out 0s;
   font-size: 50px;
@@ -25,7 +33,7 @@ background-color:#FA6900; /*deep purple 500*/
 }
 .show_notice .notice
 {
-  top: 150%;
+  top: 150px;
 }
 nav .left
 {

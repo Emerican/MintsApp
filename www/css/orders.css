@@ -1,0 +1,137 @@
+#edit_order,
+#new_order
+{
+  margin-top:0px;
+}
+
+#edit_order .contents,
+#new_order .contents
+{
+  margin-bottom:-10px;
+  border-left:none;
+  border-top:none;
+  border-bottom:none;
+  border-radius:0px;
+ width:100%;
+}
+
+#shop_back{
+  margin-top:10px;
+  float:left;
+  position:fixed;
+  bottom:0;
+}
+
+.shop_client_name{
+  font-weight:bold;
+  font-size:20px;
+}
+
+.discount{
+  margin-right:10px;
+}
+
+#edit_order .section_search input,
+#new_order .section_search input
+{
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 7px;
+  color: white;
+}
+#edit_order .categories,
+#new_order .categories{
+  float:left;
+  width:10%;
+}
+#edit_order .categories .tab_buttons  button,
+#new_order .categories .tab_buttons  button
+{
+  margin-top:5px;
+  background-color: #32446B;
+  margin-right: 4px;
+  border-radius: 100%;
+  font-size: 16px;
+  height: 100px;
+  width: 100px;
+}
+
+#edit_order .products,
+#new_order .products
+{
+  border-left:none;
+  border-top:none;
+  width:50%;
+  height:100%;
+  float:left;
+}
+#edit_order .products ul,
+#new_order .products ul
+{
+  list-style:none;
+  padding-top: 27px;
+  padding:0;
+  margin-right:20px;
+}
+#edit_order .products ul li,
+#new_order .products ul li
+{
+  display: inline-block;
+  margin-left:22px;
+  margin-bottom:20px;
+  vertical-align:top;
+  list-style:none;
+}
+#edit_order .products ul li >button,
+#new_order .products ul li >button
+{
+  border-radius: 100% 100% 0;
+  font-size: 16px;
+  height: 100px;
+  width: 100px;
+  background-color: white;
+  position: relative;
+}
+
+#edit_order .current_bill,
+#new_order .current_bill
+{
+  margin-top:10px;
+  float:left;
+  width:40%;
+}
+
+#edit_order .current_bill  table,
+#new_order .current_bill  table
+{
+  border-collapse: collapse;
+  width: 100%;
+}
+#edit_order .current_bill  table td,
+#new_order .current_bill  table td
+{
+  border-bottom: 1px solid gray;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 10px 10px;
+  text-align: left;
+  color: white;
+}
+#edit_order .current_bill .total,
+#new_order .current_bill .total
+{
+  font-size:18px;
+}
+
+#edit_order .current_bill > form > button,
+#new_order .current_bill > form > button
+{
+  vertical-align: top;
+  margin-top:20px;
+  background-color: #f38630;
+  margin-right: 4px;
+  border-radius: 100%;
+  font-size: 16px;
+  height: 100px;
+  width: 100px;
+}

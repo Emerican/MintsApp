@@ -1,0 +1,45 @@
+<div class="products">
+  <button id="shop_back" action="back"><span class="fa fa-arrow-left fa-5x "></span></button>
+  <div class="contents">
+    <div class="section_search">
+      <input type="search" name="section_search">
+    </div>
+    <div class="tabs">
+    </div>
+  </div>
+</div>
+
+<div class="current_bill">
+  <form id="{{action}}_bill_form" action="{{action}}/bills">
+    <input type="hidden" name="uuid">
+    <div class="client_data">
+
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <td>Qty</td>
+          <td>Name</td>
+          <td>Price</td>
+          <td>Discount</td>
+        </tr>
+      </thead>
+      <tbody class="product_list">
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2">Total</td>
+          <td class="total" colspan="2"><span class="amount"></span> € </td>
+        </tr>
+      </tfoot>
+    </table>
+    <input type="hidden" name="sub_action">
+    <button action="{{action}}/bills" class="submit" name="sub_action" value="cash">Maksāt ar skaidrā</button>
+    <button action="{{action}}/bills" class="submit" name="sub_action" value="card">Maksāt ar karti</button>
+    <button action="{{action}}/bills" class="submit" name="sub_action" value="save">Saglabāt</button>
+  </form>
+</div>
+<div class="categories">
+  <div class="tab_buttons">
+  </div>
+</div>

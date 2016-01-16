@@ -1,8 +1,14 @@
+
+<section id="clients">
+  <button action="section/browse_clients">Meklēt klientus</button>
+  <button action="section/browse_client_groups">Meklēt klientu grupas</button>
+</section>
+
 <section id="browse_clients">
-  <button class="big" action="section/add_clients">Pievienot lietotāju</button>
-  <form action="search/clients">
-    <div class="field">
-      <label for="search_name">Meklēt lietotāju:</label>
+  <button action="section/add_clients">Jauns klients</button>
+  <form class="search_form" action="search/clients">
+    <div class="search_field">
+      <label for="search_name">Meklēt klientu:</label>
       <input type="search" id="search_client" name="search">
       <button action="search/clients" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
     </div>

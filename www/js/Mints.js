@@ -18,12 +18,12 @@ jQuery(function()
     clients:['client_groups'],
     payments:['clients'],
     products:['product_groups'],
-    purchases:['bills'],
+    purchases:['bills','products'],
     discounts: ['clients','client_groups','products','product_groups']
   };
 
   var has_one = {
-    purchases:['products']
+    // purchases:[]
   };
 
   var resource_params = {};
@@ -31,12 +31,12 @@ jQuery(function()
 
   resources.forEach(function(res)
   {
-    resource_params[res] = ['uuid','created_at','updated_at','synced'];
+    resource_params[res] = ['uuid','created_at','updated_at','synced','syncing'];
     resource_search[res] = [];
   });
 
   resource_params.bills = resource_params.bills.concat(
-    ['client_id']
+    ['client_id','closed','paid_with']
   );
   resource_params.client_groups = resource_params.client_groups.concat(
     ['name']
@@ -79,6 +79,68 @@ jQuery(function()
     data_store: {},
     active_transfers: [],
     utilities:{
+      weekday: function()
+      {
+        var wkday = new Date().getDay();
+        return wkday == 0 ? 7 : wkday;
+      },
+      sort_by_name: function(arr)
+      {
+        if ( arr[0].name )
+        {
+          return arr.sort(function(a,b)
+          {
+            if (a.name > b.name)
+            {
+              return 1;
+            }
+            if (a.name < b.name)
+            {
+              return -1;
+            }
+            return 0;
+
+          });
+        }
+        else
+        {
+          return arr;
+        }
+      },
+      resource_list: function( resource_name, resources )
+      {
+        var items = resources || Mints[resource_name].get();
+
+        var html_output = "";
+        Mints.u.sort_by_name(items).forEach(function(item)
+        {
+          var resource_data = "";
+          var color_class= "";
+          switch ( resource_name )
+          {
+            case "discounts":
+              resource_data = item.client_group().name + " " + item.product_group().name + " " + item.amount;
+            break;
+            case "products":
+
+              if ( /0,3|0.3/i.test(item.name) ){ color_class = "color3" }
+              if ( /0,5|0.5/i.test(item.name) ){ color_class = "color5" }
+              if ( /0,7|0.7/i.test(item.name) ){ color_class = "color7" }
+              resource_data = '<div class="name">'+ item.name +'</div><div class="price">€'+ item.price +'</div><div class="color_label"></div>';
+            break;
+            case "client_groups":
+            case "product_groups":
+              resource_data = item.name;
+            break;
+            case "clients":
+              resource_data = item.name + " " + item.surname;
+            break;
+          }
+          html_output +=  '<li><button class="'+ color_class +'" data-target="' + item.uuid + '" action="section/edit_' + resource_name + '">' + resource_data + '</button>' + "</li>";
+        });
+
+        return "<ul>" + html_output + "</ul>";
+      },
       discount: function( product, client )
       {
         if( product.special_offer )
@@ -187,6 +249,7 @@ jQuery(function()
             if( type == 'post' )
             {
               Mints.data_store[resource][id].synced = true;
+              Mints.data_store[resource][id].syncing = false;
               Mints.data_store[resource][id].new = false;
             }
             callback( json );
@@ -194,6 +257,11 @@ jQuery(function()
           },
           error:function (xhr, ajaxOptions, thrownError)
   				{
+            if( type == 'post' )
+            {
+              Mints.data_store[resource][id].syncing = false;
+            }
+
             Mints.u.notice("Nevar pieslēgties serverim. Pārbaudiet interneta savienojumu!",5000);
   				}
         });
@@ -470,8 +538,9 @@ jQuery(function()
       for( var id in ds )
       {
 
-        if( !ds[id].synced )
+        if( !ds[id].synced && !ds[id].syncing )
         {
+          ds[id].syncing = true;
           Mints.u.connection( self.class_name, id, "post", function()
           {
             self.trigger('sync')

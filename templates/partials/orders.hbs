@@ -1,17 +1,7 @@
 <section id="new_order">
-  <div class="left">
-    <button id="shop_back" action="back"><span class="fa fa-arrow-left fa-5x "></span></button>
-    <div class="contents"></div>
-  </div>
+  {{> order_form action="new" }}
+</section>
 
-  <div class="right">
-    <form action="new/bills">
-      <div class="client_data"></div>
-      <div class="product_list"></div>
-      <br>
-      <div class="total"><span class="amount"></span> € </div>
-
-      <button action="new/bills" class="submit">Izveidot rēķinu</button>
-    </form>
-  </div>
+<section id="edit_order">
+  {{> order_form action="update" }}
 </section>
