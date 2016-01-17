@@ -3,11 +3,13 @@ module.exports = [
     {
         "file": "plugins/com.chariotsolutions.nfc.plugin/www/phonegap-nfc.js",
         "id": "com.chariotsolutions.nfc.plugin.NFC",
+        "pluginId": "com.chariotsolutions.nfc.plugin",
         "runs": true
     },
     {
         "file": "plugins/com.toluhta.immersify/www/ImmersiveModePlugin.js",
         "id": "com.toluhta.immersify.Immersify",
+        "pluginId": "com.toluhta.immersify",
         "clobbers": [
             "Immersify"
         ]
@@ -15,6 +17,7 @@ module.exports = [
     {
         "file": "plugins/org.apache.cordova.camera/www/CameraConstants.js",
         "id": "org.apache.cordova.camera.Camera",
+        "pluginId": "org.apache.cordova.camera",
         "clobbers": [
             "Camera"
         ]
@@ -22,6 +25,7 @@ module.exports = [
     {
         "file": "plugins/org.apache.cordova.camera/www/CameraPopoverOptions.js",
         "id": "org.apache.cordova.camera.CameraPopoverOptions",
+        "pluginId": "org.apache.cordova.camera",
         "clobbers": [
             "CameraPopoverOptions"
         ]
@@ -29,6 +33,7 @@ module.exports = [
     {
         "file": "plugins/org.apache.cordova.camera/www/Camera.js",
         "id": "org.apache.cordova.camera.camera",
+        "pluginId": "org.apache.cordova.camera",
         "clobbers": [
             "navigator.camera"
         ]
@@ -36,6 +41,7 @@ module.exports = [
     {
         "file": "plugins/org.apache.cordova.camera/www/CameraPopoverHandle.js",
         "id": "org.apache.cordova.camera.CameraPopoverHandle",
+        "pluginId": "org.apache.cordova.camera",
         "clobbers": [
             "CameraPopoverHandle"
         ]

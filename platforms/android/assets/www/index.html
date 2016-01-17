@@ -10,17 +10,19 @@
   <link rel="stylesheet" href="css/font-awesome-4.3.0/css/font-awesome.min.css"/>
   <link rel="stylesheet" type="text/css" href="css/index.css" />
   <link rel="stylesheet" type="text/css" href="css/navigation.css"/>
-  <link rel="stylesheet" type="text/css" href="css/shop.css"/>
-  <link rel="stylesheet" type="text/css" href="css/shop_left.css"/>
-  <link rel="stylesheet" type="text/css" href="css/shop_right.css"/>
+  <link rel="stylesheet" type="text/css" href="css/orders.css"/>
 
   <title>Shroom</title>
 </head>
 
 <body class="main">
 
+  <div class="notice_wrap">
+    <div class="notice info"><div class="text"></div></div>
+    <div class="notice debug"><div class="text"></div></div>
+    <div class="notice alert"><div class="text"></div></div>
+  </div>
   <nav>
-    <div class="notice"><div class="text"></div></div>
     <div class="left">
       <button action="back"><span class="fa fa-arrow-left fa-5x "></span></button>
       <button action="section/main"><span class="fa fa-home fa-5x"></span></button>
@@ -31,20 +33,16 @@
     <div class="title">title</div>
   </nav>
   <section id="main">
-  
     <button action="section/products"><span class="fa fa-list fa-5x"></span></button>
+    <button action="section/clients"><span class="fa fa-users fa-5x"></span></button>
     <button action="section/browse_discounts"><span class="fa-5x">%</span></button>
-    <br>
-    <button action="section/browse_clients"><span class="fa fa-user fa-5x"></span></button>
-    <button action="section/browse_client_groups"><span class="fa fa-users fa-5x"></span></button>
-    <br>
-    <button action="section/reports"><span class="fa fa-bar-chart fa-5x"></span></button>
     <button action="section/new_order"><span class="fa fa-shopping-cart fa-5x"></span></button>
-  
-  
+    <h1>Atvērtie rēķini</h1>
+    <div class="open_bills">
+    </div>
   </section>
   <section id="browse_discounts">
-    <button class="big" action="section/add_discounts">Pievienot Atlaidi</button>
+    <button action="section/add_discounts">Pievienot Atlaidi</button>
     <div class="contents"></div>
   </section>
   
@@ -118,15 +116,14 @@
     </form>
   </section>
   <section id="products">
-    <button class="big" action="section/browse_products">Meklēt produktus</button>
-    <br>
-    <button class="big" action="section/browse_product_groups">Meklēt produkta grupu</button>
+    <button action="section/browse_products">Meklēt produktus</button>
+    <button action="section/browse_product_groups">Meklēt produkta grupu</button>
   </section>
   
   <section id="browse_products">
-    <button class="big" action="section/add_products">Pievienot produktu</button>
-    <form action="search/products">
-      <div class="field">
+    <button action="section/add_products">Jauns produktu</button>
+    <form class="search_form" action="search/products">
+      <div class="search_field">
         <label for="search_name">Meklēt produktus:</label>
         <input type="search" id="search_product" name="search">
         <button action="search/products" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
@@ -221,7 +218,7 @@
     </form>
   </section>
   <section id="browse_product_groups">
-    <button class="big" action="section/add_product_groups">Pievienot produkta grupu</button>
+    <button action="section/add_product_groups">Jauna produkta grupa</button>
     <div class="contents"></div>
   </section>
   
@@ -246,11 +243,17 @@
       <button action="update/product_groups" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
     </form>
   </section>
+  
+  <section id="clients">
+    <button action="section/browse_clients">Meklēt klientus</button>
+    <button action="section/browse_client_groups">Meklēt klientu grupas</button>
+  </section>
+  
   <section id="browse_clients">
-    <button class="big" action="section/add_clients">Pievienot lietotāju</button>
-    <form action="search/clients">
-      <div class="field">
-        <label for="search_name">Meklēt lietotāju:</label>
+    <button action="section/add_clients">Jauns klients</button>
+    <form class="search_form" action="search/clients">
+      <div class="search_field">
+        <label for="search_name">Meklēt klientu:</label>
         <input type="search" id="search_client" name="search">
         <button action="search/clients" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
       </div>
@@ -277,9 +280,12 @@
         <label for="new_clients_email">E-Pasts:</label>
         <input type="email" name="email"  id="new_clients_email">
       </div>
-      <div class="field">
-        <label for="new_clients_card_id">ID:</label>
-        <input class="nfc" type="text" name="card_id" id="new_clients_card_id" required="true">
+      <div class="field nfc">
+        <label for="new_clients_card_id">ID karte:</label>
+        <span class="fa fa-cog fa-5x"></span>
+        <input type="hidden" name="card_id" id="new_clients_card_id">
+        <div class="input_val">
+        </div>
       </div>
       <div class="field">
         <label for="new_clients_client_group_id">Grupa:</label>
@@ -315,9 +321,12 @@
         <label for="update_clients_email">E-Pasts:</label>
         <input type="email" name="email"  id="update_clients_email">
       </div>
-      <div class="field">
-        <label for="update_clients_card_id">ID:</label>
-        <input class="nfc" type="text" name="card_id" id="update_clients_card_id" required="true">
+      <div class="field nfc">
+        <label for="update_clients_card_id">ID karte:</label>
+        <span class="fa fa-cog fa-5x"></span>
+        <input type="hidden" name="card_id" id="update_clients_card_id">
+        <div class="input_val">
+        </div>
       </div>
       <div class="field">
         <label for="update_clients_client_group_id">Grupa:</label>
@@ -334,7 +343,7 @@
     </form>
   </section>
   <section id="browse_client_groups">
-    <button class="big" action="section/add_client_groups">Pievienot grupu</button>
+    <button action="section/add_client_groups">Pievienot grupu</button>
     <div class="contents"></div>
   </section>
   
@@ -361,20 +370,98 @@
   </section>
 
   <section id="new_order">
-    <div class="left">
+    <div class="products">
       <button id="shop_back" action="back"><span class="fa fa-arrow-left fa-5x "></span></button>
-      <div class="contents"></div>
+      <div class="contents">
+        <div class="section_search">
+          <input type="search" name="section_search">
+        </div>
+        <div class="tabs">
+        </div>
+      </div>
     </div>
-  
-    <div class="right">
-      <form action="new/bills">
-        <div class="client_data"></div>
-        <div class="product_list"></div>
-        <br>
-        <div class="total"><span class="amount"></span> € </div>
-  
-        <button action="new/bills" class="submit">Izveidot rēķinu</button>
+    
+    <div class="current_bill">
+      <form id="new_bill_form" action="new/bills">
+        <input type="hidden" name="uuid">
+        <div class="client_data">
+    
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <td>Qty</td>
+              <td>Name</td>
+              <td>Price</td>
+              <td>Discount</td>
+            </tr>
+          </thead>
+          <tbody class="product_list">
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2">Total</td>
+              <td class="total" colspan="2"><span class="amount"></span> € </td>
+            </tr>
+          </tfoot>
+        </table>
+        <input type="hidden" name="sub_action">
+        <button action="new/bills" class="submit" name="sub_action" value="cash">Maksāt ar skaidrā</button>
+        <button action="new/bills" class="submit" name="sub_action" value="card">Maksāt ar karti</button>
+        <button action="new/bills" class="submit" name="sub_action" value="save">Saglabāt</button>
       </form>
+    </div>
+    <div class="categories">
+      <div class="tab_buttons">
+      </div>
+    </div>
+  </section>
+  
+  <section id="edit_order">
+    <div class="products">
+      <button id="shop_back" action="back"><span class="fa fa-arrow-left fa-5x "></span></button>
+      <div class="contents">
+        <div class="section_search">
+          <input type="search" name="section_search">
+        </div>
+        <div class="tabs">
+        </div>
+      </div>
+    </div>
+    
+    <div class="current_bill">
+      <form id="update_bill_form" action="update/bills">
+        <input type="hidden" name="uuid">
+        <div class="client_data">
+    
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <td>Qty</td>
+              <td>Name</td>
+              <td>Price</td>
+              <td>Discount</td>
+            </tr>
+          </thead>
+          <tbody class="product_list">
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2">Total</td>
+              <td class="total" colspan="2"><span class="amount"></span> € </td>
+            </tr>
+          </tfoot>
+        </table>
+        <input type="hidden" name="sub_action">
+        <button action="update/bills" class="submit" name="sub_action" value="cash">Maksāt ar skaidrā</button>
+        <button action="update/bills" class="submit" name="sub_action" value="card">Maksāt ar karti</button>
+        <button action="update/bills" class="submit" name="sub_action" value="save">Saglabāt</button>
+      </form>
+    </div>
+    <div class="categories">
+      <div class="tab_buttons">
+      </div>
     </div>
   </section>
   <section id="reports">
@@ -390,13 +477,15 @@
   <script type="text/javascript" src="js/phonegap-nfc.js"></script>
 
   <!-- classes -->
+  <script type="text/javascript" src="js/config.js"></script>
   <script type="text/javascript" src="js/Nfc.js"></script>
   <script type="text/javascript" src="js/Mints.js"></script>
 
   <!-- client script -->
+  <script type="text/javascript" src="js/buttons.js"></script>
+  <script type="text/javascript" src="js/data_load.js"></script>
   <script type="text/javascript" src="js/lang.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
-  <script type="text/javascript" src="js/script2.js"></script>
 
 
 
