@@ -13,7 +13,7 @@ window.Nfc = {
   },
   debug: function()
   {
-    Nfc.tag = "b8d56400";
+    Nfc.tag = "fcd06400";
     Nfc.trigger( 'tag_read' );
   },
   // deviceready Event Handler
@@ -33,6 +33,7 @@ window.Nfc = {
   {
     Nfc.tag = nfc.bytesToHexString(nfcEvent.tag.id);
     Nfc.trigger( 'tag_read' );
+    Mints.u.notice( "Karte Nolasīta" );
   },
   events: {},
   on: function( type, handler )
@@ -59,7 +60,7 @@ window.Nfc = {
 	},
   unbind: function( type )
   {
-    this.events[type] == null;
+    this.events[type] = [];
   },
   tag: null
 

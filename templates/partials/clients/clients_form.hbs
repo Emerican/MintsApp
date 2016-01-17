@@ -16,9 +16,12 @@
     <label for="{{action}}_clients_email">E-Pasts:</label>
     <input type="email" name="email"  id="{{action}}_clients_email">
   </div>
-  <div class="field">
-    <label for="{{action}}_clients_card_id">ID:</label>
-    <input class="nfc" type="text" name="card_id" id="{{action}}_clients_card_id" required="true">
+  <div class="field nfc">
+    <label for="{{action}}_clients_card_id">ID karte:</label>
+    <span class="fa fa-cog fa-5x"></span>
+    <input type="hidden" name="card_id" id="{{action}}_clients_card_id">
+    <div class="input_val">
+    </div>
   </div>
   <div class="field">
     <label for="{{action}}_clients_client_group_id">Grupa:</label>

@@ -24,3 +24,5 @@ platforms/android/*
 npm-debug.log
 
 www/index.html
+
+platforms/android/*

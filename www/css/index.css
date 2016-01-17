@@ -3,7 +3,8 @@
     }
 html
 {
-  background-image: url('/img/mints_bg.png');
+  background-color: gray;
+  background-image: url('../img/mints_bg.png');
   background-size: cover;
   background-position: center;
 }
@@ -228,4 +229,7 @@ ul li >button.color7 .color_label
   font-size: 14px;
   color: #F26101;
   padding: 1px 5px;
+}
+input[name="card_id"]
+{
 }

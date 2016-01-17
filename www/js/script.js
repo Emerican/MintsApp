@@ -40,23 +40,6 @@ jQuery(function()
 
   };
 
-
-  var trigger_action = function( action, data_target, original_target )
-  {
-    var action_name = action.split('/')[0];
-    Nfc.unbind('tag_read');
-    if (button_actions[action_name])
-    {
-      var target_section = action.split('/')[1] || original_target.parents("section").attr("id");
-      button_actions[action_name]( target_section , data_target );
-      return false;
-    }
-    else
-    {
-      return true;
-    }
-  }
-
   container.on('click', '.product_list .purchase_item', function()
   {
     var target = jQuery(this);
@@ -114,7 +97,7 @@ jQuery(function()
   {
     var target = jQuery(this);
 
-    return trigger_action( target.attr('action'), target.attr('data-target'), target );
+    return Mints.u.trigger_action( target.attr('action'), target.attr('data-target'), target );
   });
 
   container.on('submit', 'form',function(e)
@@ -135,7 +118,7 @@ jQuery(function()
           {
             Mints.u.notice( "Izveidots" );
             Mints[resource_name].unbind('sync');
-            trigger_action( "section/new_order" );
+            Mints.u.trigger_action( "section/new_order" );
           });
 
           var bill = Mints[resource_name].new( {
@@ -172,7 +155,7 @@ jQuery(function()
           {
             Mints.u.notice( "Izveidots" );
             Mints[resource_name].unbind('sync');
-            trigger_action( "section/browse_" + resource_name );
+            tMints.u.rigger_action( "section/browse_" + resource_name );
             form.find('input, textarea').val("");
             form.find('img').remove();
           });
@@ -190,7 +173,7 @@ jQuery(function()
           {
             Mints.u.notice( "Saglabāts" );
             Mints[resource_name].unbind('sync');
-            trigger_action( "section/main" );
+            Mints.u.trigger_action( "section/main" );
           });
           Mints[resource_name].get(resource_id).set( form_data );
 
@@ -210,9 +193,9 @@ jQuery(function()
           }
           else
           {
-            if( form_data.purchase_self_id[i] )
+            if( form_data.purchase_self_id )
             {
-                Mints.purchases.get( form_data.purchase_self_id[i] ).set( { product_id:form_data.product_id, count: form_data.count, bill_id: form_data.uuid } );
+                Mints.purchases.get( form_data.purchase_self_id ).set( { product_id:form_data.product_id, count: form_data.count, bill_id: form_data.uuid } );
             }
             else
             {
@@ -238,7 +221,7 @@ jQuery(function()
           {
             Mints.u.notice( "Saglabāts" );
             Mints[resource_name].unbind('sync');
-            trigger_action( "section/browse_" + resource_name );
+            Mints.u.trigger_action( "section/browse_" + resource_name );
           });
           Mints[resource_name].get(resource_id).set( form_data );
         }
@@ -262,6 +245,21 @@ jQuery(function()
   {
     var target = jQuery(this);
     target.parents("form").find('input[name="sub_action"]').val( target.attr("value") );
+  });
+
+  container.on('click', '.nfc', function()
+  {
+    var target = jQuery(this);
+    Mints.u.notice( "Gatavs kartei" );
+
+    Nfc.unbind('tag_read');
+
+    Nfc.on('tag_read', function()
+    {
+      target.find("input").val( Nfc.tag );
+      target.find(".input_val").html( Nfc.tag );
+      Nfc.unbind('tag_read');
+    });
   });
 
   setTimeout(function(argument) {

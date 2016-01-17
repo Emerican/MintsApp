@@ -19,9 +19,12 @@ nav{
 }
 .notice
 {
-  background-color: #c8293f;
+  background-color: #DFF0D8;
+  color: #3C763D;
+  border: 1px solid #3C763D;
+  border-radius: 7px;
   position: absolute;
-  top: -100px;
+  top: -150px;
   left: 5%;
   right: 5%;
   height: auto;
@@ -29,11 +32,30 @@ nav{
   transition: top 0.1s ease-in-out 0s;
   font-size: 50px;
   text-align: center;
-  line-height: 75px;
+  line-height: 1.4em;
+  padding: 5px 0 2px;
 }
-.show_notice .notice
+.notice.alert
 {
-  top: 150px;
+  background-color: #F2DEDE;
+  color: #A94341;
+  border: 1px solid #A94341;
+}
+.notice.debug
+{
+  background-color: #FCF8E3;
+  color: #8A6D3B;
+  border: 1px solid #8A6D3B;
+}
+.notice.blue
+{
+  background-color: #D9EDF7;
+  color: #30708F;
+  border: 1px solid #30708F;
+}
+.notice.show_notice
+{
+  top: 100px;
 }
 nav .left
 {

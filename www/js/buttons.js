@@ -1,5 +1,6 @@
 var section_change = function(section_name, data_target)
 {
+  Nfc.unbind('tag_read');
   var address = "#"+section_name+( data_target ? "/"+data_target : "" );
   Mints.current_section = section_name;
   Mints.navigation.trigger('change');

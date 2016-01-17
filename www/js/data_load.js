@@ -118,15 +118,23 @@ var data_load_actions = {
   {
     var bill_buttons = open_bills().map(function(b)
     {
+      var client = b.client();
+      var product_list = b.purchases().map(function(p)
+      {
+        var product = Mints.products.get( p.product_id );
+        return product.name;
 
-      total_price = ( b.purchases().map(function(p)
+      });
+      var bill_name = client ? client.name + " " + client.surname : "Rēķins";
+      var total_price = ( b.purchases().map(function(p)
       {
         var product = Mints.products.get( p.product_id );
         return parseFloat( product.price ) * 100 * p.count;
 
       }).reduce(function(pv, cv) { return pv + cv; }, 0) ) /100;
 
-      return '<button action="section/edit_order" data-target="' + b.uuid + '"><div class="name">bill</div><div class="price">€'+total_price+'</div></button>'
+
+      return '<button action="section/edit_order" data-target="' + b.uuid + '"><div class="name">'+ bill_name +'</div><div class="price">€'+total_price+'</div></button>'
     });
     section.find('.open_bills').html( bill_buttons.join("") );
   },
@@ -161,10 +169,10 @@ var data_load_actions = {
     Nfc.on('tag_read', function()
     {
       var client = Mints.clients.search_by_card( Nfc.tag );
-
-      trigger_action("section/edit_clients", client.uuid);
-
-      Nfc.unbind('tag_read');
+      if( client )
+      {
+        Mints.u.trigger_action("section/edit_clients", client.uuid);
+      }
     });
   },
   browse_client_groups: function(section)
@@ -193,7 +201,7 @@ var data_load_actions = {
   {
     section.find('.client_data, .product_list, .amount').html("");
     Mints.navigation.hide();
-    section.find('.client_data').html('<div id="client"><span class="shop_client_name">Tims Mints' + '<img id="shop_avatar" width="85px" height="100px"src="img/logo.png"></span></div>');
+    section.find('.client_data').html('<div id="client"><span class="shop_client_name"> Tims Mints <img id="shop_avatar" class="shop_avatar" src="img/logo.png"></span></div>');
 
     var categories = section.find('.categories');
     var content = section.find('.contents');
@@ -203,26 +211,32 @@ var data_load_actions = {
 
     section.find('.categories .tab_buttons button:first-child').trigger("click");
   },
-  new_order: function(section)
+  be_ready_for_client_card: function( section )
   {
-    this.order_common( section );
-
+    var self = this;
     Nfc.on('tag_read', function()
     {
       var client = Mints.clients.search_by_card( Nfc.tag );
       if(client)
       {
-        this.add_client(section, client);
+        self.add_client(section, client);
+        Nfc.unbind('tag_read');
       }
 
-      Nfc.unbind('tag_read');
     });
+  },
+  new_order: function(section)
+  {
+
+    this.order_common( section );
+    this.be_ready_for_client_card( section );
+
   },
   add_client: function(section, client)
   {
     section.find('img').remove();
     section.find('avatar_path').remove();
-    section.find('.client_data').html('<input type="hidden" name="client_id" value="'+ client.uuid +'"><span class="shop_client_name">'+ client.name + ' ' + client.surname  +' <img id="shop_avatar" width="150px" height="200"src="'+ client.avatar_path + '"></span>');
+    section.find('.client_data').html('<input type="hidden" name="client_id" value="'+ client.uuid +'"><span class="shop_client_name">'+ client.name + ' ' + client.surname  +' <img id="shop_avatar" class="shop_avatar" src="'+ client.avatar_path + '"></span>');
     button_actions.update_product_discounts_in_bill();
   },
   edit_order: function(section)
@@ -230,22 +244,25 @@ var data_load_actions = {
     this.order_common( section );
     var bill = Mints.bills.get( section.attr('data-source') );
     var order_form = section.find('form');
-    var client_id = order_form.find('input[name="client_id"]').val();
+    var client = bill.client();
+
+    if(client)
+    {
+      this.add_client(section, client);
+    }
+    else
+    {
+      this.be_ready_for_client_card( section );
+    }
+
     populate_form( section, bill );
-
-
 
     bill.purchases().forEach(function(p)
     {
       var product = Mints.products.get( p.product_id );
-
-
-      var client = client_id ? Mints.clients.get(client_id) : null;
       product.discount = Mints.u.discount( product, client );
       order_form.find('.product_list').append( product_template( product, p.count, p.uuid ) );
     });
-
-
 
     order_form.find('.total .amount').html( Mints.u.calculate_total( order_form ) );
   },

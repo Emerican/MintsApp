@@ -76,9 +76,24 @@ jQuery(function()
 
   // bind event handlers to resources
   window.Mints = {
+    debug: true,
     data_store: {},
     active_transfers: [],
     utilities:{
+      trigger_action: function( action, data_target, original_target )
+      {
+        var action_name = action.split('/')[0];
+        if (button_actions[action_name])
+        {
+          var target_section = action.split('/')[1] || original_target.parents("section").attr("id");
+          button_actions[action_name]( target_section , data_target );
+          return false;
+        }
+        else
+        {
+          return true;
+        }
+      },
       weekday: function()
       {
         var wkday = new Date().getDay();
@@ -195,16 +210,23 @@ jQuery(function()
       {
         alert(msg);
       },
-      notice: function(msg, time)
+      notice: function(msg, level, time)
       {
+        level = level || "info";
         time = time || 1000;
-        container.addClass( "show_notice" );
-        container.find('.notice .text').html( msg );
-        setTimeout(function()
+
+        if( level != "debug" || Mints.debug )
         {
-          container.removeClass( "show_notice" );
-          container.find('.notice .text').html( "" );
-        }, time);
+          var notice = container.find(".notice."+level);
+          notice.addClass( "show_notice" );
+          notice.find('.text').html( msg );
+          setTimeout(function()
+          {
+            notice.removeClass( "show_notice" );
+            // notice.find('.text').html( "" );
+          }, time);
+        }
+
       },
       singular:function( name )
       {
@@ -262,7 +284,7 @@ jQuery(function()
               Mints.data_store[resource][id].syncing = false;
             }
 
-            Mints.u.notice("Nevar pieslēgties serverim. Pārbaudiet interneta savienojumu!",5000);
+            Mints.u.notice("Nevar pieslēgties serverim. Pārbaudiet interneta savienojumu!", "alert", 5000);
   				}
         });
         Mints.active_transfers.push( transfer );
@@ -352,21 +374,9 @@ jQuery(function()
           belongs_to[res].forEach(function(rel)
           {
             data[Mints.u.singular(rel)] = function(){
-
-              var result = null;
-              for( var i in Mints.data_store[rel] )
-              {
-                var item = Mints.data_store[rel][i];
-
-                if(resource[ Mints.u.singular(rel) + "_id" ] == item.id )
-                {
-                  result = Mints.u.create_relations(Mints[rel],item);
-                  break;
-                }
-
-              };
-
-              return result;
+              var rel_res_id = this[ Mints.u.singular(rel) + "_id" ];
+              var item = Mints.data_store[rel][ rel_res_id ];
+              return item ? Mints.u.create_relations(Mints[rel],item) : null;
             };
           });
         }
