@@ -233,3 +233,56 @@ ul li >button.color7 .color_label
 input[name="card_id"]
 {
 }
+
+.calculator
+{
+  display: none;
+  background-color: gray;
+  border-radius: 10px;
+  box-sizing: border-box;
+  left: 50%;
+  margin-left: -300px;
+  padding: 30px 25px;
+  position: fixed;
+  top: 50px;
+  width: 620px;
+  z-index: 99;
+}
+.calculator .status
+{
+  width: 100%;
+}
+
+.calculator button
+{
+  border: 3px solid;
+  border-radius: 10px;
+  font-size: 38px;
+  margin-bottom: 10px;
+  padding: 10px 0;
+  width: 100px;
+}
+.calculator .actions button
+{
+  padding: 25px 0;
+  width: 120px;
+}
+
+.calculator > div
+{
+  float: left;
+  margin-left: 20px;
+}
+.calculator .numpad,
+.calculator .status
+{
+  margin-left: 0;
+}
+.calculator .status .col_left
+{
+  float: left;
+}
+.calculator .status .col_right
+{
+  float: right;
+}

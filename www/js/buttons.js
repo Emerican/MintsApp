@@ -32,6 +32,57 @@ var product_template = function(p, count, purchase_id)
 };
 
 var button_actions = {
+  calculator: function(action, value)
+  {
+    var calculator = jQuery(".calculator");
+    var input = calculator.find(".amount_input");
+    switch (action) {
+      case "add":
+        var current_val = input.val();
+        if ( /\./.test(current_val) && (value == "." || current_val.split(".")[1].length > 1) )
+        {
+          return;
+        }
+        input.val( current_val  + "" + value );
+        calculator.trigger("change");
+      break;
+      case "overwrite":
+        input.val( value );
+        calculator.trigger("change");
+      break;
+      case "backspace":
+        var str = input.val();
+        input.val( str.substring(0, str.length - 1) );
+        calculator.trigger("change");
+      break;
+      case "exact":
+        input.val( calculator.find(".amount_due").text() );
+        calculator.trigger("change");
+      break;
+      case "confirm":
+        calculator.unbind("change");
+        var form = jQuery( "#"+calculator.attr("data-target") );
+        form.find('input[name="sub_action"]').val( "cash" );
+        form.trigger("submit");
+        calculator.hide();
+
+      break;
+      case "show":
+        calculator.show();
+        calculator.attr("data-target", value);
+        calculator.find(".amount_due").html( Mints.u.calculate_total( jQuery("#"+value) ) );
+
+        calculator.on("change",function()
+        {
+          var change = parseFloat( input.val() ) - parseFloat( calculator.find(".amount_due").html() );
+          calculator.find(".change").html( change >= 0 ? change : "" );
+        });
+      break;
+    }
+
+
+
+  },
   section: function(section_name, data_target)
   {
     if(section_name =="new_order")

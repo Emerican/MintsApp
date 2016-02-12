@@ -34,7 +34,9 @@
       </tfoot>
     </table>
     <input type="hidden" name="sub_action">
-    <button action="{{action}}/bills" class="submit" name="sub_action" value="cash">Maksāt ar skaidrā</button>
+    <!-- <button action="{{action}}/bills" class="submit" name="sub_action" value="cash">Maksāt ar skaidrā</button> -->
+
+    <button action="calculator/show" data-target="{{action}}_bill_form">Maksāt ar skaidrā</button>
     <button action="{{action}}/bills" class="submit" name="sub_action" value="card">Maksāt ar karti</button>
     <button action="{{action}}/bills" class="submit" name="sub_action" value="save">Saglabāt</button>
   </form>
