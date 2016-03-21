@@ -9,7 +9,7 @@
     <div class="search_field">
       <label for="search_name">Meklēt produktus:</label>
       <input type="search" id="search_product" name="search">
-      <button action="search/products" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
+      <button action="search/products" class="submit search"><span class="fa fa-search fa-2x"></span></button>
     </div>
   </form>
   <div class="contents"></div>
@@ -20,5 +20,5 @@
 </section>
 
 <section id="edit_products">
-  {{> products_form action="update" }}
+  {{> products_form action="update" delete=true }}
 </section>

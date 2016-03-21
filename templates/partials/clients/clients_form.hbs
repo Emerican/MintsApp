@@ -33,6 +33,12 @@
     <label for="{{action}}_clients_avatar">Bilde:</label>
     <input class="add_avatar_button" id="{{action}}_clients_avatar" type="button" value="Take Picture">
   </div>
-
-  <button action="{{action}}/clients" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
 </form>
+
+<div class="btn_group">
+  <button action="{{action}}/clients" class="submit" form="{{action}}_clients_form"><span class="fa fa-floppy-o fa-4x"></span></button>
+  {{#if delete }}
+    <button action="delete/clients" class="delete"><span class="fa fa-trash fa-4x"></span></button>
+  {{/if}}
+  <div class="clear"></div>
+</div>

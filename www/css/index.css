@@ -28,6 +28,12 @@ section
   height:100%;
   text-align: center;
 }
+.clear
+{
+  clear: both!important;
+  margin: 0!important;
+  padding: 0!important;
+}
 button
 {
   outline:none;
@@ -45,6 +51,47 @@ section > button
   height: 150px;
   width: 150px;
   vertical-align: top;
+}
+.btn_group
+{
+  width: 50%;
+  margin: 0 auto;
+}
+button.delete,
+button.submit
+{
+  margin:10px;
+  background-color: white;
+  border-radius: 100%;
+  font-size: 16px;
+  height: 100px;
+  width: 100px;
+  vertical-align: top;
+}
+button.delete
+{
+  float: right;
+}
+button.submit
+{
+  float: left;
+}
+button.pay
+{
+  float: none;
+}
+button.search
+{
+  height: 60px;
+  width: 60px;
+  margin-top: -5px;
+  float: none;
+}
+.search_form input,
+.search_form label,
+.search_form button
+{
+  display: inline-block;
 }
 #main
 {
@@ -247,6 +294,20 @@ input[name="card_id"]
   top: 50px;
   width: 620px;
   z-index: 99;
+}
+.calculator .close
+{
+  background-color: black;
+  border: 0 none;
+  border-radius: 100%;
+  color: white;
+  font-size: 24px;
+  height: 40px;
+  padding: 0;
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  width: 40px;
 }
 .calculator .status
 {

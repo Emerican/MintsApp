@@ -57,7 +57,7 @@ jQuery(function()
     ['product_group_id','name','price','description','special_offer','weekdays']
   );
   resource_params.purchases = resource_params.purchases.concat(
-    ['product_id','bill_id','count','discount']
+    ['product_id','bill_id','count','discount','price']
   );
 
   resource_search.client_groups = resource_search.client_groups.concat(
@@ -86,7 +86,7 @@ jQuery(function()
         if (button_actions[action_name])
         {
           var target_section = action.split('/')[1] || original_target.parents("section").attr("id");
-          button_actions[action_name]( target_section , data_target );
+          button_actions[action_name]( target_section , data_target, original_target );
           return false;
         }
         else
@@ -165,27 +165,38 @@ jQuery(function()
         var max_discount = 0;
         var all_product_discounts = product.product_group().discounts();
 
-        var product_discounts = all_product_discounts.filter(function(d){ return d.client_group_id.length == 0 });
-        product_discounts.forEach(function(d)
+        // get all discounts for product_group that have no client_group
+        if( all_product_discounts )
         {
-          max_discount = Math.max( max_discount, d.amount );
-        });
-
-        if( client )
-        {
-          if( all_product_discounts )
+          var product_discounts = all_product_discounts.filter(function(d){ return d.client_group_id.length == 0 });
+          product_discounts.forEach(function(d)
           {
-            var joint_discounts = all_product_discounts.filter(function(d){ return d.client_group_id == client.uuid  });
+            max_discount = Math.max( max_discount, d.amount );
+          });
+        }
+
+        if( client && client.client_group_id )
+        {
+          if( all_product_discounts  )
+          {
+            // get all discounts for product_group joint with client_group
+            var joint_discounts = all_product_discounts.filter(function(d){ return d.client_group_id == client.client_group_id  });
             joint_discounts.forEach(function(d)
             {
               max_discount = Math.max( max_discount, d.amount );
             });
           }
-          var client_discounts = client.client_group().discounts().filter(function(d){ return d.product_group_id.length == 0 });
-          client_discounts.forEach(function(d)
+
+          // get all discounts for client_group that have no product_group
+          var all_client_discounts = client.client_group().discounts();
+          if(all_client_discounts)
           {
-            max_discount = Math.max( max_discount, d.amount );
-          });
+            var client_discounts = all_client_discounts.filter(function(d){ return d.product_group_id.length == 0 });
+            client_discounts.forEach(function(d)
+            {
+              max_discount = Math.max( max_discount, d.amount );
+            });
+          }
 
         }
 
@@ -260,6 +271,13 @@ jQuery(function()
           data.utf8 = "✓";
         }
 
+        if( type == 'delete' )
+        {
+          type = 'post';
+          data.utf8 = "✓";
+          data._method = "delete";
+        }
+
         var transfer = jQuery.ajax(
         {
           url: serverAdress+"/"+ resource + resource_id + sub_resource +".json",
@@ -307,12 +325,21 @@ jQuery(function()
           {
             if( params && params[param] )
             {
-              self[param] = ds_res[param] = params[param];
+              self[param] = ds_res[param] = html_sanitize(params[param]);
             }
           });
 
           self.synced = ds_res.synced = false;
 
+          resource.sync();
+        };
+
+        data.remove = function()
+        {
+          var self = this;
+          var ds_res = Mints.data_store[res][self['uuid']];
+          self.synced = ds_res.synced = false;
+          self.delete = ds_res.delete = true;
           resource.sync();
         };
 
@@ -551,10 +578,25 @@ jQuery(function()
         if( !ds[id].synced && !ds[id].syncing )
         {
           ds[id].syncing = true;
-          Mints.u.connection( self.class_name, id, "post", function()
+          if( ds[id].delete )
           {
-            self.trigger('sync')
-          });
+            Mints.u.connection( self.class_name, id, "delete", function()
+            {
+              delete ds[id];
+              Mints.u.notice( "Izdzēsts" );
+              self.trigger('synced');
+              self.trigger('deleted');
+            });
+          }
+          else
+          {
+            Mints.u.connection( self.class_name, id, "post", function()
+            {
+              self.trigger('synced');
+              self.trigger('sync');
+            });
+          }
+
         }
       }
     };
@@ -576,7 +618,7 @@ jQuery(function()
         }
         else if( params && params[param] )
         {
-          new_object[param] = params[param];
+          new_object[param] = html_sanitize( params[param] );
         }
         else
         {

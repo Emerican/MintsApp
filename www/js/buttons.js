@@ -32,7 +32,7 @@ var product_template = function(p, count, purchase_id)
 };
 
 var button_actions = {
-  calculator: function(action, value)
+  calculator: function(action, value, target)
   {
     var calculator = jQuery(".calculator");
     var input = calculator.find(".amount_input");
@@ -78,12 +78,15 @@ var button_actions = {
           calculator.find(".change").html( change >= 0 ? change : "" );
         });
       break;
+      case "close":
+        calculator.hide();
+      break;
     }
 
 
 
   },
-  section: function(section_name, data_target)
+  section: function(section_name, data_target, target)
   {
     if(section_name =="new_order")
     {
@@ -98,18 +101,18 @@ var button_actions = {
       Mints.section_history.push( Mints.current_section );
     }
 
-    section_change( section_name, data_target );
+    section_change( section_name, data_target, target );
   },
-  back: function(section_name, data_target)
+  back: function(section_name, data_target, target)
   {
     jQuery("nav").show();
     section_change( Mints.section_history.pop() );
   },
-  add_product: function(section_name, data_target)
+  add_product: function(section_name, data_target, target)
   {
-    button_actions.add_products_to_bill( section_name, data_target );
+    button_actions.add_products_to_bill( section_name, data_target, target );
   },
-  switch_tab: function(section_name, data_target)
+  switch_tab: function(section_name, data_target, target)
   {
     var section = jQuery( '#'+section_name );
     section.find( '.tab_buttons > *' ).removeClass('active');
@@ -117,7 +120,7 @@ var button_actions = {
     section.find( '.tabs > *' ).hide();
     section.find( '.tabs [data-product_group="'+data_target+'"]' ).show();
   },
-  add_products_to_bill: function( section_name, data_source )
+  add_products_to_bill: function( section_name, data_source, target )
   {
     var section = jQuery( '#'+section_name );
     var order_form = section.find('form');
@@ -158,6 +161,7 @@ var button_actions = {
     }
 
     button_actions.update_products_in_bill();
+    order_form.find('.total .amount').html( Mints.u.calculate_total( order_form ) );
   },
   update_products_in_bill: function( product_in_list, new_count )
   {
@@ -178,5 +182,12 @@ var button_actions = {
       item.find('td.price').html( ( count * price * (100 - discount) / 100 ) / 100 + "€" );
     });
 
+  },
+  delete: function(resources, data_target, target )
+  {
+    var res = Mints[resources].get( target.parents('section').attr("data-source") );
+    res.remove();
+
+    button_actions.section(resources);
   }
 }

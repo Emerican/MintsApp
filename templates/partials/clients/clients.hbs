@@ -10,7 +10,7 @@
     <div class="search_field">
       <label for="search_name">Meklēt klientu:</label>
       <input type="search" id="search_client" name="search">
-      <button action="search/clients" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
+      <button action="search/clients" class="submit search"><span class="fa fa-search fa-2x"></span></button>
     </div>
   </form>
   <div class="contents"></div>
@@ -21,5 +21,5 @@
 </section>
 
 <section id="edit_clients">
-  {{> clients_form action="update" }}
+  {{> clients_form action="update" delete=true }}
 </section>

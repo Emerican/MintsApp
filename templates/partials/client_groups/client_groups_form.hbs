@@ -4,5 +4,11 @@
     <label for="{{ action }}_client_groups_name">Nosaukums</label>
     <input type="text" id="{{ action }}_client_groups_name" name="name">
   </div>
-  <button action="{{ action }}/client_groups" class="submit"><span class="fa fa-check-circle-o fa-4x"></span></button>
 </form>
+<div class="btn_group">
+  <button action="{{action}}/client_groups" class="submit" form="{{action}}_client_groups_form"><span class="fa fa-floppy-o fa-4x"></span></button>
+  {{#if delete }}
+    <button action="delete/client_groups" class="delete"><span class="fa fa-trash fa-4x"></span></button>
+  {{/if}}
+  <div class="clear"></div>
+</div>

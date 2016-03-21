@@ -16,10 +16,18 @@
 }
 
 #shop_back{
-  margin-top:10px;
-  float:left;
-  position:fixed;
-  bottom:0;
+  background-color: #32446b;
+  border-top-right-radius: 60%;
+  bottom: 0;
+  left: 0;
+  color: white;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  position: fixed;
+  z-index: 99;
+  display: block;
 }
 
 .shop_client_name{
@@ -43,6 +51,8 @@
 #new_order .categories{
   float:left;
   width:10%;
+  height: 100vh;
+  overflow: scroll;
 }
 #edit_order .categories .tab_buttons  button,
 #new_order .categories .tab_buttons  button
@@ -62,8 +72,10 @@
   border-left:none;
   border-top:none;
   width:50%;
-  height:100%;
+  /*height:100%;*/
   float:left;
+  height: 100vh;
+  overflow: scroll;
 }
 #edit_order .products ul,
 #new_order .products ul
@@ -96,9 +108,12 @@
 #edit_order .current_bill,
 #new_order .current_bill
 {
-  margin-top:10px;
-  float:left;
-  width:40%;
+  box-sizing: border-box;
+  float: left;
+  height: 100vh;
+  overflow: scroll;
+  padding-top: 10px;
+  width: 40%;
 }
 
 #edit_order .current_bill  table,
@@ -137,6 +152,6 @@
 }
 .shop_avatar
 {
-  width: 85px;
+  width: 75px;
   height: 100px;
 }

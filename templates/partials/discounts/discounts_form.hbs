@@ -27,6 +27,12 @@
       <option value="7">7</option>
     </select>
   </div>
-
-  <button action="{{action}}/discounts" class="submit"><span class="fa fa-check-circle-o fa-5x"></span></button>
 </form>
+
+<div class="btn_group">
+  <button action="{{action}}/discounts" class="submit" form="{{action}}_discounts_form"><span class="fa fa-floppy-o fa-4x"></span></button>
+  {{#if delete }}
+    <button action="delete/discounts" class="delete"><span class="fa fa-trash fa-4x"></span></button>
+  {{/if}}
+  <div class="clear"></div>
+</div>

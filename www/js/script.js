@@ -122,20 +122,20 @@ jQuery(function()
           });
 
           var bill = Mints[resource_name].new( {
-            client_id:form_obj.client_id,
+            client_id: form_obj.client_id,
             closed: form_obj.sub_action != "save",
-            paid_with: form_obj.sub_action != "save" ?  form_obj.subaction : ""
+            paid_with: form_obj.sub_action != "save" ?  form_obj.sub_action : ""
           } );
 
           if( Object.prototype.toString.call( form_obj.product_id ) === '[object Array]' ) {
             for(var i = 0; i < form_obj.product_id.length; i++)
             {
-              Mints.purchases.new( { product_id:form_obj.product_id[i], count: form_obj.count[i], bill_id: bill.uuid } );
+              Mints.purchases.new( { product_id:form_obj.product_id[i], count: form_obj.count[i], bill_id: bill.uuid, price:form_obj.price[i] } );
             }
           }
           else
           {
-            Mints.purchases.new( { product_id:form_obj.product_id, count: form_obj.count, bill_id: bill.uuid } );
+            Mints.purchases.new( { product_id:form_obj.product_id, count: form_obj.count, bill_id: bill.uuid, price:form_obj.price } );
           }
 
         }
@@ -155,7 +155,7 @@ jQuery(function()
           {
             Mints.u.notice( "Izveidots" );
             Mints[resource_name].unbind('sync');
-            tMints.u.rigger_action( "section/browse_" + resource_name );
+            Mints.u.trigger_action( "section/browse_" + resource_name );
             form.find('input, textarea').val("");
             form.find('img').remove();
           });
@@ -175,18 +175,22 @@ jQuery(function()
             Mints[resource_name].unbind('sync');
             Mints.u.trigger_action( "section/main" );
           });
-          Mints[resource_name].get(resource_id).set( form_data );
+          Mints[resource_name].get(resource_id).set( {
+            client_id: form_data.client_id,
+            closed: form_data.sub_action != "save",
+            paid_with: form_data.sub_action != "save" ?  form_data.sub_action : ""
+          } );
 
           if( Object.prototype.toString.call( form_data.product_id ) === '[object Array]' ) {
             for(var i = 0; i < form_data.product_id.length; i++)
             {
               if( form_data.purchase_self_id[i] )
               {
-                Mints.purchases.get( form_data.purchase_self_id[i] ).set( { product_id:form_data.product_id[i], count: form_data.count[i], bill_id: form_data.uuid } )
+                Mints.purchases.get( form_data.purchase_self_id[i] ).set( { product_id:form_data.product_id[i], count: form_data.count[i], bill_id: form_data.uuid, price:form_data.price[i] } )
               }
               else
               {
-                Mints.purchases.new( { product_id:form_data.product_id[i], count: form_data.count[i], bill_id: form_data.uuid } );
+                Mints.purchases.new( { product_id:form_data.product_id[i], count: form_data.count[i], bill_id: form_data.uuid, price:form_data.price[i] } );
               }
 
             }
@@ -195,11 +199,11 @@ jQuery(function()
           {
             if( form_data.purchase_self_id )
             {
-                Mints.purchases.get( form_data.purchase_self_id ).set( { product_id:form_data.product_id, count: form_data.count, bill_id: form_data.uuid } );
+                Mints.purchases.get( form_data.purchase_self_id ).set( { product_id:form_data.product_id, count: form_data.count, bill_id: form_data.uuid, price:form_data.price } );
             }
             else
             {
-              Mints.purchases.new( { product_id:form_data.product_id, count: form_data.count, bill_id: form_data.uuid } );
+              Mints.purchases.new( { product_id:form_data.product_id, count: form_data.count, bill_id: form_data.uuid, price:form_data.price } );
             }
 
           }

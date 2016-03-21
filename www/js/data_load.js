@@ -93,7 +93,7 @@ var open_bills = function( argument )
 {
 
   return Mints["bills"].get().filter(function(i) {
-    return i.closed != "true";
+    return i.closed != "true" && i.purchases();
   });
 }
 
@@ -128,8 +128,7 @@ var data_load_actions = {
       var bill_name = client ? client.name + " " + client.surname : "Rēķins";
       var total_price = ( b.purchases().map(function(p)
       {
-        var product = Mints.products.get( p.product_id );
-        return parseFloat( product.price ) * 100 * p.count;
+        return parseFloat( p.price ) * 100 * p.count;
 
       }).reduce(function(pv, cv) { return pv + cv; }, 0) ) /100;
 
